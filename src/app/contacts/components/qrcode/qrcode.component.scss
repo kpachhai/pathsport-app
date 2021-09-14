@@ -1,0 +1,58 @@
+@import 'src/app/contacts/root.scss';
+
+ion-grid {
+  background: #ffffff;
+  height: 100%;
+  width: 100%;
+  padding: 30px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  h1 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.45px;
+    color: #161740;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: #161740;
+  }
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    padding: 5px;
+    margin: 0;
+    border-radius: 17px;
+
+    qrcode {
+      zoom: 0.70;
+    }
+  }
+}
+
+.darkContainer {
+  background: #121212;
+
+  div {
+    margin: 10px;
+  }
+  
+  h1, h2 {
+    color: #ffffff;
+  }
+}
+
+
+
+
+

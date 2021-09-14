@@ -1,0 +1,67 @@
+@import "src/app/settings/root.scss";
+
+.subsetting-grid {
+    min-height: auto;
+
+    .section-row {
+        .icon-col {
+            align-items: flex-start;
+
+            img {
+                width: 70%;
+            }
+        }
+
+        .left-col {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            overflow: hidden;
+
+            .name {
+                font-weight: 600;
+                font-size: 18px;
+            }
+
+            .description {
+                margin: 5px 0 0;
+            }
+
+            .url {
+                margin: 5px 0 0;
+            }
+
+            .sessionid {
+                margin: 5px 0 0;
+                color: #444;
+                font-size: 11px;
+                width: 100%;
+            }
+        }
+
+        .right-col {
+            img {
+                height: 20px;
+                width: 20px;
+            }
+        }
+    }
+    .no-session {
+        text-align: center;
+        margin: 40px;
+    }
+}
+
+.dark-subsetting-grid {
+    border-bottom: 0;
+
+    .section-row {
+        border-bottom: 0;
+
+        .left-col {
+            .sessionid {
+                color: #CCC;
+            }
+        }
+    }
+}

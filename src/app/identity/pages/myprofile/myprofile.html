@@ -1,0 +1,120 @@
+<ion-content>
+  <app-titlebar></app-titlebar>
+  <!-- <ion-button (click)="testPage()">Test Publishing</ion-button> -->
+  <ion-grid class="container" [class.darkContainer]="theme.darkMode">
+
+    <ion-grid class="header-grid">
+      <ion-row class="avatar-row">
+        <div class="icon-section">
+          <ion-icon *ngIf="!avatarDataUrl" mode="ios" name="person"></ion-icon>
+          <img *ngIf="avatarDataUrl" [src]="avatarDataUrl" />
+        </div>
+      </ion-row>
+      <ion-row class="title-row">
+        <ion-col>
+          <p>{{ 'identity.welcome-back' | translate }}</p>
+          <h1 *ngIf="profile">{{ getProfileName() }}</h1>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid  class="status-grid">
+      <ion-row *ngIf="profileService.isPublishStatusFetched() && !profileService.didNeedsToBePublished">
+        <ion-col size="1.5">
+          <img src="/assets/identity/svg/credential-published.svg" class="published">
+        </ion-col>
+        <ion-col size="7">
+          <ion-label>{{ 'identity.identity-published-on-blockchain' | translate }}</ion-label>
+        </ion-col>
+        <ion-col size="3.5">
+          <ion-label>{{ getLastPublished() }}</ion-label>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="1.5">
+          <img [src]="profileService.getUnchangedPublishedCredentials().length ? '/assets/identity/svg/credential-published.svg' : '/assets/identity/svg/publish-gray.svg'" class="published" />
+        </ion-col>
+        <ion-col size="10.5">
+          <ion-label>
+            {{ profileService.getUnchangedPublishedCredentials().length }}/{{ profileService.allCreds.length }}
+            {{ 'identity.credentials-published-on-blockchain' | translate }}
+          </ion-label>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="profileService.verifiedCredentials.length > 0">
+        <ion-col size="1.5">
+          <img src="/assets/identity/svg/verified.svg" class="verified">
+        </ion-col>
+        <ion-col size="10.5">
+          <ion-label>
+            {{ profileService.verifiedCredentials.length }}/{{ profileService.allCreds.length }}
+            {{ 'identity.credentials-verified' | translate }}
+          </ion-label>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="profileService.verifiedCredentials.length == 0">
+        <ion-col size="1.5">
+          <img src="/assets/identity/svg/verified-gray.svg" class="verified">
+        </ion-col>
+        <ion-col size="10.5">
+          <ion-label>
+            {{ profileService.verifiedCredentials.length }}/{{ profileService.allCreds.length }}
+            {{ 'identity.credentials-verified' | translate }}
+          </ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-row *ngIf="profileService.hasModifiedCredentials()" class="actions-row" (click)="this.profileService.publish()">
+      <ion-col size="2">
+        <ion-icon src="/assets/identity/svg/Credentials.svg" class="credentials-icon"></ion-icon>
+      </ion-col>
+      <ion-col size="9" class="label-col">
+        <h1 class="title">{{ 'identity.credentials-modified' | translate }}</h1>
+        <p class="description">{{ 'identity.credentials-modified-description' | translate }}</p>
+      </ion-col>
+      <ion-col size="1">
+        <ion-icon src="/assets/identity/svg/chevron-thin-right-dark.svg" class="chevron-thin-right"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <ion-grid class="options-grid">
+      <ion-row class="title-row">
+        <ion-col>
+          <p>{{ 'identity.current-options' | translate }}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="options-row">
+        <ion-col size="5.8" class="publish ripple ion-activatable" (click)="profileService.publish()">
+          <img src=" /assets/identity/svg/publish-button.svg" />
+          <h2>{{ 'identity.publish' | translate}}</h2>
+          <span>{{ 'identity.publish-description' | translate }}</span>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-col>
+        <ion-col size="5.8"class="edit ripple ion-activatable" (click)="profileService.editProfile()">
+          <img src="{{ this.theme.darkMode ? '/assets/identity/svg/edit-button-dark.svg' : '/assets/identity/svg/edit-button.svg' }}" />
+          <h2>{{ 'identity.edit' | translate}}</h2>
+          <span>{{ 'identity.edit-description' | translate }}</span>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-col>
+        <ion-col size="5.8" class="share ripple ion-activatable" (click)="profileService.shareIdentity()">
+          <img
+            src="{{ this.theme.darkMode ? '/assets/identity/svg/share-button-dark.svg' : '/assets/identity/svg/share-button.svg' }}" />
+          <h2>{{ 'common.share' | translate}}</h2>
+          <span>{{ 'identity.share-description' | translate }} </span>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-col>
+        <ion-col size="5.8" class="export ripple ion-activatable" (click)="exportMnemonic()">
+          <img src="{{ this.theme.darkMode ? '/assets/identity/svg/export.svg' : '/assets/identity/svg/export-dark.svg' }}" />
+          <h2>{{ 'identity.export-mnemonics' | translate}}</h2>
+          <span>{{ 'identity.export-mnemonics-description' | translate}}</span>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-grid>
+</ion-content>

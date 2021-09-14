@@ -1,0 +1,53 @@
+{
+  "compileOnSave": false,
+  "include": [
+    "src/**/*.ts"
+, "src/assets/web3providertest.js"  ],
+  "exclude": [
+    "node_modules",
+    "plugins",
+    "platforms",
+    "origin_platforms",
+    //"www"
+  ],
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "resolveJsonModule": true,
+    "module": "es2020",
+    "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types",
+    ],
+    "types": [
+      "node",
+      "cordova",
+      "@elastosfoundation/elastos-cordova-plugin-did",
+      "@elastosfoundation/elastos-cordova-plugin-hive",
+      "elastos-essentials-plugin-intent",
+      "elastos-essentials-plugin-passwordmanager",
+      "elastos-essentials-plugin-wallet",
+      "elastos-essentials-plugin-internal",
+      "cordova-plugin-camera"
+    ],
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "paths": {
+      "crypto": [
+        "node_modules/crypto-browserify"
+      ],
+      "stream": [
+        "node_modules/stream-browserify"
+      ]
+    }
+  }
+}

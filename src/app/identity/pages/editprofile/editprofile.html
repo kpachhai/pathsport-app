@@ -1,0 +1,199 @@
+<ion-content>
+  <app-titlebar></app-titlebar>
+  <ion-grid class="container" [class.blur]="profileService.popover" [class.darkContainer]="theme.darkMode">
+
+    <ion-row class="header-row">
+      <ion-col size="12" class="avatar-col">
+        <div class="avatar">
+          <ion-icon *ngIf="!avatarDataUrl" mode="ios" name="person"></ion-icon>
+          <img *ngIf="avatarDataUrl" [src]="avatarDataUrl" />
+        </div>
+        <span (click)="editAvatar()">{{ 'identity.edit-avatar' | translate }}</span>
+      </ion-col>
+      <ion-col size="12" class="show-col ion-align-self-end">
+        <span>{{ 'identity.show-on-profile' | translate }}</span>
+       </ion-col>
+    </ion-row>
+
+    <div *ngFor="let entry of profile.entries" class="credentials">
+      <ion-row *ngIf="entryIsStandardText(entry)" class="ion-align-items-center main-row">
+        <ion-col size="1.25" class="icon-col" (click)="deleteProfileEntry(entry, $event)">
+          <img src="/assets/identity/svg/circle-with-minus.svg" />
+        </ion-col>
+        <ion-col size="8.75">
+          <ion-grid>
+            <ion-row>
+              <ion-col class="subject-col">
+                <ion-label>{{ 'identity.credential-info-type-'+entry.key | translate }}</ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="edit-col">
+                <ion-input mode="ios" [placeholder]="'identity.enter-here'|translate" [(ngModel)]="entry.value" name="edit" ngDefaultControl></ion-input>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+        <ion-col size="2" class="toggle-col">
+          <ion-toggle color="tertiary" mode="ios" [disabled]="updatingVisibility" [(ngModel)]="entry.isVisible" (ngModelChange)="onVisibilityChange($event, entry)" ngDefaultControl></ion-toggle>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="entry.key === 'email'" class="ion-align-items-center main-row">
+        <ion-col size="1.25" class="icon-col" (click)="deleteProfileEntry(entry, $event)">
+          <img src="/assets/identity/svg/circle-with-minus.svg" />
+        </ion-col>
+        <ion-col size="8.75">
+          <ion-grid>
+            <ion-row>
+              <ion-col class="subject-col">
+                <span>{{ 'identity.credential-info-type-'+entry.key | translate }}</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="edit-col">
+                <ion-input
+                  mode="ios"
+                  [placeholder]="'identity.enter-here'|translate"
+                  [(ngModel)]="entry.value"
+                  type="email" pattern="email" name="email"
+                  ngDefaultControl
+                >
+                </ion-input>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+        <ion-col size="2" class="toggle-col">
+          <ion-toggle color="tertiary" mode="ios" [disabled]="updatingVisibility" [(ngModel)]="entry.isVisible" (ngModelChange)="onVisibilityChange($event, entry)" ngDefaultControl></ion-toggle>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="entry.key === 'telephone'" class="ion-align-items-center main-row">
+        <ion-col size="1.25" class="icon-col" (click)="deleteProfileEntry(entry, $event)">
+          <img src="/assets/identity/svg/circle-with-minus.svg" />
+        </ion-col>
+        <ion-col size="8.75">
+          <ion-grid>
+            <ion-row class="subject-col">
+              <ion-col>
+                <ion-label>{{ 'identity.credential-info-type-'+entry.key | translate }}</ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row class="edit-col">
+              <ion-col>
+                <ion-input mode="ios" [placeholder]="'identity.enter-here'|translate" [(ngModel)]="entry.value" type="tel" name="tel" ngDefaultControl></ion-input>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+        <ion-col size="2" class="toggle-col">
+          <ion-toggle color="tertiary" mode="ios" [disabled]="updatingVisibility" [(ngModel)]="entry.isVisible" (ngModelChange)="onVisibilityChange($event, entry)" ngDefaultControl></ion-toggle>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="entry.key === 'nation'" class="ion-align-items-center main-row">
+        <ion-col size="1.25" class="icon-col" (click)="deleteProfileEntry(entry, $event)">
+          <img src="/assets/identity/svg/circle-with-minus.svg" />
+        </ion-col>
+        <ion-col size="8.75">
+          <ion-grid>
+            <ion-row class="subject-col">
+              <ion-col>
+                <ion-label>{{ 'identity.credential-info-type-'+entry.key | translate }}</ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row class="edit-col">
+              <ion-col (click)="selectCountry(entry)">
+                <ion-label>{{ getDisplayableNation(entry.value) || ('identity.enter-here' | translate) }}</ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+        <ion-col size="2" class="toggle-col">
+          <ion-toggle color="tertiary" mode="ios" [disabled]="updatingVisibility" [(ngModel)]="entry.isVisible" (ngModelChange)="onVisibilityChange($event, entry)" ngDefaultControl></ion-toggle>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="entry.key === 'gender'" class="ion-align-items-center main-row">
+        <ion-col size="1.25" class="icon-col" (click)="deleteProfileEntry(entry, $event)">
+          <img src="/assets/identity/svg/circle-with-minus.svg" />
+        </ion-col>
+        <ion-col size="8.75">
+          <ion-grid>
+            <ion-row class="subject-col">
+              <ion-col>
+                <ion-label>
+                  {{ 'identity.credential-info-type-'+entry.key | translate }}
+                </ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row class="edit-col">
+              <ion-col>
+                <ion-select [(ngModel)]="entry.value" [placeholder]="'identity.select-one'|translate" [interfaceOptions]="option"
+                  [cancelText]="'common.cancel'|translate" [okText]="'common.confirm'|translate" ngDefaultControl>
+                  <ion-select-option value="female">{{ 'identity.female' | translate }}</ion-select-option>
+                  <ion-select-option value="male">{{ 'identity.male' | translate }}</ion-select-option>
+                </ion-select>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+        <ion-col size="2" class="toggle-col">
+          <ion-toggle color="tertiary" mode="ios" [disabled]="updatingVisibility" [(ngModel)]="entry.isVisible" (ngModelChange)="onVisibilityChange($event, entry)" ngDefaultControl></ion-toggle>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="entry.key === 'birthDate'" class="ion-align-items-center main-row">
+        <ion-col size="1.25" class="icon-col" (click)="deleteProfileEntry(entry, $event)">
+          <img src="/assets/identity/svg/circle-with-minus.svg" />
+        </ion-col>
+        <ion-col size="8.75">
+          <ion-grid>
+            <ion-row class="subject-col">
+              <ion-col>
+                <ion-label>{{ 'identity.credential-info-type-'+entry.key | translate }}</ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row class="edit-col">
+              <ion-col>
+                <ion-datetime picker-format="YYYY/M/D" [(ngModel)]="entry.value" [placeholder]="'identity.select-date'|translate"
+                  [cancelText]="'common.cancel'|translate" [doneText]="'common.confirm'|translate"
+                  (ionChange)="formatBirthDay(entry)"
+                  ngDefaultControl>
+                </ion-datetime>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+        <ion-col size="2" class="toggle-col">
+          <ion-toggle color="tertiary" mode="ios" [disabled]="updatingVisibility" [(ngModel)]="entry.isVisible" (ngModelChange)="onVisibilityChange($event, entry)" ngDefaultControl></ion-toggle>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="entry.key === 'avatar'" class="ion-align-items-center main-row">
+        <ion-col size="1.25" class="icon-col" (click)="deleteProfileEntry(entry, $event)">
+          <img src="/assets/identity/svg/circle-with-minus.svg" />
+        </ion-col>
+        <ion-col size="8.75">
+          <ion-grid>
+            <ion-row class="subject-col">
+              <ion-col (click)="editAvatar()">
+                <ion-label class="avatar-label">{{ 'identity.credential-info-type-'+entry.key | translate }}</ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+        <ion-col size="2" class="toggle-col">
+          <ion-toggle color="tertiary" mode="ios" [disabled]="updatingVisibility" [(ngModel)]="entry.isVisible" (ngModelChange)="onVisibilityChange($event, entry)" ngDefaultControl></ion-toggle>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <ion-row class="btn-row">
+      <ion-button color="tertiary" (click)="addProfileEntry()">
+        {{ 'identity.add-field' | translate }}
+      </ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-content>

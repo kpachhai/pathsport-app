@@ -1,0 +1,57 @@
+@import 'src/app/didsessions/root.scss';
+
+.scan {
+  --background: none transparent;
+}
+
+.notScanning {
+  --background: #f8f8ff;
+}
+
+.qrscanner-area {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: url(../../../../assets/didsessions/images/scanner.svg) no-repeat center center;
+  background-size: contain;
+}
+
+.through-line {
+  left: 25%;
+  width: 50%;
+  height: 2px;
+  background: #f04141;
+  position: absolute;
+  animation: lineAnimation 2s linear infinite alternate;
+}
+
+@keyframes lineAnimation {
+  0% {
+      background: #f04141;
+      top: 40%;
+  }
+  20% {
+      background: #ffc409;
+      top: 45%;
+  }
+  40% {
+      background: #3dc2ff;
+      top: 50%;
+  }
+  60% {
+      background: #2dd36f;
+      top: 55%;
+  }
+  80% {
+      background: #4854e0;
+      top: 60%;
+  }
+  100% {
+      background: #eb445a;
+      top: 65%;
+  }
+}
+
+.hidden {
+  visibility: hidden;
+}

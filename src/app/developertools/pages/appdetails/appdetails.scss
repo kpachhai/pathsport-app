@@ -1,0 +1,96 @@
+@import "src/app/developertools/root.scss";
+
+.container {
+  min-height: 100%;
+  background: #FAFAFA;
+  padding: 0px 30px 90px;
+
+  p, h1, ion-label, ion-icon {
+    color: #21313d;
+    margin: 0;
+  }
+
+  h1 {
+    padding-top: 20px;
+  }
+
+  ion-row {
+    .empty-app {
+      display: flex;
+      justify-content: center;
+    }
+    
+    ion-col {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h1 {
+        font-size: 24px;
+        font-weight: 900;
+      }
+
+      ion-icon {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .section-container {
+    .section-title-row {
+      ion-col {
+        padding-left: 0;
+
+        ion-icon {
+          padding-top: 20px;
+        }
+      }
+    }
+
+    ion-list {
+      background: #FAFAFA;
+  
+      ion-row {
+        border-bottom: 0.5px solid #21313d;
+        padding: 12.5px 0;
+  
+        ion-col {
+          padding-left: 0;
+          padding-right: 0;
+
+          p {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 700;
+          }
+  
+          ion-icon {
+            font-size: 16px;
+          }
+  
+          ion-label {
+            font-size: 12px;
+            font-weight: 600;
+            word-wrap: break-word;
+            white-space: pre-wrap !important;
+          }
+  
+          ion-input {
+            --background: #FAFAFA;
+            --color: #21313d;
+            --padding-top: 0;
+            --padding-bottom: 0;
+          }
+        }
+      }
+
+      .input-row {
+        padding-bottom: 5px;
+      }
+    }
+  }
+
+  ion-button {
+    margin-top: 30px;
+  }
+}

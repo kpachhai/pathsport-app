@@ -1,0 +1,38 @@
+@import 'src/app/didsessions/root.scss';
+
+.container {
+  padding: 20px;
+
+  ion-row {
+    margin: 0 0 10px 2.5px;
+
+    ion-label {
+      font-size: 13.5px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+    }
+  }
+
+  ion-input {
+    --padding-start: 12px;
+    --padding-top: 13px;
+    --padding-bottom: 13px;
+    height: 47.5px;
+    width: 100%;
+    background: #ffffff;
+    box-shadow: 0 3px 15px 0 #ededf0;
+    color: black;
+    border-radius: 8px;
+    font-size: 13px;
+    text-align: left;
+    letter-spacing: -0.5px;
+  }
+}
+
+.dark-container {
+  ion-input {
+    background: #212021;
+    box-shadow: none;
+    color: white;
+  }
+}

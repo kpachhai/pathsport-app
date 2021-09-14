@@ -1,0 +1,15 @@
+/** General Spinner **/
+.spinner {
+    position: fixed;
+    z-index: 2;
+    top: 40%;
+    left: 46.5%;
+  
+    ion-spinner {
+      transform: scale(2);
+    }
+}
+
+.proposal-search-result {
+    width: 100%;
+}

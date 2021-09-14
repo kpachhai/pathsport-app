@@ -1,0 +1,32 @@
+<ion-content>
+  <app-titlebar></app-titlebar>
+  <ion-grid class="container" [class.dark-container]="theme.darkMode">
+    <ion-row>
+      <ion-label>{{ 'didsessions.your-name' | translate }}</ion-label>
+    </ion-row>
+    <ion-input
+      [placeholder]="'didsessions.enter-name-here'|translate"
+      #input
+      [(ngModel)]="name"
+      name="name"
+      ngDefaultControl
+    ></ion-input>
+
+    <ion-row>
+      <ion-label>{{ 'didsessions.your-location' | translate }}</ion-label>
+    </ion-row>
+    <ion-input
+      [placeholder]="'didsessions.enter-location-here'|translate"
+      #input
+      [(ngModel)]="location"
+      name="location"
+      ngDefaultControl
+    ></ion-input>
+
+    <div class="footer">
+      <ion-button [disabled]="creatingDid" (click)="next()">
+        {{ 'common.continue' | translate }}
+      </ion-button>
+    </div>
+  </ion-grid>
+</ion-content>

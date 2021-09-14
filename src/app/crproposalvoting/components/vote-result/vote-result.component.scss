@@ -1,0 +1,38 @@
+.container {
+    padding: 10px 7.5px 10px 22.5px;
+    margin-bottom: 2px;
+    box-shadow: 0 3px 15px 0 #ededf0;
+    background-color: #ffffff;
+
+    ion-row {
+        .icon, .author {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.46;
+
+            img {
+                height: 22px;
+                width: 22px;
+            }
+        }
+
+        .reason {
+            padding-top: 0;
+    
+            pre {
+                font-weight: 400;
+                font-size: 12px;
+                white-space: pre-wrap;
+                word-wrap: break-word;
+                font-family: 'Inter' !important;
+            }
+        }
+    }
+}
+
+.darkContainer {
+    background: #212021;
+    box-shadow: none;
+}

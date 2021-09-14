@@ -1,0 +1,35 @@
+<ion-content>
+    <app-titlebar></app-titlebar>
+    <ion-grid *ngIf="receivedIntent" class="container" [class.dark-container]="theme.darkMode">
+        <ion-card>
+            <img src="assets/identity/images/fingerprint.svg">
+            <ion-card-title *ngIf="receivedIntent.params.from">{{ 'identity.sethiveprovider-app-id' | translate }}</ion-card-title>
+            <ion-card-subtitle *ngIf="receivedIntent.params.from">{{ receivedIntent.params.from }}</ion-card-subtitle>
+        </ion-card>
+
+        <div class="msg-container">
+            <p class="first-msg">{{ 'identity.sethiveprovider-intro' | translate }}</p>
+        </div>
+
+        <ion-row class="data-row" *ngIf="receivedIntent.params.name">
+            <p>{{ 'identity.sethiveprovider-name' | translate }}</p>
+            <h5>
+                {{ receivedIntent.params.name }}
+            </h5>
+        </ion-row>
+
+        <ion-row class="data-row">
+            <p>{{ 'identity.sethiveprovider-address' | translate }}</p>
+            <h5>
+                {{ receivedIntent.params.address }}
+            </h5>
+        </ion-row>
+
+        <ion-row class="btn-container" (click)="acceptRequest()">
+            <ion-button color="tertiary">
+                <ion-label>{{ 'identity.accept' | translate }}</ion-label>
+            </ion-button>
+        </ion-row>
+
+    </ion-grid>
+</ion-content>

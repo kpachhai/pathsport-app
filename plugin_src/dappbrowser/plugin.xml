@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+-->
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-inappbrowser" version="5.0.1-dev">
+
+    <name>InAppBrowser</name>
+    <description>Cordova InAppBrowser Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,in,app,browser,inappbrowser</keywords>
+    <repo>https://github.com/apache/cordova-plugin-inappbrowser</repo>
+    <issue>https://github.com/apache/cordova-plugin-inappbrowser/issues</issue>
+
+    <engines>
+        <engine name="cordova" version=">=9.0.0"/>
+        <engine name="cordova-android" version=">=9.0.0" />
+        <engine name="cordova-ios" version=">=6.0.0" />
+    </engines>
+
+    <!-- android -->
+    <platform name="android">
+        <js-module src="www/inappbrowser.js" name="inappbrowser">
+            <clobbers target="cordova.InAppBrowser.open" />
+        </js-module>
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="InAppBrowser">
+                <param name="android-package" value="org.elastos.essentials.plugins.dappbrowser.InAppBrowser"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/InAppBrowser.java" target-dir="src/org/elastos/essentials/plugins/dappbrowser"/>
+        <source-file src="src/android/InAppBrowserDialog.java" target-dir="src/org/elastos/essentials/plugins/dappbrowser" />
+        <source-file src="src/android/InAppChromeClient.java" target-dir="src/org/elastos/essentials/plugins/dappbrowser" />
+
+        <!-- drawable src/android/resources -->
+        <!-- <resource-file src="src/android/res/drawable-hdpi/ic_action_next_item.png" target="res/drawable-hdpi/ic_action_next_item.png" />
+        <resource-file src="src/android/res/drawable-mdpi/ic_action_next_item.png" target="res/drawable-mdpi/ic_action_next_item.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/ic_action_next_item.png" target="res/drawable-xhdpi/ic_action_next_item.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/ic_action_next_item.png" target="res/drawable-xxhdpi/ic_action_next_item.png" />
+
+        <resource-file src="src/android/res/drawable-hdpi/ic_action_previous_item.png" target="res/drawable-hdpi/ic_action_previous_item.png" />
+        <resource-file src="src/android/res/drawable-mdpi/ic_action_previous_item.png" target="res/drawable-mdpi/ic_action_previous_item.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/ic_action_previous_item.png" target="res/drawable-xhdpi/ic_action_previous_item.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/ic_action_previous_item.png" target="res/drawable-xxhdpi/ic_action_previous_item.png" /> -->
+
+        <!-- <resource-file src="src/android/res/drawable-hdpi/ic_action_remove.png" target="res/drawable-hdpi/ic_action_remove.png" />
+        <resource-file src="src/android/res/drawable-mdpi/ic_action_remove.png" target="res/drawable-mdpi/ic_action_remove.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/ic_action_remove.png" target="res/drawable-xhdpi/ic_action_remove.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/ic_action_remove.png" target="res/drawable-xxhdpi/ic_action_remove.png" /> --> -->
+
+        <!-- <source-file src="src/android/WebViewFragment.java" target-dir="src/org/elastos/essentials/plugins/dappbrowser" /> -->
+        <source-file src="src/android/TitleBarPlugin.java" target-dir="src/org/elastos/essentials/plugins/dappbrowser" />
+        <source-file src="src/android/BuiltInIcon.java" target-dir="src/org/elastos/essentials/plugins/dappbrowser" />
+        <source-file src="src/android/TitleBarActivityType.java" target-dir="src/org/elastos/essentials/plugins/dappbrowser" />
+        <source-file src="src/android/TitleBarIconSlot.java" target-dir="src/org/elastos/essentials/plugins/dappbrowser" />
+        <source-file src="src/android/TitleBarNavigationMode.java" target-dir="src/org/elastos/essentials/plugins/dappbrowser" />
+        <source-file src="src/android/NativeStatusBarVisibility.java" target-dir="src/org/elastos/essentials/plugins/dappbrowser" />
+        <source-file src="src/android/TitleBarForegroundMode.java" target-dir="src/org/elastos/essentials/plugins/dappbrowser" />
+        <source-file src="src/android/TitleBarIconView.java" target-dir="src/org/elastos/essentials/plugins/dappbrowser" />
+        <source-file src="src/android/TitleBarVisibility.java" target-dir="src/org/elastos/essentials/plugins/dappbrowser" />
+        <source-file src="src/android/TitleBar.java" target-dir="src/org/elastos/essentials/plugins/dappbrowser" />
+        <source-file src="src/android/TitleBarIcon.java" target-dir="src/org/elastos/essentials/plugins/dappbrowser" />
+        <source-file src="src/android/TitleBarMenuItem.java" target-dir="src/org/elastos/essentials/plugins/dappbrowser" />
+        <source-file src="src/android/UrlEditText.java" target-dir="src/org/elastos/essentials/plugins/dappbrowser" />
+
+        <resource-file src="src/android/res/fragments_view.xml" target="/res/layout/fragments_view.xml" />
+        <resource-file src="src/android/res/title_bar.xml" target="/res/layout/title_bar.xml" />
+        <resource-file src="src/android/res/title_bar_icon_view.xml" target="/res/layout/title_bar_icon_view.xml" />
+        <resource-file src="src/android/res/title_bar_menu.xml" target="/res/layout/title_bar_menu.xml" />
+        <resource-file src="src/android/res/title_bar_menu_item.xml" target="/res/layout/title_bar_menu_item.xml" />
+        <resource-file src="src/android/res/styles.xml" target="/res/values/styles.xml" />
+
+        <resource-file src="src/android/res/fadein.xml" target="/res/anim/fadein.xml" />
+        <resource-file src="src/android/res/fadeout.xml" target="/res/anim/fadeout.xml" />
+        <resource-file src="src/android/res/slide_in_right.xml" target="/res/anim/slide_in_right.xml" />
+        <resource-file src="src/android/res/slide_out_right.xml" target="/res/anim/slide_out_right.xml" />
+
+        <resource-file src="src/android/res/title_bar_background.xml" target="/res/drawable/title_bar_background.xml" />
+         <resource-file src="src/android/res/rounded_edittext.xml" target="/res/drawable/rounded_edittext.xml" />
+
+        <resource-file src="src/android/res/ic_back.xml" target="/res/drawable/ic_back.xml" />
+        <resource-file src="src/android/res/ic_close.xml" target="/res/drawable/ic_close.xml" />
+        <resource-file src="src/android/res/ic_url_lock.xml" target="/res/drawable/ic_url_lock.xml" />
+        <resource-file src="src/android/res/ic_elastos.xml" target="/res/drawable/ic_elastos.xml" />
+        <resource-file src="src/android/res/ic_clear_input.xml" target="/res/drawable/ic_clear_input.xml" />
+        <resource-file src="src/android/res/ic_vertical_menu.xml" target="/res/drawable/ic_vertical_menu.xml" />
+        <resource-file src="src/android/res/ic_back_darkmode.xml" target="/res/drawable/ic_back_darkmode.xml" />
+        <resource-file src="src/android/res/ic_close_darkmode.xml" target="/res/drawable/ic_close_darkmode.xml" />
+        <resource-file src="src/android/res/ic_url_lock_darkmode.xml" target="/res/drawable/ic_url_lock_darkmode.xml" />
+         <resource-file src="src/android/res/ic_elastos_darkmode.xml" target="/res/drawable/ic_elastos_darkmode.xml" />
+         <resource-file src="src/android/res/ic_clear_input_darkmode.xml" target="/res/drawable/ic_clear_input_darkmode.xml" />
+        <resource-file src="src/android/res/ic_vertical_menu_darkmode.xml" target="/res/drawable/ic_vertical_menu_darkmode.xml" />
+
+        <framework src="src/android/titlebar.gradle" custom="true" type="gradleReference"/>
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <js-module src="www/inappbrowser.js" name="inappbrowser">
+            <clobbers target="cordova.InAppBrowser.open" />
+        </js-module>
+        <config-file target="config.xml" parent="/*">
+            <feature name="InAppBrowser">
+                <param name="ios-package" value="CDVWKInAppBrowser" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/CDVInAppBrowserOptions.h" />
+        <source-file src="src/ios/CDVInAppBrowserOptions.m" />
+        <header-file src="src/ios/CDVInAppBrowserNavigationController.h" />
+        <source-file src="src/ios/CDVInAppBrowserNavigationController.m" />
+        <header-file src="src/ios/CDVWKInAppBrowser.h" />
+        <source-file src="src/ios/CDVWKInAppBrowser.m" />
+        <header-file src="src/ios/CDVWKInAppBrowserUIDelegate.h" />
+        <source-file src="src/ios/CDVWKInAppBrowserUIDelegate.m" />
+
+        <source-file src="src/ios/TitleBarIconView.swift" />
+        <source-file src="src/ios/TitleBarPlugin.swift" />
+        <source-file src="src/ios/TitleBarMenuView.swift" />
+        <source-file src="src/ios/TitleBarView.swift" />
+        <source-file src="src/ios/TitleBarMenuItemView.swift" />
+
+        <source-file src="src/ios/TitleBarMenuItemView.xib" />
+        <source-file src="src/ios/TitleBarIconView.xib" />
+        <source-file src="src/ios/TitleBarMenuView.xib" />
+        <source-file src="src/ios/TitleBarView.xib" />
+
+        <resource-file src="src/ios/res/ic_back.png" />
+        <resource-file src="src/ios/res/ic_elastos.png" />
+        <resource-file src="src/ios/res/ic_vertical_menu.png" />
+        <resource-file src="src/ios/res/ic_back_darkmode.png" />
+        <resource-file src="src/ios/res/ic_elastos_darkmode.png" />
+        <resource-file src="src/ios/res/ic_vertical_menu_darkmode.png" />
+
+        <header-file src="src/ios/InAppBrowser-Bridging-Header.h" type="BridgingHeader" />
+
+        <framework src="CoreGraphics.framework" />
+    </platform>
+
+    <!-- osx -->
+    <platform name="osx">
+        <js-module src="www/inappbrowser.js" name="inappbrowser">
+            <clobbers target="cordova.InAppBrowser.open" />
+        </js-module>
+        <config-file target="config.xml" parent="/*">
+            <feature name="InAppBrowser">
+                <param name="osx-package" value="CDVInAppBrowser" />
+            </feature>
+        </config-file>
+
+        <header-file src="src/osx/CDVInAppBrowser.h" />
+        <source-file src="src/osx/CDVInAppBrowser.m" />
+    </platform>
+
+    <!-- windows -->
+    <platform name="windows">
+        <js-module src="www/inappbrowser.js" name="inappbrowser">
+            <clobbers target="cordova.InAppBrowser.open" />
+        </js-module>
+        <js-module src="src/windows/InAppBrowserProxy.js" name="InAppBrowserProxy">
+            <runs />
+        </js-module>
+        <asset src="www/inappbrowser.css" target="css/inappbrowser.css" />
+    </platform>
+
+    <!-- browser -->
+    <platform name="browser">
+        <js-module src="www/inappbrowser.js" name="inappbrowser">
+            <clobbers target="cordova.InAppBrowser.open" />
+        </js-module>
+        <js-module src="src/browser/InAppBrowserProxy.js" name="InAppBrowserProxy">
+            <runs />
+        </js-module>
+    </platform>
+
+    <!-- <hook src="hooks/before_plugin_install/build_ts.js" type="before_plugin_install" /> -->
+</plugin>

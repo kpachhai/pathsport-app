@@ -1,0 +1,234 @@
+<ion-content>
+  <app-titlebar></app-titlebar>
+  <ion-grid *ngIf="contact" class="container" [class.blur]="popupService.deletePopup" [class.darkContainer]="theme.darkMode">
+    <div class="header">
+      <img [src]="uxService.getAvatar(contact)" class="profile-img">
+      <h1>{{ uxService.getDisplayableName(contact) }}</h1>
+      <p> {{ uxService.getDisplayableBio(contact) }}</p>
+      <ion-row class="btn-row">
+        <div class="ion-activatable ripple">
+          <img [src]="!theme.darkMode ? '/assets/contacts/buttons/scan.svg' : '/assets/contacts/buttons/darkmode/scan.svg'" (click)="popupService.showQRCode(contact)">
+          <ion-ripple-effect></ion-ripple-effect>
+        </div>
+        <div class="ion-activatable ripple">
+          <img [src]="!theme.darkMode ? '/assets/contacts/buttons/edit.svg' : '/assets/contacts/buttons/darkmode/edit.svg'" (click)="friendsService.showCustomization(contact, false)">
+          <ion-ripple-effect></ion-ripple-effect>
+        </div>
+        <div class="ion-activatable ripple">
+          <img [src]="!theme.darkMode ? '/assets/contacts/buttons/options.svg' : '/assets/contacts/buttons/darkmode/options.svg'" (click)="popupService.showOptions($event, contact, true)">
+          <ion-ripple-effect></ion-ripple-effect>
+        </div>
+      </ion-row>
+    </div>
+
+    <ion-list>
+      <ion-row class="profile-data" *ngIf="contact.credentials.name">
+        <ion-col>
+          <h5>{{ 'contacts.name' | translate }}</h5>
+          <h4>{{ contact.credentials.name }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.nickname">
+        <ion-col>
+          <h5>{{ 'common.nickname' | translate }}</h5>
+          <h4>{{ contact.credentials.nickname }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.description">
+        <ion-col>
+          <h5>{{ 'common.bio' | translate }}</h5>
+          <h4>{{ contact.credentials.description }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.gender">
+        <ion-col>
+          <h5>{{ 'common.gender' | translate }}</h5>
+          <h4>{{ contact.credentials.gender }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.nation">
+        <ion-col>
+          <h5>{{ 'common.country' | translate }}</h5>
+          <h4>{{ contact.credentials.nation }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.birthDate">
+        <ion-col>
+          <h5>{{ 'common.birth' | translate }}</h5>
+          <h4>{{ fixBirthDate(contact.credentials.birthDate) }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.birthPlace">
+        <ion-col>
+          <h5>{{ 'common.birth-place' | translate }}</h5>
+          <h4>{{ contact.credentials.birthPlace }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.occupation">
+        <ion-col>
+          <h5>{{ 'common.occupation' | translate }}</h5>
+          <h4>{{ contact.credentials.occupation }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.education">
+        <ion-col>
+          <h5>{{ 'common.education' | translate }}</h5>
+          <h4>{{ contact.credentials.education }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.interests">
+        <ion-col>
+          <h5>{{ 'common.interests' | translate }}</h5>
+          <h4>{{ contact.credentials.interests  }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.telephone">
+        <ion-col>
+          <h5>{{ 'common.telephone' | translate }}</h5>
+          <h4>{{ contact.credentials.telephone }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.email">
+        <ion-col>
+          <h5>{{ 'common.email' | translate }}</h5>
+          <h4>{{ contact.credentials.email }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.url">
+        <ion-col>
+          <h5>{{ 'common.website' | translate }}</h5>
+          <h4>{{ contact.credentials.url }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.twitter">
+        <ion-col>
+          <h5>Twitter</h5>
+          <h4>{{ contact.credentials.twitter }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.facebook">
+        <ion-col>
+          <h5>Facebook</h5>
+          <h4>{{ contact.credentials.facebook }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.instagram">
+        <ion-col>
+          <h5>Instagram</h5>
+          <h4>{{ contact.credentials.instagram }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.snapchat">
+        <ion-col>
+          <h5>Snapchat</h5>
+          <h4>{{ contact.credentials.snapchat }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.telegram">
+        <ion-col>
+          <h5>Telegram</h5>
+          <h4>{{ contact.credentials.telegram }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.wechat">
+        <ion-col>
+          <h5>Wechat</h5>
+          <h4>{{ contact.credentials.wechat }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.weibo">
+        <ion-col>
+          <h5>Weibo</h5>
+          <h4>{{ contact.credentials.weibo }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.twitch">
+        <ion-col>
+          <h5>Twitch</h5>
+          <h4>{{ contact.credentials.twitch }}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="profile-data" *ngIf="contact.credentials.elaAddress">
+        <ion-col size="11">
+          <h5>{{ 'contacts.elaWallet' | translate }}</h5>
+          <h4>
+            {{ contact.credentials.elaAddress.slice(0,25) }} <br>
+            {{ contact.credentials.elaAddress.slice(25,50) }}
+          </h4>
+        </ion-col>
+        <ion-col size="1" (click)="copyAddress('contacts.elaWallet', contact.credentials.elaAddress)">
+          <ion-icon mode="ios" name="copy" color="tertiary"></ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <ion-row
+        *ngIf="contact.id !== 'did:elastos'"
+        class="profile-data"
+        [class.remove-border]="!contact.carrierAddress && !contact.notificationsCarrierAddress"
+        >
+        <ion-col size="11">
+          <h5>{{ 'contacts.did' | translate }}</h5>
+          <h4>
+            {{ contact.id.slice(0,25) }} <br>
+            {{ contact.id.slice(25,50) }}
+          </h4>
+        </ion-col>
+        <ion-col size="1" (click)="copyAddress('contacts.did', contact.id)">
+          <ion-icon mode="ios" name="copy" color="tertiary"></ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <ion-row
+        *ngIf="contact.carrierAddress"
+        class="profile-data"
+        [class.remove-border]="!contact.notificationsCarrierAddress"
+      >
+        <ion-col size="11">
+          <h5>{{ 'contacts.carrier' | translate }}</h5>
+          <h4>
+            {{ contact.carrierAddress.slice(0,25) }} <br>
+            {{ contact.carrierAddress.slice(25,50) }}
+          </h4>
+        </ion-col>
+        <ion-col size="1" (click)="copyAddress('contacts.carrier', contact.carrierAddress)">
+          <ion-icon mode="ios" name="copy" color="tertiary"></ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <!-- <ion-row *ngIf="contact.notificationsCarrierAddress" class="profile-data remove-border">
+        <ion-col size="11">
+          <h5>{{ 'contacts.elastos-notifications-carrier-address' | translate }}</h5>
+          <h4>
+            {{ contact.notificationsCarrierAddress.slice(0,25) }} <br>
+            {{ contact.notificationsCarrierAddress.slice(25,50) }}
+          </h4>
+        </ion-col>
+        <ion-col size="1" (click)="copyAddress('contacts.carrier', contact.carrierAddress)">
+          <ion-icon mode="ios" name="copy" color="tertiary"></ion-icon>
+        </ion-col>
+      </ion-row> -->
+    </ion-list>
+
+  </ion-grid>
+</ion-content>
