@@ -1,4 +1,4 @@
-@import "src/app/identity/root.scss";
+@import 'src/app/identity/root.scss';
 
 .container {
   .header-row {
@@ -7,7 +7,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-  
+
       .avatar {
         width: 215.1px;
         height: 214.6px;
@@ -16,10 +16,10 @@
         display: flex;
         justify-content: center;
         color: #ffffff;
-        background-image: url("/assets/identity/svg/empty-balloon.svg");
+        background-image: url('/assets/identity/svg/empty-balloon.svg');
         background-blend-mode: multiply;
         padding: 35px;
-    
+
         ion-icon {
           display: block;
           margin: auto;
@@ -37,7 +37,7 @@
           height: 100%;
         }
       }
-  
+
       span {
         font-size: 13px;
         font-weight: 500;
@@ -58,7 +58,7 @@
 
   .credentials {
     .main-row {
-      border-top: 1px solid #EAEAEA;
+      border-top: 1px solid #eaeaea;
       padding-top: 1px;
       padding-bottom: 1px;
 
@@ -77,30 +77,31 @@
           object-fit: contain;
         }
       }
-  
+
       .subject-col {
         display: flex;
         justify-content: flex-start;
         align-items: center;
-      
-        ion-label, span {
+
+        ion-label,
+        span {
           font-size: 13px;
           font-weight: 600;
           line-height: 1.62;
           text-align: left;
           --color: #121212;
         }
-      
+
         .avatar-label {
           line-height: 3.24;
         }
       }
-  
+
       .edit-col {
         display: flex;
         justify-content: flex-end;
         align-items: center;
-      
+
         ion-input,
         ion-label,
         ion-select,
@@ -114,11 +115,12 @@
           --padding-end: 5px;
           --padding-top: 3px;
         }
-      
-        ion-input, ion-datetime {
+
+        ion-input,
+        ion-datetime {
           --padding-start: 0px;
         }
-      
+
         ion-select {
           width: 150px;
           position: relative;
@@ -138,7 +140,7 @@
       }
     }
   }
-  
+
   .btn-row {
     display: flex;
     justify-content: center;
@@ -149,8 +151,8 @@
     ion-button {
       height: 50px;
       width: 90%;
-      --background: linear-gradient(to bottom, #732dcf, #640fd4);
-      --border-radius: 8px;
+      background: linear-gradient(97.64deg, #0acffe 0.23%, #495aff 101.03%);
+      border-radius: 15px;
       font-size: 14px;
       font-weight: 500;
       letter-spacing: 0.1px;
@@ -177,7 +179,7 @@
           --color: #ffffff;
         }
       }
-    
+
       .edit-col {
         ion-label,
         ion-select,

@@ -1,13 +1,19 @@
-@import "src/app/identity/root.scss";
+@import 'src/app/identity/root.scss';
 
 ion-list {
   ion-item {
-    border-bottom: 1px solid #f0f1ff;
+    // border-bottom: 1px solid #f0f1ff;
+
+    border: 1px solid #292a37;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    --border-style: none;
 
     ion-label {
       font-size: 13px;
       font-weight: 600;
       line-height: 1.27;
+      margin-left: 10px;
     }
   }
 }
@@ -16,4 +22,11 @@ ion-list {
   ion-item {
     border-bottom: 1px solid #2f305a;
   }
+}
+
+.flag {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  margin-left: 10px;
 }

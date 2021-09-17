@@ -1,19 +1,56 @@
 // http://ionicframework.com/docs/theming/
-@import "~@ionic/angular/css/core.css";
-@import "~@ionic/angular/css/normalize.css";
-@import "~@ionic/angular/css/structure.css";
-@import "~@ionic/angular/css/typography.css";
-@import "~@ionic/angular/css/display.css";
-@import "~@ionic/angular/css/padding.css";
-@import "~@ionic/angular/css/float-elements.css";
-@import "~@ionic/angular/css/text-alignment.css";
-@import "~@ionic/angular/css/text-transformation.css";
-@import "~@ionic/angular/css/flex-utils.css";
+@import '~@ionic/angular/css/core.css';
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+@import '~@ionic/angular/css/display.css';
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
 
 @import './theme/declared.scss';
 @import './theme/ionic.scss';
 
 /********************** SHARED FONTS **********************/
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-style: normal;
+  src: url('assets/fonts/poppins/Poppins-Medium.ttf');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-style: normal;
+  src: url('assets/fonts/poppins/Poppins-SemiBold.ttf');
+}
+@font-face {
+  font-family: 'Inter';
+  font-weight: 500;
+  font-style: normal;
+  src: url('assets/fonts/inter/Inter-Medium.ttf');
+}
+@font-face {
+  font-family: 'Inter';
+  font-weight: 600;
+  font-style: normal;
+  src: url('assets/fonts/inter/Inter-SemiBold.ttf');
+}
+@font-face {
+  font-family: 'Inter';
+  font-weight: 700;
+  font-style: normal;
+  src: url('assets/fonts/inter/Inter-Bold.ttf');
+}
+@font-face {
+  font-family: 'Inter';
+  font-weight: 800;
+  font-style: normal;
+  src: url('assets/fonts/inter/Inter-ExtraBold.ttf');
+}
+/*
 @font-face {
     font-family: 'Montserrat';
     font-weight: 300;
@@ -142,41 +179,41 @@
     font-style: normal;
     src: url('assets/fonts/raleway/Raleway-Black.ttf') format('truetype');
 }
-
+*/
 /** Global font family **/
 * {
-    font-family: 'Montserrat' !important;
+  font-family: 'Poppins' !important;
 }
 
 /** Remove 'box' outline on clicked items **/
 :focus {
-    outline: none;
+  outline: none;
 }
 
 /** Hide visibility **/
 .hidden {
-    visibility: hidden;
+  visibility: hidden;
 }
-  
+
 /** Blur screen when a popup is showing **/
 .blur {
-    filter: blur(2.5px);
+  filter: blur(2.5px);
 }
 
 /** Ripple to clickable items **/
 .ripple {
-    overflow: hidden;
-    position: relative;
+  overflow: hidden;
+  position: relative;
 }
 
 /** Color for warning texts  **/
 .warning-text {
-    color: #f04141;
+  color: #f04141;
 }
 
 /** Simple class to apply theme background **/
 .lightmode {
-    background: #F5F5FD;
+  background: #f5f5fd;
 
   /*   ion-refresher {
         background: #F5F5FD;
@@ -212,9 +249,9 @@
 }
 
 .darkmode {
-    background: #121212;
+  background: #121212;
 
-   /*  ion-refresher {
+  /*  ion-refresher {
         background: #121212;
         color: white;
         

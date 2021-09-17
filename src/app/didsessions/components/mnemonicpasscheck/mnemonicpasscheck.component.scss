@@ -29,8 +29,8 @@
     ion-button {
       height: 50px;
       width: 100%;
-      --background: linear-gradient(to bottom, #732dcf, #640fd4);
-      --border-radius: 8px;
+      background: linear-gradient(97.64deg, #0acffe 0.23%, #495aff 101.03%);
+      border-radius: 15px;
       font-size: 14px;
       font-weight: 500;
       letter-spacing: 0.1px;
@@ -59,8 +59,8 @@
     }
 
     .password-failed-info {
-      color: #FF6464;
-      font-weight:700;
+      color: #ff6464;
+      font-weight: 700;
       font-size: 10px;
       margin-top: 5px;
     }

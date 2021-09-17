@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, NgZone, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonInput } from '@ionic/angular';
 import { UXService } from 'src/app/didsessions/services/ux.service';
@@ -13,6 +13,15 @@ import {
   TitleBarMenuItem,
 } from 'src/app/components/titlebar/titlebar.types';
 import { Logger } from 'src/app/logger';
+
+// Imports start for country picker
+import { Native } from '../../../identity/services/native';
+import { area } from '../../../../assets/identity/area/area';
+import { BasicCredentialEntry } from '../../../identity/model/basiccredentialentry.model';
+import { CountryCodeInfo } from '../../../identity/model/countrycodeinfo';
+import { Subscription } from 'rxjs';
+import { Events } from 'src/app/services/events.service';
+// Imports end for country picker
 
 export type EditProfileStateParams = {
   onCompletion: Promise<string>;
@@ -31,6 +40,9 @@ export class EditProfilePage {
   public isEdit: boolean = false;
   public name: string = ''; // Name being edited
   public location: string = ''; // Location being edited
+  public locationAlpha3: string = '';
+  private selectCountrySubscription: Subscription = null;
+  private showSelectCountry = false;
 
   public creatingDid = false;
 
@@ -43,6 +55,9 @@ export class EditProfilePage {
     public theme: GlobalThemeService,
     private translate: TranslateService,
     private identityService: IdentityService,
+    private native: Native,
+    public events: Events,
+    public zone: NgZone,
     private router: Router
   ) {
     const navigation = this.router.getCurrentNavigation();
@@ -105,5 +120,35 @@ export class EditProfilePage {
     }
 
     return true;
+  }
+
+  /********** For 'nation' entry **********/
+  // async selectCountry(countryEntry: BasicCredentialEntry) {
+  async selectCountry() {
+    // Logger.log('Identity', 'CountryEntry: ' + countryEntry.key);
+    this.selectCountrySubscription = this.events.subscribe(
+      'selectarea',
+      (params: CountryCodeInfo) => {
+        Logger.log('Identity', 'Country selected: ' + params.alpha3);
+        this.zone.run(() => {
+          this.location = params.name;
+          this.locationAlpha3 = params.alpha3;
+          this.showSelectCountry = false;
+        });
+        this.selectCountrySubscription.unsubscribe();
+      }
+    );
+    await this.native.go('/identity/countrypicker');
+    this.showSelectCountry = true;
+  }
+
+  getDisplayableNation(countryAlpha3) {
+    let countryInfo = area.find((a: CountryCodeInfo) => {
+      return countryAlpha3 == a.alpha3;
+    });
+
+    if (!countryInfo) return null;
+
+    return countryInfo.name;
   }
 }

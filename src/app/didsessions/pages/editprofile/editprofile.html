@@ -2,7 +2,7 @@
   <app-titlebar></app-titlebar>
   <ion-grid class="container" [class.dark-container]="theme.darkMode">
     <ion-row>
-      <ion-label>{{ 'didsessions.your-name' | translate }}</ion-label>
+      <ion-label>{{ 'didsessions.name' | translate }}</ion-label>
     </ion-row>
     <ion-input
       [placeholder]="'didsessions.enter-name-here'|translate"
@@ -13,6 +13,35 @@
     ></ion-input>
 
     <ion-row>
+      <ion-label>{{ 'didsessions.location' | translate }}</ion-label>
+    </ion-row>
+    <ion-row class="country">
+      <ion-col (click)="selectCountry()">
+        <img
+          *ngIf="locationAlpha3 !== ''"
+          class="flag"
+          src="../../../../assets/didsessions/flags/{{ locationAlpha3 | lowercase}}.svg"
+        />
+        <ion-label class="countryLabel"
+          >{{ getDisplayableNation(locationAlpha3) || ('identity.enter-here' |
+          translate) }}</ion-label
+        >
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row>
+      <ion-label>{{ 'didsessions.master-password' | translate }}</ion-label>
+    </ion-row>
+    <ion-input
+      [placeholder]="'didsessions.enter-password-here'|translate"
+      #input
+      [(ngModel)]="password"
+      name="password"
+      type="password"
+      ngDefaultControl
+    ></ion-input> -->
+
+    <!-- <ion-row>
       <ion-label>{{ 'didsessions.your-location' | translate }}</ion-label>
     </ion-row>
     <ion-input
@@ -21,7 +50,7 @@
       [(ngModel)]="location"
       name="location"
       ngDefaultControl
-    ></ion-input>
+    ></ion-input> -->
 
     <div class="footer">
       <ion-button [disabled]="creatingDid" (click)="next()">

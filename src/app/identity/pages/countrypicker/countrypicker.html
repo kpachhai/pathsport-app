@@ -1,6 +1,6 @@
 <ion-content>
   <app-titlebar></app-titlebar>
-<!--   <ion-list class="ion-padding" [class.dark-container]="theme.darkMode">
+  <!--   <ion-list class="ion-padding" [class.dark-container]="theme.darkMode">
     <ion-virtual-scroll [items]="areaList" approxItemHeight="320px">
       <ion-item *virtualItem="let item" (click)="selectItem(item)">
         <ion-label>{{ item.name }}</ion-label>
@@ -10,9 +10,11 @@
 
   <ion-list class="ion-padding" [class.dark-container]="theme.darkMode">
     <ion-item *ngFor="let item of areaList" (click)="selectItem(item)">
+      <img
+        class="flag"
+        src="../../../../assets/didsessions/flags/{{ item.alpha3 | lowercase}}.svg"
+      />
       <ion-label>{{ item.name }}</ion-label>
     </ion-item>
   </ion-list>
-  
 </ion-content>
-

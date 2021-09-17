@@ -1,5 +1,15 @@
 <ion-content>
   <app-titlebar></app-titlebar>
+  <img
+    *ngIf="slideIndex === 0 && onboarded === false"
+    class="animateLogo"
+    [src]="!theme.darkMode ? 'assets/didsessions/onboard/logo.svg' : 'assets/didsessions/onboard/logo.svg'"
+  />
+  <img
+    *ngIf="slideIndex !== 0 || onboarded === true"
+    class="logo"
+    [src]="!theme.darkMode ? 'assets/didsessions/onboard/logo.svg' : 'assets/didsessions/onboard/logo.svg'"
+  />
   <ion-slides
     #slide
     pager="true"
@@ -8,35 +18,69 @@
     (ionSlideWillChange)="getActiveSlide()"
     class="ion-text-center"
   >
-    <ion-slide id="slide1">
-      <img [src]="!theme.darkMode ? 'assets/didsessions/onboard/elalogo.svg' : 'assets/didsessions/onboard/dark_mode/elalogo.svg'">
-      <h1>{{ 'common.elastos-essentials' | translate }}</h1>
-      <ion-label>{{ 'didsessions.welcome-message1' | translate }}</ion-label>
+    <ion-slide class="slide1">
+      <!-- <img [src]="!theme.darkMode ? 'assets/didsessions/onboard/elalogo.svg' : 'assets/didsessions/onboard/dark_mode/elalogo.svg'"> -->
+      <!-- <h1>{{ 'common.elastos-essentials' | translate }}</h1>
+      <ion-label>{{ 'didsessions.welcome-message1' | translate }}</ion-label> -->
+      <img
+        [src]="!theme.darkMode ? 'assets/didsessions/onboard/features.svg' : 'assets/didsessions/onboard/features.svg'"
+      />
+      <h1>Features</h1>
+      <ion-label>Lorem ipsum</ion-label>
     </ion-slide>
 
-    <ion-slide id="slide2">
-      <img [src]="!theme.darkMode ? 'assets/didsessions/icon/ela.svg' : 'assets/didsessions/icon/dark_mode/ela.svg'">
-<!--       <lottie-player src="/assets/animations/device.json" background="transparent" speed="1" style="width: 150px; height: 150px;" autoplay loop></lottie-player> -->
-      <ion-label>{{ 'didsessions.welcome-message2' | translate }}</ion-label>
+    <ion-slide class="slide1">
+      <img
+        [src]="!theme.darkMode ? 'assets/didsessions/onboard/features.svg' : 'assets/didsessions/onboard/features.svg'"
+      />
+      <h1>Features</h1>
+      <ion-label>Lorem ipsum</ion-label>
+      <!-- <img
+        [src]="!theme.darkMode ? 'assets/didsessions/icon/ela.svg' : 'assets/didsessions/icon/dark_mode/ela.svg'"
+      /> -->
+      <!--       <lottie-player src="/assets/animations/device.json" background="transparent" speed="1" style="width: 150px; height: 150px;" autoplay loop></lottie-player> -->
+      <!-- <ion-label>{{ 'didsessions.welcome-message2' | translate }}</ion-label> -->
     </ion-slide>
 
-    <ion-slide id="slide2">
-      <img [src]="!theme.darkMode ? 'assets/didsessions/onboard/did.svg' : 'assets/didsessions/onboard/dark_mode/did.svg'">
-      <ion-label>{{ 'didsessions.welcome-message3' | translate }} <br>{{ 'didsessions.welcome-message3.1' | translate }} <br>{{ 'didsessions.welcome-message3.2' | translate }}</ion-label>
+    <ion-slide class="slide1">
+      <img
+        [src]="!theme.darkMode ? 'assets/didsessions/onboard/features.svg' : 'assets/didsessions/onboard/features.svg'"
+      />
+      <h1>Features</h1>
+      <ion-label>Lorem ipsum</ion-label>
+      <!-- <img
+        [src]="!theme.darkMode ? 'assets/didsessions/icon/ela.svg' : 'assets/didsessions/icon/dark_mode/ela.svg'"
+      /> -->
+      <!--       <lottie-player src="/assets/animations/device.json" background="transparent" speed="1" style="width: 150px; height: 150px;" autoplay loop></lottie-player> -->
+      <!-- <ion-label>{{ 'didsessions.welcome-message2' | translate }}</ion-label> -->
     </ion-slide>
 
+    <!-- <ion-slide id="slide2">
+      <img
+        [src]="!theme.darkMode ? 'assets/didsessions/onboard/did.svg' : 'assets/didsessions/onboard/dark_mode/did.svg'"
+      />
+      <ion-label
+        >{{ 'didsessions.welcome-message3' | translate }} <br />{{
+        'didsessions.welcome-message3.1' | translate }} <br />{{
+        'didsessions.welcome-message3.2' | translate }}</ion-label
+      >
+    </ion-slide> -->
   </ion-slides>
   <div class="footer">
-    <ion-button *ngIf="slideIndex === 0" (click)="nextSlide()">{{ 'common.begin' | translate }}</ion-button>
-    <ion-button *ngIf="slideIndex === 1" (click)="nextSlide()">{{ 'common.continue' | translate }}</ion-button>
+    <ion-button *ngIf="slideIndex === 0" (click)="nextSlide()"
+      >{{ 'common.next' | translate }}</ion-button
+    >
+    <ion-button *ngIf="slideIndex === 1" (click)="nextSlide()"
+      >{{ 'common.continue' | translate }}</ion-button
+    >
     <div *ngIf="slideIndex >= 2">
       <ion-button (click)="createNewIdentity()">
         {{ 'didsessions.new' | translate }}
       </ion-button>
-      <ion-button (click)="importIdentity()">
+      <ion-button color="secondary" (click)="importIdentity()"
+        ><ion-icon src="assets/didsessions/icon/download.svg"></ion-icon>&nbsp;
         {{ 'didsessions.import' | translate }}
       </ion-button>
     </div>
   </div>
 </ion-content>
-

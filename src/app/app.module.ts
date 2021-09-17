@@ -1,10 +1,19 @@
 import { ErrorHandler, Injectable, NgModule } from '@angular/core';
-import { ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  DetachedRouteHandle,
+  RouteReuseStrategy,
+} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MissingTranslationHandler, MissingTranslationHandlerParams, TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {
+  MissingTranslationHandler,
+  MissingTranslationHandlerParams,
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-import { FirebaseX } from "@ionic-native/firebase-x/ngx";
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppVersion } from '@ionic-native/app-version/ngx';
@@ -36,74 +45,72 @@ import { DeveloperToolsInitModule } from './developertools/init.module';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 import * as Sentry from '@sentry/browser';
-import { Integrations }  from '@sentry/tracing';
+import { Integrations } from '@sentry/tracing';
 import { GlobalNativeService } from './services/global.native.service';
 import { DPoSRegistrationInitModule } from './dposregistration/init.module';
 import { CRCouncilManagerInitModule } from './crcouncilmanager/init.module';
 
+// Sentry.init({
+//   dsn: "https://1de99f1d75654d479051bfdce1537821@o339076.ingest.sentry.io/5722236",
+//   release: "default",
+//   integrations: [
+//     new Integrations.BrowserTracing(),
+//   ],
+//   tracesSampleRate: 1.0,
+// });
 
-Sentry.init({
-  dsn: "https://1de99f1d75654d479051bfdce1537821@o339076.ingest.sentry.io/5722236",
-  release: "default",
-  integrations: [
-    new Integrations.BrowserTracing(),
-  ],
-  tracesSampleRate: 1.0,
-});
+// @Injectable()
+// export class SentryErrorHandler implements ErrorHandler {
+//   private version = ''
+//   constructor(
+//     public native: GlobalNativeService,
+//     private appVersion: AppVersion,
+//   ) {
+//     this.appVersion.getVersionNumber().then(res => {
+//       this.version = res;
+//     }).catch(error => {
+//       Logger.error('Sentry', 'getVersionNumber error:', error);
+//     });
+//   }
 
-@Injectable()
-export class SentryErrorHandler implements ErrorHandler {
-  private version = ''
-  constructor(
-    public native: GlobalNativeService,
-    private appVersion: AppVersion,
-  ) {
-    this.appVersion.getVersionNumber().then(res => {
-      this.version = res;
-    }).catch(error => {
-      Logger.error('Sentry', 'getVersionNumber error:', error);
-    });
-  }
+//   /**
+//    * Let a few special errors be handled silently.
+//    */
+//   private shouldHandleAsSilentError(error) {
+//     let stringifiedError = ""+error;
 
-  /**
-   * Let a few special errors be handled silently.
-   */
-  private shouldHandleAsSilentError(error) {
-    let stringifiedError = ""+error;
+//     // Error unhandled by the wallet connect 1.0 library, but this is not a real error (caused by calling
+//     // disconnect when not connected). This can be removed after upgrading to wallet connect 2.0.
+//     if (stringifiedError.indexOf("Missing or invalid topic field") >= 0)
+//       return true;
 
-    // Error unhandled by the wallet connect 1.0 library, but this is not a real error (caused by calling
-    // disconnect when not connected). This can be removed after upgrading to wallet connect 2.0.
-    if (stringifiedError.indexOf("Missing or invalid topic field") >= 0)
-      return true;
+//     return false;
+//   }
 
-    return false;
-  }
+//   handleError(error) {
+//     if (this.shouldHandleAsSilentError(error)) {
+//       Logger.warn("Sentry", "Globally catched exception (silently):", error);
+//       return;
+//     }
 
-  handleError(error) {
-    if (this.shouldHandleAsSilentError(error)) {
-      Logger.warn("Sentry", "Globally catched exception (silently):", error);
-      return;
-    }
+//     Logger.error("Sentry", "Globally catched exception:", error);
+//     Logger.error("Sentry", document.URL);
+//     Logger.error("Sentry", 'version:', this.version);
 
-    Logger.error("Sentry", "Globally catched exception:", error);
-    Logger.error("Sentry", document.URL);
-    Logger.error("Sentry", 'version:', this.version);
+//     // Only send reports to sentry if we are not debugging.
+//     if (document.URL.includes('localhost')) { // Prod builds or --nodebug CLI builds use the app package id instead of a local IP
+//       /*const eventId = */ Sentry.captureException(error.originalError || error);
+//       // Sentry.showReportDialog({ eventId });
+//     }
 
-    // Only send reports to sentry if we are not debugging.
-    if (document.URL.includes('localhost')) { // Prod builds or --nodebug CLI builds use the app package id instead of a local IP
-      /*const eventId = */ Sentry.captureException(error.originalError || error);
-      // Sentry.showReportDialog({ eventId });
-    }
-
-    if (error.promise && error.promise.__zone_symbol__value && 'skipsentry' === error.promise.__zone_symbol__value.type) {
-      // Do not popop error dialog, but still send to sentry for debug.
-      Logger.error("Sentry", 'This exception has been handled:', error);
-    } else {
-      this.native.genericToast('common.sentry-message', 5000);
-    }
-  }
-}
-
+//     if (error.promise && error.promise.__zone_symbol__value && 'skipsentry' === error.promise.__zone_symbol__value.type) {
+//       // Do not popop error dialog, but still send to sentry for debug.
+//       Logger.error("Sentry", 'This exception has been handled:', error);
+//     } else {
+//       this.native.genericToast('common.sentry-message', 5000);
+//     }
+//   }
+// }
 
 /**
  * NOTE: BPI 20210226: Tried to have one translation loader per dapp module, using forChild / isolate,
@@ -112,15 +119,17 @@ export class SentryErrorHandler implements ErrorHandler {
  */
 class CustomTranslateLoader implements TranslateLoader {
   public getTranslation(lang: string): Observable<any> {
-    return Observable.create(async observer => {
-      let translations = await TranslationsLoader.getTranslations(lang)
+    return Observable.create(async (observer) => {
+      let translations = await TranslationsLoader.getTranslations(lang);
       observer.next(translations);
       observer.complete();
     });
   }
 }
 
-export class CustomMissingTranslationHandler implements MissingTranslationHandler {
+export class CustomMissingTranslationHandler
+  implements MissingTranslationHandler
+{
   handle(params: MissingTranslationHandlerParams) {
     //Logger.warn("Translations", "Missing translation:", params)
   }
@@ -180,12 +189,8 @@ export function TranslateLoaderFactory() {
 }*/
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  entryComponents: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
+  entryComponents: [AppComponent],
   imports: [
     LauncherModule,
 
@@ -217,20 +222,23 @@ export function TranslateLoaderFactory() {
       mode: 'ios',
       scrollAssist: false,
       scrollPadding: false,
-      navAnimation: iosTransitionAnimation
+      navAnimation: iosTransitionAnimation,
     }),
     AppRoutingModule,
     FormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: (TranslateLoaderFactory)
+        useFactory: TranslateLoaderFactory,
       },
-      missingTranslationHandler: {provide: MissingTranslationHandler, useClass: CustomMissingTranslationHandler},
+      missingTranslationHandler: {
+        provide: MissingTranslationHandler,
+        useClass: CustomMissingTranslationHandler,
+      },
     }),
     IonicStorageModule.forRoot({
       name: '__essentials.db',
-      driverOrder: ['sqlite', 'indexeddb', 'localstorage', 'websql']
+      driverOrder: ['sqlite', 'indexeddb', 'localstorage', 'websql'],
     }),
     BrowserAnimationsModule,
   ],
@@ -242,11 +250,11 @@ export function TranslateLoaderFactory() {
     StatusBar,
     FirebaseX,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-   // { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
-    { provide: ErrorHandler, useClass: SentryErrorHandler },
+    // { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
+    { provide: ErrorHandler }, //useClass: SentryErrorHandler },
     //{ provide: TranslateModule, deps: [TranslationsLoader.loadAllModulesAndMerge("")]}
   ],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule { }
+export class AppModule {}

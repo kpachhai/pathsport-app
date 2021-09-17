@@ -11,13 +11,18 @@ import { IdentityService } from 'src/app/didsessions/services/identity.service';
 import { UXService } from 'src/app/didsessions/services/ux.service';
 import { GlobalThemeService } from 'src/app/services/global.theme.service';
 import { TitleBarComponent } from 'src/app/components/titlebar/titlebar.component';
-import { TitleBarIconSlot, BuiltInIcon, TitleBarIcon, TitleBarMenuItem } from 'src/app/components/titlebar/titlebar.types';
+import {
+  TitleBarIconSlot,
+  BuiltInIcon,
+  TitleBarIcon,
+  TitleBarMenuItem,
+} from 'src/app/components/titlebar/titlebar.types';
 import { Logger } from 'src/app/logger';
 
 @Component({
   selector: 'page-createidentity',
   templateUrl: 'createidentity.html',
-  styleUrls: ['./createidentity.scss']
+  styleUrls: ['./createidentity.scss'],
 })
 export class CreateIdentityPage {
   @ViewChild(TitleBarComponent, { static: true }) titleBar: TitleBarComponent;
@@ -28,19 +33,22 @@ export class CreateIdentityPage {
   public slideOpts = {
     initialSlide: 0,
     speed: 400,
-    init: false
+    init: false,
   };
 
   public isfirst: boolean = true;
+  public onboarded: boolean = false;
   public styling = Styling;
 
   public passwordSheetState = DrawerState.Bottom;
   public passwordSheetMinHeight = 0;
   public passwordSheetDockedHeight = 350;
-  public password: string = "";
-  public passwordConfirmation: string = "";
+  public password: string = '';
+  public passwordConfirmation: string = '';
 
-  private titleBarIconClickedListener: (icon: TitleBarIcon | TitleBarMenuItem) => void;
+  private titleBarIconClickedListener: (
+    icon: TitleBarIcon | TitleBarMenuItem
+  ) => void;
 
   constructor(
     public router: Router,
@@ -49,24 +57,40 @@ export class CreateIdentityPage {
     private uxService: UXService,
     private translate: TranslateService,
     public theme: GlobalThemeService,
-    private splashScreen: SplashScreen,
+    private splashScreen: SplashScreen
   ) {
     const navigation = this.router.getCurrentNavigation();
     if (!Util.isEmptyObject(navigation.extras.state)) {
       this.isfirst = false;
-      Logger.log('didsessions', "Setting create identity screen initial slide to index 1");
+      Logger.log(
+        'didsessions',
+        'Setting create identity screen initial slide to index 1'
+      );
       this.slideOpts.initialSlide = 1;
     }
   }
 
   ionViewWillEnter() {
-    this.titleBar.setTitle(this.translate.instant("didsessions.create-identity"));
-    this.titleBar.setIcon(TitleBarIconSlot.OUTER_LEFT, { key:'backToRoot', iconPath: BuiltInIcon.BACK });
-    this.titleBar.setIcon(TitleBarIconSlot.OUTER_RIGHT, { key: "language", iconPath: BuiltInIcon.EDIT });
-    this.titleBar.setNavigationMode(null);
-    this.titleBar.addOnItemClickedListener(this.titleBarIconClickedListener = (icon) => {
-      this.uxService.onTitleBarItemClicked(icon);
+    this.titleBar.setVisibility(false);
+    /*
+    this.titleBar.setTitle(
+      this.translate.instant('didsessions.create-identity')
+    );
+    this.titleBar.setIcon(TitleBarIconSlot.OUTER_LEFT, {
+      key: 'backToRoot',
+      iconPath: BuiltInIcon.BACK,
     });
+    this.titleBar.setIcon(TitleBarIconSlot.OUTER_RIGHT, {
+      key: 'language',
+      iconPath: BuiltInIcon.EDIT,
+    });
+    this.titleBar.setNavigationMode(null);
+    this.titleBar.addOnItemClickedListener(
+      (this.titleBarIconClickedListener = (icon) => {
+        this.uxService.onTitleBarItemClicked(icon);
+      })
+    );
+    */
 
     // Dirty hack because on iOS we are currently unable to understand why the
     // ion-slides width is sometimes wrong when an app starts. Waiting a few
@@ -74,7 +98,7 @@ export class CreateIdentityPage {
     if (this.platform.platforms().indexOf('ios') >= 0) {
       setTimeout(() => {
         this.showSlider();
-      }, 300)
+      }, 300);
     } else {
       this.showSlider();
     }
@@ -90,8 +114,8 @@ export class CreateIdentityPage {
   }
 
   showSlider() {
-    Logger.log('didsessions', "Showing created identity screen slider");
-    this.hidden = false
+    Logger.log('didsessions', 'Showing created identity screen slider');
+    this.hidden = false;
     void this.slide.getSwiper().then((swiper) => {
       swiper.init();
     });
@@ -99,9 +123,13 @@ export class CreateIdentityPage {
 
   async getActiveSlide() {
     this.slideIndex = await this.slide.getActiveIndex();
+    if (!this.onboarded) {
+      this.onboarded = true;
+    }
   }
 
   nextSlide() {
+    this.onboarded = true;
     void this.slide.slideNext();
   }
 

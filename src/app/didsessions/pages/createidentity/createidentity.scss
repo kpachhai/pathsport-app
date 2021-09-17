@@ -1,7 +1,70 @@
 @import 'src/app/didsessions/root.scss';
 
 ion-slides {
-  height: calc(100% - (150px + 40px)); // Substract height of slides on approximate height of footer
+  height: calc(
+    100% - (150px + 40px)
+  ); // Substract height of slides on approximate height of footer
+  --bullet-background: #707c8e;
+  --bullet-background-active: #0066ff;
+  // bottom: 20px;
+  // opacity: 1;
+
+  // @media screen and (max-height: 640px) {
+  //   .swiper-pagination {
+  //     padding-top: 0px;
+  //   }
+  // }
+
+  // .swiper-pagination {
+  //   bottom: 20px !important;
+  //   opacity: 1 !important;
+
+  //   .swiper-pagination-bullet {
+  //     width: 11px !important;
+  //     height: 5px !important;
+  //     display: inline-block;
+  //     border-radius: 15% !important;
+  //     background: #707c8e;
+  //   }
+
+  //   .swiper-pagination-bullet-active {
+  //     // background: var(--bullet-background-active);
+  //     width: 20px !important;
+  //     height: 7px !important;
+  //     background: #0066ff;
+  //   }
+  // top: 70%;
+  // .swiper-pagination-bullet {
+  //   background-color: #fff;
+  //   width: 3%;
+  //   height: 13%;
+  //   opacity: 1;
+  // }
+  // .swiper-pagination-bullet-active {
+  //   background: #e5001b;
+  //   opacity: 1;
+  // }
+  // }
+
+  // .swiper-container-horizontal > .swiper-pagination-bullets {
+  //   bottom: 20px !important;
+  //   opacity: 1 !important;
+  // }
+
+  // .swiper-pagination-bullet {
+  //   width: 11px !important;
+  //   height: 5px !important;
+  //   display: inline-block;
+  //   border-radius: 15% !important;
+  //   background: #707c8e;
+  // }
+
+  // .swiper-pagination-bullet-active {
+  //   // background: var(--bullet-background-active);
+  //   width: 20px !important;
+  //   height: 7px !important;
+  //   background: #0066ff;
+  // }
 }
 
 ion-slide {
@@ -16,22 +79,70 @@ ion-slide {
     font-size: 15px;
     font-weight: 500;
     letter-spacing: -0.5px;
-    margin-top: 45px;
+    // margin-top: 45px;
   }
 }
 
-#slide1 {
+img.animateLogo {
+  width: 203.85px;
+  height: 49.82px;
+  position: absolute;
+  top: 50%;
+
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+
+  animation: logoAnimate;
+  animation-duration: 2000ms;
+  animation-fill-mode: forwards;
+
+  @keyframes logoAnimate {
+    0% {
+      width: 203.85px;
+      height: 49.82px;
+      top: 50%;
+    }
+    100% {
+      width: 119.84px;
+      height: 30.72px;
+      top: 10%;
+    }
+  }
+}
+
+img.logo {
+  width: 119.84px;
+  height: 30.72px;
+
+  position: absolute;
+  top: 10%;
+
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.slide1 {
   img {
-    width: 80px;
-    height: 80px;
+    width: 259px;
+    height: 273px;
 
     animation: imgAnimate;
     animation-duration: 800ms;
     animation-fill-mode: forwards;
 
     @keyframes imgAnimate {
-      0% { width: 0px; height: 0px; }
-      100% { width: 120px; height: 120px; }
+      0% {
+        width: 0px;
+        height: 0px;
+      }
+      100% {
+        width: 259px;
+        height: 273px;
+      }
     }
   }
 
@@ -49,15 +160,30 @@ ion-slide {
     bottom: 50%;
     animation: imgAnimate2;
     animation-duration: 1600ms;
-    animation-iteration-count:infinite;
+    animation-iteration-count: infinite;
     animation-fill-mode: forwards;
 
     @keyframes imgAnimate2 {
-      0% { width: 115px; height: 115px; }
-      25% { width: 120px; height: 120px; }
-      50% { width: 115px; height: 115px; }
-      75% { width: 120px; height: 120px; }
-      100% { width: 115px; height: 115px; }
+      0% {
+        width: 115px;
+        height: 115px;
+      }
+      25% {
+        width: 120px;
+        height: 120px;
+      }
+      50% {
+        width: 115px;
+        height: 115px;
+      }
+      75% {
+        width: 120px;
+        height: 120px;
+      }
+      100% {
+        width: 115px;
+        height: 115px;
+      }
     }
   }
 

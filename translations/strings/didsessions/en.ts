@@ -14,6 +14,7 @@ export const en = {
     // Placeholder
     'enter-name-here': 'Enter Name Here',
     'enter-location-here': 'Enter Location Here',
+    'enter-password-here': 'Enter Password Here',
 
     // Popups
     'mnemonic-invalid': 'Mnemonic invalid',
@@ -43,12 +44,16 @@ export const en = {
     'welcome-message3.2': 'or import one that you already own.',
     'create-message':
       'Create a brand new identity starting fresh or you can import an existing identity you already own',
-    new: 'New',
-    import: 'Import',
+    new: 'Create a new ID',
+    import: 'Import DID',
 
     // Edit
-    'your-name': "What's your name?",
-    'your-location': "What's your location?",
+    // 'your-name': "What's your name?",
+    // 'your-location': "What's your location?",
+
+    name: 'Name',
+    location: 'Location',
+    'master-password': 'Master password',
 
     // Backup
 
@@ -69,6 +74,7 @@ export const en = {
 
     // Pick Identity
     'create-new-identity': 'New Identity',
+    'import-or-create-new-identity': 'Import or Create a new ID',
 
     // Delete Identity
     'delete-identity': 'Delete Identity',

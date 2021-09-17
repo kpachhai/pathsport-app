@@ -1,4 +1,3 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
@@ -32,33 +31,33 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 :root {
   /** Wallet - primary **/
   --ion-color-primary: linear-gradient(to bottom, #732dcf, #640fd4);
-  --ion-color-primary-rgb: 115,45,207;
+  --ion-color-primary-rgb: 115, 45, 207;
   --ion-color-primary-contrast: #ffffff;
-  --ion-color-primary-contrast-rgb: 255,255,255;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
   --ion-color-primary-shade: #6528b6;
   --ion-color-primary-tint: #8142d4;
 
   /** Wallet 2 - secondary **/
   --ion-color-secondary: linear-gradient(to bottom, #4a118d, #39136a);
-  --ion-color-secondary-rgb: 74,17,141;
+  --ion-color-secondary-rgb: 74, 17, 141;
   --ion-color-secondary-contrast: #ffffff;
-  --ion-color-secondary-contrast-rgb: 255,255,255;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
   --ion-color-secondary-shade: #410f7c;
   --ion-color-secondary-tint: #5c2998;
 
   /** Identity - tertiary **/
   --ion-color-tertiary: #565bdb;
-  --ion-color-tertiary-rgb: 86,91,219;
+  --ion-color-tertiary-rgb: 86, 91, 219;
   --ion-color-tertiary-contrast: #ffffff;
-  --ion-color-tertiary-contrast-rgb: 255,255,255;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
   --ion-color-tertiary-shade: #4c50c1;
   --ion-color-tertiary-tint: #676bdf;
 
   /** Contacts - success **/
   --ion-color-success: #4620b0;
-  --ion-color-success-rgb: 70,32,176;
+  --ion-color-success-rgb: 70, 32, 176;
   --ion-color-success-contrast: #ffffff;
-  --ion-color-success-contrast-rgb: 255,255,255;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
   --ion-color-success-shade: #3e1c9b;
   --ion-color-success-tint: #5936b8;
 
@@ -79,55 +78,55 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
   --ion-color-danger-tint: #f25454;
 
   /** dark **/
-  --ion-color-dark: linear-gradient(to bottom, #181d20 0%,  #21313d 100%);
-  --ion-color-dark-rgb: 24,29,32;
+  --ion-color-dark: linear-gradient(to bottom, #181d20 0%, #21313d 100%);
+  --ion-color-dark-rgb: 24, 29, 32;
   --ion-color-dark-contrast: #ffffff;
-  --ion-color-dark-contrast-rgb: 255,255,255;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
   --ion-color-dark-shade: #151a1c;
   --ion-color-dark-tint: #2f3436;
 
   /** medium **/
   --ion-color-medium: #f0f1ff;
-  --ion-color-medium-rgb: 240,241,255;
+  --ion-color-medium-rgb: 240, 241, 255;
   --ion-color-medium-contrast: #000000;
-  --ion-color-medium-contrast-rgb: 0,0,0;
+  --ion-color-medium-contrast-rgb: 0, 0, 0;
   --ion-color-medium-shade: #d3d4e0;
   --ion-color-medium-tint: #f2f2ff;
 
   /** light **/
   --ion-color-light: #ffffff;
-  --ion-color-light-rgb: 255,255,255;
+  --ion-color-light-rgb: 255, 255, 255;
   --ion-color-light-contrast: #000000;
-  --ion-color-light-contrast-rgb: 0,0,0;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #e0e0e0;
   --ion-color-light-tint: #ffffff;
 
-  --ion-background-color: #F5F5FD;
-  --ion-background-color-rgb: 0,0,0;
+  --ion-background-color: #f5f5fd;
+  --ion-background-color-rgb: 0, 0, 0;
 
   --ion-text-color: #121212;
-  --ion-text-color-rgb: 255,255,255;
+  --ion-text-color-rgb: 255, 255, 255;
 
   ion-refresher {
-    background: #F5F5FD;
+    background: #f5f5fd;
 
     ion-refresher-content {
-      background: #F5F5FD;
+      background: #f5f5fd;
 
       .refresher-pulling {
-        background: #F5F5FD;
+        background: #f5f5fd;
 
         .refresher-pulling-icon {
-          background: #F5F5FD;
+          background: #f5f5fd;
           color: #121212;
         }
       }
 
       .refresher-refreshing {
-        background: #F5F5FD;
+        background: #f5f5fd;
 
         .refresher-refreshing-icon {
-          background: #F5F5FD;
+          background: #f5f5fd;
           color: #121212;
         }
       }
@@ -135,7 +134,7 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
   }
 
   ion-alert {
-    [aria-checked=true].sc-ion-alert-ios .alert-radio-label.sc-ion-alert-ios,
+    [aria-checked='true'].sc-ion-alert-ios .alert-radio-label.sc-ion-alert-ios,
     .alert-radio-inner.sc-ion-alert-ios {
       font-weight: 600;
       color: #565bdb;
@@ -148,36 +147,41 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
  * -------------------------------------------
  */
 
- body.dark {
-  /** Wallet - primary **/
-  --ion-color-primary: linear-gradient(to bottom, #732dcf, #640fd4);
-  --ion-color-primary-rgb: 115,45,207;
+body.dark {
+  /** primary **/
+  --ion-color-primary: linear-gradient(
+    97.64deg,
+    #0acffe 0.23%,
+    #495aff 101.03%
+  );
+  // --ion-color-primary: linear-gradient(to bottom, #732dcf, #640fd4);
+  --ion-color-primary-rgb: 10, 207, 254;
   --ion-color-primary-contrast: #ffffff;
-  --ion-color-primary-contrast-rgb: 255,255,255;
-  --ion-color-primary-shade: #6528b6;
-  --ion-color-primary-tint: #8142d4;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  // --ion-color-primary-shade: #6528b6;
+  // --ion-color-primary-tint: #8142d4;
 
-  /** Wallet 2 - secondary **/
-  --ion-color-secondary: linear-gradient(to bottom, #4a118d, #39136a);
-  --ion-color-secondary-rgb: 74,17,141;
+  /** secondary **/
+  --ion-color-secondary: #282a3a;
+  --ion-color-secondary-rgb: 40, 42, 58;
   --ion-color-secondary-contrast: #ffffff;
-  --ion-color-secondary-contrast-rgb: 255,255,255;
-  --ion-color-secondary-shade: #410f7c;
-  --ion-color-secondary-tint: #5c2998;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  // --ion-color-secondary-shade: #410f7c;
+  // --ion-color-secondary-tint: #5c2998;
 
   /** Identity - tertiary **/
   --ion-color-tertiary: #565bdb;
-  --ion-color-tertiary-rgb: 86,91,219;
+  --ion-color-tertiary-rgb: 86, 91, 219;
   --ion-color-tertiary-contrast: #ffffff;
-  --ion-color-tertiary-contrast-rgb: 255,255,255;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
   --ion-color-tertiary-shade: #4c50c1;
   --ion-color-tertiary-tint: #676bdf;
 
   /** Contacts - success **/
   --ion-color-success: #4620b0;
-  --ion-color-success-rgb: 70,32,176;
+  --ion-color-success-rgb: 70, 32, 176;
   --ion-color-success-contrast: #ffffff;
-  --ion-color-success-contrast-rgb: 255,255,255;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
   --ion-color-success-shade: #3e1c9b;
   --ion-color-success-tint: #5936b8;
 
@@ -198,26 +202,26 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
   --ion-color-danger-tint: #f25454;
 
   /** dark **/
-  --ion-color-dark: linear-gradient(to bottom, #181d20 0%,  #21313d 100%);
-  --ion-color-dark-rgb: 24,29,32;
+  --ion-color-dark: linear-gradient(to bottom, #181d20 0%, #21313d 100%);
+  --ion-color-dark-rgb: 24, 29, 32;
   --ion-color-dark-contrast: #ffffff;
-  --ion-color-dark-contrast-rgb: 255,255,255;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
   --ion-color-dark-shade: #151a1c;
   --ion-color-dark-tint: #2f3436;
 
   /** Pop-up rows/toast colors **/
   --ion-color-medium: #f0f1ff;
-  --ion-color-medium-rgb: 240,241,255;
+  --ion-color-medium-rgb: 240, 241, 255;
   --ion-color-medium-contrast: #000000;
-  --ion-color-medium-contrast-rgb: 0,0,0;
+  --ion-color-medium-contrast-rgb: 0, 0, 0;
   --ion-color-medium-shade: #d3d4e0;
   --ion-color-medium-tint: #f2f2ff;
 
   /** light **/
   --ion-color-light: #ffffff;
-  --ion-color-light-rgb: 255,255,255;
+  --ion-color-light-rgb: 255, 255, 255;
   --ion-color-light-contrast: #000000;
-  --ion-color-light-contrast-rgb: 0,0,0;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #e0e0e0;
   --ion-color-light-tint: #ffffff;
 
@@ -226,7 +230,7 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
     --ion-text-color: #ffffff;
 
     h2 {
-        color: #ffffff;
+      color: #ffffff;
     }
 
     button {
@@ -235,7 +239,7 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
       }
     }
 
-    [aria-checked=true].sc-ion-alert-ios .alert-radio-label.sc-ion-alert-ios,
+    [aria-checked='true'].sc-ion-alert-ios .alert-radio-label.sc-ion-alert-ios,
     .alert-radio-inner.sc-ion-alert-ios {
       color: #565bdb;
       font-weight: 600;
@@ -243,31 +247,31 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
   }
 
   ion-refresher {
-    background: #121212;;
-    border: #121212;;
+    background: #121212;
+    border: #121212;
 
     ion-refresher-content {
-      background: #121212;;
-      border: #121212;;
+      background: #121212;
+      border: #121212;
 
       .refresher-pulling {
-        background: #121212;;
-        border: #121212;;
+        background: #121212;
+        border: #121212;
 
         .refresher-pulling-icon {
-          background: #121212;;
-          border: #121212;;
+          background: #121212;
+          border: #121212;
           color: white;
         }
       }
 
       .refresher-refreshing {
-        background: #121212;;
-        border: #121212;;
+        background: #121212;
+        border: #121212;
 
         .refresher-refreshing-icon {
-          background: #121212;;
-          border: #121212;;
+          background: #121212;
+          border: #121212;
           color: white;
         }
       }
@@ -282,10 +286,10 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 
 .ios body.dark {
   --ion-background-color: #121212;
-  --ion-background-color-rgb: 0,0,0;
+  --ion-background-color-rgb: 0, 0, 0;
 
   --ion-text-color: #ffffff;
-  --ion-text-color-rgb: 255,255,255;
+  --ion-text-color-rgb: 255, 255, 255;
 
   --ion-color-step-50: #0d0d0d;
   --ion-color-step-100: #1a1a1a;
@@ -325,10 +329,10 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 
 .md body.dark {
   --ion-background-color: #121212;
-  --ion-background-color-rgb: 18,18,18;
+  --ion-background-color-rgb: 18, 18, 18;
 
   --ion-text-color: #ffffff;
-  --ion-text-color-rgb: 255,255,255;
+  --ion-text-color-rgb: 255, 255, 255;
 
   --ion-color-step-50: #1e1e1e;
   --ion-color-step-100: #2a2a2a;
@@ -354,8 +358,14 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
   --ion-item-background-activated: #121212;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
 
 .footer {
   position: fixed;
@@ -367,6 +377,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   justify-content: center;
   align-items: center;
   padding: 15px 10px;
+  text-align: center;
 
   div {
     width: 100%;
@@ -374,12 +385,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
   ion-button {
     height: 50px;
-    width: 100%;
-    --background: linear-gradient(to bottom, #732dcf, #640fd4);
-    --border-radius: 8px;
+    width: 80%;
+    background: linear-gradient(97.64deg, #0acffe 0.23%, #495aff 101.03%);
+    border-radius: 15px;
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.1px;
   }
 }
-

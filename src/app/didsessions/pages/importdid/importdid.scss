@@ -32,7 +32,7 @@
         height: 22px;
         background: #ffffff;
         border-radius: 100%;
-        border: 2px solid #F5F5FD;
+        border: 2px solid #f5f5fd;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -84,12 +84,12 @@
 
   .btn-row {
     padding: 10px 0;
-    
+
     ion-button {
       height: 50px;
       width: 100%;
-      --background: linear-gradient(to bottom, #732dcf, #640fd4);
-      --border-radius: 8px;
+      background: linear-gradient(97.64deg, #0acffe 0.23%, #495aff 101.03%);
+      border-radius: 15px;
       font-size: 14px;
       font-weight: 500;
       letter-spacing: 0.1px;
@@ -135,5 +135,3 @@
     }
   }
 }
-
-

@@ -10,7 +10,8 @@ ion-item {
 ion-button {
   height: 50px;
   width: 100%;
-  --border-radius: 8px;
+  background: linear-gradient(97.64deg, #0acffe 0.23%, #495aff 101.03%);
+  border-radius: 15px;
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.1px;
@@ -35,13 +36,13 @@ ion-title {
   width: 100%;
   height: 100%;
   text-align: center !important;
-  --background: #0093F0;
+  --background: #0093f0;
   font-size: 18px;
 }
 
 ion-item {
   --padding-start: 0;
-  --inner-padding-end:0;
+  --inner-padding-end: 0;
   margin-left: px2rem(45px);
   margin-right: px2rem(45px);
 }
@@ -57,14 +58,14 @@ ion-footer {
 .confirm {
   width: px2rem(686px);
   height: px2rem(84px);
-  --background: #0093F0;
+  --background: #0093f0;
   font-size: 14px;
 }
 
 .delete {
   width: px2rem(686px);
   height: px2rem(84px);
-  --background: #AB2323;
+  --background: #ab2323;
   font-size: 16px;
 }
 
@@ -88,6 +89,6 @@ ion-footer {
 }
 
 .no-background {
-  --background:none;
-  background:none;
+  --background: none;
+  background: none;
 }
