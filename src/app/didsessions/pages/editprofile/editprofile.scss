@@ -57,7 +57,7 @@
   ion-input {
     background: #212021;
     box-shadow: none;
-    color: white;
+    color: #e5f0f4;
   }
 }
 
@@ -65,4 +65,49 @@
   position: absolute;
   margin-top: 4px;
   margin-left: 10px;
+  color: #e5f0f4;
+}
+
+.countryPlaceholder {
+  position: absolute;
+  margin-top: 4px;
+  margin-left: 10px;
+  color: #777b84;
+  font-weight: 500;
+}
+
+.sportsType {
+  width: 6.5em !important;
+  background: #292a37;
+  border-radius: 10px;
+  height: 5.5em;
+  font-size: 1em;
+  margin-right: 10px;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.sportsTypeActive {
+  background: #eff0ff;
+  color: #292a37;
+}
+
+.sportsSlider {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sportsIcon {
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px !important;
+}
+
+.sportsLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

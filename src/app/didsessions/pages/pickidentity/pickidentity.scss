@@ -4,20 +4,40 @@
   padding: 15px;
   margin: 0;
 
+  img.logo {
+    width: 119.84px;
+    height: 30.72px;
+
+    position: absolute;
+    top: 10%;
+
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  h1 {
+    margin-top: 3em;
+    font-size: 26px;
+  }
+
   .identities {
     margin-bottom: 75px;
+    margin-top: 2.5em;
 
     .id-row {
-      background: #ffffff;
+      background: none;
       border-radius: 16px;
-      padding: 4px;
+      padding: 10px;
       margin-bottom: 10px;
-  
+      border: 1px solid #313342;
+
       .img-col {
         display: flex;
         justify-content: flex-end;
         align-items: center;
-  
+
         img {
           width: 41px;
           height: 41px;
@@ -28,19 +48,19 @@
         .noAvatar {
         }
       }
-  
+
       .info-col {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-  
+
         h1 {
           margin: 0;
           font-size: 14px;
           font-weight: 600;
         }
-  
+
         p {
           margin: 0;
           font-size: 9px;
@@ -73,11 +93,10 @@
 
       .info-col {
         p {
-          color: #ACACAC;
+          color: #acacac;
           opacity: 1;
         }
       }
     }
   }
 }
-

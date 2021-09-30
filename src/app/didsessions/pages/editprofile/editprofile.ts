@@ -1,6 +1,6 @@
 import { Component, NgZone, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonInput } from '@ionic/angular';
+import { IonInput, IonSlides } from '@ionic/angular';
 import { UXService } from 'src/app/didsessions/services/ux.service';
 import { TranslateService } from '@ngx-translate/core';
 import { IdentityService } from 'src/app/didsessions/services/identity.service';
@@ -35,12 +35,15 @@ export type EditProfileStateParams = {
 export class EditProfilePage {
   @ViewChild(TitleBarComponent, { static: true }) titleBar: TitleBarComponent;
   @ViewChild('input', { static: false }) input: IonInput;
+  @ViewChild(IonSlides, { static: false }) private slide: IonSlides;
 
+  public slideIndex = null;
   private nextStepId: number = null;
   public isEdit: boolean = false;
   public name: string = ''; // Name being edited
   public location: string = ''; // Location being edited
   public locationAlpha3: string = '';
+  public sportsType: string = '';
   private selectCountrySubscription: Subscription = null;
   private showSelectCountry = false;
 
@@ -87,11 +90,11 @@ export class EditProfilePage {
     );
   }
 
-  ionViewDidEnter() {
-    setTimeout(() => {
-      this.input.setFocus();
-    }, 200);
-  }
+  // ionViewDidEnter() {
+  //   setTimeout(() => {
+  //     this.input.setFocus();
+  //   }, 200);
+  // }
 
   ionViewWillLeave() {
     this.titleBar.removeOnItemClickedListener(this.titleBarIconClickedListener);
@@ -116,6 +119,11 @@ export class EditProfilePage {
 
     if (!this.location || this.location == '') {
       this.uxService.toast_trans('common.location-is-missing');
+      return false;
+    }
+
+    if (!this.sportsType || this.sportsType == '') {
+      this.uxService.toast_trans('common.sports-type-is-missing');
       return false;
     }
 
@@ -150,5 +158,17 @@ export class EditProfilePage {
     if (!countryInfo) return null;
 
     return countryInfo.name;
+  }
+
+  async selectSports(event) {
+    this.slideIndex = await this.slide.getActiveIndex();
+    console.log('Sports type slide index: ', this.slideIndex);
+    console.log(event);
+
+    if (this.slideIndex === 0) {
+      this.sportsType = 'Football';
+    } else if (this.slideIndex === 1) {
+      this.sportsType = 'Basketball';
+    }
   }
 }

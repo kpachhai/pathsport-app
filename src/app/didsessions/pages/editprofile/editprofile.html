@@ -22,9 +22,11 @@
           class="flag"
           src="../../../../assets/didsessions/flags/{{ locationAlpha3 | lowercase}}.svg"
         />
-        <ion-label class="countryLabel"
-          >{{ getDisplayableNation(locationAlpha3) || ('identity.enter-here' |
-          translate) }}</ion-label
+        <ion-label class="countryLabel" *ngIf="locationAlpha3 !== ''"
+          >{{ getDisplayableNation(locationAlpha3) }}</ion-label
+        >
+        <ion-label class="countryPlaceholder" *ngIf="locationAlpha3 === ''"
+          >{{ 'didsessions.enter-location-here' | translate }}</ion-label
         >
       </ion-col>
     </ion-row>
@@ -41,16 +43,99 @@
       ngDefaultControl
     ></ion-input> -->
 
-    <!-- <ion-row>
-      <ion-label>{{ 'didsessions.your-location' | translate }}</ion-label>
+    <ion-row>
+      <ion-label>{{ 'didsessions.your-sports' | translate }}</ion-label>
     </ion-row>
-    <ion-input
-      [placeholder]="'didsessions.enter-location-here'|translate"
-      #input
-      [(ngModel)]="location"
-      name="location"
-      ngDefaultControl
-    ></ion-input> -->
+    <ion-slides (ionSlideTap)="selectSports($event)">
+      <ion-slide
+        class="sportsSlider"
+        [ngClass]="slideIndex === 0 ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img src="../../../../assets/didsessions/sports/football.svg" />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Football</ion-label>
+        </ion-row>
+      </ion-slide>
+      <ion-slide
+        class="sportsSlider"
+        [ngClass]="slideIndex === 1 ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img src="../../../../assets/didsessions/sports/basketball.svg" />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Basketball</ion-label>
+        </ion-row></ion-slide
+      >
+      <ion-slide
+        class="sportsSlider"
+        [ngClass]="slideIndex === 2 ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img src="../../../../assets/didsessions/sports/golf.svg" />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Golf</ion-label>
+        </ion-row></ion-slide
+      >
+      <ion-slide
+        class="sportsSlider"
+        [ngClass]="slideIndex === 3 ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img src="../../../../assets/didsessions/sports/basketball.svg" />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Cricket</ion-label>
+        </ion-row></ion-slide
+      >
+      <ion-slide
+        class="sportsSlider"
+        [ngClass]="slideIndex === 4 ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img src="../../../../assets/didsessions/sports/baseball.svg" />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Baseball</ion-label>
+        </ion-row></ion-slide
+      >
+      <ion-slide
+        class="sportsSlider"
+        [ngClass]="slideIndex === 5 ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img src="../../../../assets/didsessions/sports/swimming.svg" />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Swimming</ion-label>
+        </ion-row></ion-slide
+      >
+      <ion-slide
+        class="sportsSlider"
+        [ngClass]="slideIndex === 6 ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img src="../../../../assets/didsessions/sports/tennis.svg" />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Tennis</ion-label>
+        </ion-row></ion-slide
+      >
+      <ion-slide
+        class="sportsSlider"
+        [ngClass]="slideIndex === 7 ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img src="../../../../assets/didsessions/sports/table-tennis.svg" />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Table Tennis</ion-label>
+        </ion-row></ion-slide
+      >
+    </ion-slides>
 
     <div class="footer">
       <ion-button [disabled]="creatingDid" (click)="next()">

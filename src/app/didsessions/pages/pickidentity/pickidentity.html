@@ -5,6 +5,11 @@
     [class.dark-container]="theme.darkMode"
     [class.blur]="uxService.popover"
   >
+    <img
+      class="logo"
+      [src]="!theme.darkMode ? 'assets/didsessions/onboard/logo.svg' : 'assets/didsessions/onboard/logo.svg'"
+    />
+    <h1>Users</h1>
     <div class="identities">
       <div *ngFor="let group of groupedIdentities">
         <ion-row

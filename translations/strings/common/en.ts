@@ -44,6 +44,7 @@ export const en = {
     sorry: 'Sorry',
     'name-is-missing': 'Please enter a name',
     'location-is-missing': 'Please enter a location',
+    'sports-type-is-missing': 'Please select a sport',
     error: 'Error',
     'sentry-message':
       'Sorry, the application encountered an error. This has been reported to the team.',
