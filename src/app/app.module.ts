@@ -37,18 +37,18 @@ import { IdentityInitModule } from './identity/init.module';
 import { ContactsInitModule } from './contacts/init.module';
 import { DIDSessionsInitModule } from './didsessions/init.module';
 import { ScannerInitModule } from './scanner/init.module';
-import { CRCouncilVotingInitModule } from './crcouncilvoting/init.module';
-import { CRProposalVotingInitModule } from './crproposalvoting/init.module';
+// import { CRCouncilVotingInitModule } from './crcouncilvoting/init.module';
+// import { CRProposalVotingInitModule } from './crproposalvoting/init.module';
 import { SettingsInitModule } from './settings/init.module';
-import { DPoSVotingInitModule } from './dposvoting/init.module';
+// import { DPoSVotingInitModule } from './dposvoting/init.module';
 import { DeveloperToolsInitModule } from './developertools/init.module';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 import * as Sentry from '@sentry/browser';
 import { Integrations } from '@sentry/tracing';
 import { GlobalNativeService } from './services/global.native.service';
-import { DPoSRegistrationInitModule } from './dposregistration/init.module';
-import { CRCouncilManagerInitModule } from './crcouncilmanager/init.module';
+// import { DPoSRegistrationInitModule } from './dposregistration/init.module';
+// import { CRCouncilManagerInitModule } from './crcouncilmanager/init.module';
 
 // Sentry.init({
 //   dsn: "https://1de99f1d75654d479051bfdce1537821@o339076.ingest.sentry.io/5722236",
@@ -203,12 +203,12 @@ export function TranslateLoaderFactory() {
     ContactsInitModule,
     DIDSessionsInitModule,
     ScannerInitModule,
-    CRCouncilVotingInitModule,
-    CRCouncilManagerInitModule,
-    CRProposalVotingInitModule,
+    // CRCouncilVotingInitModule,
+    // CRCouncilManagerInitModule,
+    // CRProposalVotingInitModule,
     SettingsInitModule,
-    DPoSVotingInitModule,
-    DPoSRegistrationInitModule,
+    // DPoSVotingInitModule,
+    // DPoSRegistrationInitModule,
     DeveloperToolsInitModule,
 
     /*

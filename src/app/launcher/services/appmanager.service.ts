@@ -177,6 +177,18 @@ export class AppmanagerService {
             hasWidget: false,
             startCall: () => this.contactsInitService.start(),
           },
+          {
+            id: 'psprofile',
+            routerContext: App.PSPROFILE,
+            name: this.translate.instant('launcher.app-psprofile'),
+            description: this.translate.instant(
+              'launcher.app-psprofile-description'
+            ),
+            icon: '/assets/launcher/apps/app-icons/contacts.svg',
+            hasWidget: false,
+            // startCall: () => this.contactsInitService.start(),
+          },
+
           // {
           //     id: 'browser',
           //     routerContext: App.DAPP_BROWSER,

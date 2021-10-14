@@ -140,7 +140,7 @@ namespace AssistPublishing {
             const requestBody = {
                 "did": didString,
                 "memo": memo || "",
-                "requestFrom": "Elastos Essentials",
+                "requestFrom": "Pathsports",
                 "didRequest": payloadObject
             };
 
