@@ -1,0 +1,10 @@
+<ion-content>
+  <app-titlebar></app-titlebar>
+  <ion-grid
+    *ngIf="psprofile"
+    class="container"
+    [class.darkContainer]="theme.darkMode"
+  >
+    <div class="header">Edit your summary here</div>
+  </ion-grid>
+</ion-content>

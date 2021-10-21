@@ -7,7 +7,7 @@ export enum OptionsType {
   CONTACTS = 'Contacts',
   CRYPTONAMES = 'Cryptonames',
   Paste = 'Paste',
-  SCAN = 'Scan'
+  SCAN = 'Scan',
 }
 
 @Component({
@@ -23,8 +23,8 @@ export class OptionsComponent implements OnInit {
     private navParams: NavParams,
     public theme: GlobalThemeService,
     public translate: TranslateService,
-    private popoverCtrl: PopoverController,
-  ) { }
+    private popoverCtrl: PopoverController
+  ) {}
 
   ngOnInit() {
     this.showContacts = this.navParams.get('showContacts');

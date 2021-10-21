@@ -2,15 +2,18 @@ import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Logger } from 'src/app/logger';
 import { ContactAvatar } from 'src/app/services/contactnotifier.service';
-import { GlobalNotificationsService, Notification } from 'src/app/services/global.notifications.service';
+import {
+  GlobalNotificationsService,
+  Notification,
+} from 'src/app/services/global.notifications.service';
 import { GlobalThemeService } from 'src/app/services/global.theme.service';
-import { App } from "src/app/model/app.enum"
+import { App } from 'src/app/model/app.enum';
 
 export const enum LauncherNotificationType {
   SYSTEM,
   CONTACT,
   NORMAL,
-  TIP
+  TIP,
 }
 
 export type LauncherNotification = Notification & {
@@ -20,7 +23,7 @@ export type LauncherNotification = Notification & {
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotificationManagerService {
   public notifications: LauncherNotification[] = [];
@@ -42,10 +45,14 @@ export class NotificationManagerService {
   }
   async getNotifications() {
     this.notifications = await this.globalNotifications.getNotifications();
-    Logger.log("Launcher", "Got notifications from the notification manager: " + JSON.stringify(this.notifications));
+    Logger.log(
+      'Launcher',
+      'Got notifications from the notification manager: ' +
+        JSON.stringify(this.notifications)
+    );
     this.fillAppInfoToNotification();
 
-    if(this.globalNotifications.newNotifications > 0) {
+    if (this.globalNotifications.newNotifications > 0) {
       this.newNotifications = true;
     }
   }
@@ -55,11 +62,11 @@ export class NotificationManagerService {
     for (let notification of this.notifications) {
       if (this.isNotificationATip(notification)) {
         notification.type = LauncherNotificationType.TIP;
-      } else if (notification.emitter && (notification.emitter !== '')) {
+      } else if (notification.emitter && notification.emitter !== '') {
         notification.type = LauncherNotificationType.CONTACT;
 
         // Resolve contact to show a nice name.
- /*        const contact = await contactNotifier.resolveContact(notification.emitter);
+        /*        const contact = await contactNotifier.resolveContact(notification.emitter);
         if (contact) {
           contact.getName() ? notification.contactName = contact.getName() : notification.contactName = null;
           contact.getAvatar() ? notification.contactAvatar = contact.getAvatar() : notification.contactAvatar = null;
@@ -68,7 +75,6 @@ export class NotificationManagerService {
           notification.contactName = null;
           notification.contactAvatar = null;
         } */
-
       } else if (notification.app === App.LAUNCHER) {
         notification.type = LauncherNotificationType.SYSTEM;
       } else {
@@ -82,14 +88,20 @@ export class NotificationManagerService {
   clearUselessNotification() {
     this.notifications.forEach((notification: LauncherNotification) => {
       if (!this.isValidNotification(notification)) {
-        Logger.log('Launcher', 'clearNotification ', notification.notificationId);
+        Logger.log(
+          'Launcher',
+          'clearNotification ',
+          notification.notificationId
+        );
         this.clearNotification(notification.notificationId);
         notification.notificationId = null;
       }
     });
 
     // remove from array
-    this.notifications = this.notifications.filter((item) => item.notificationId !== null);
+    this.notifications = this.notifications.filter(
+      (item) => item.notificationId !== null
+    );
   }
 
   /**
@@ -98,13 +110,18 @@ export class NotificationManagerService {
    * @param notificationId Notification ID
    */
   public clearNotification(notificationId: string) {
-    this.notifications = this.notifications.filter((notification) => notification.notificationId !== notificationId);
+    this.notifications = this.notifications.filter(
+      (notification) => notification.notificationId !== notificationId
+    );
     this.globalNotifications.clearNotification(notificationId);
   }
 
   // if no appid and no emitter, automatically delete the notification, because we don't know what to do with it.
   isValidNotification(notification: LauncherNotification) {
-    if (!notification.app && (!notification.emitter || notification.emitter === '')) {
+    if (
+      !notification.app &&
+      (!notification.emitter || notification.emitter === '')
+    ) {
       Logger.log('Launcher', 'notification is invalid: ', notification);
       return false;
     }
@@ -114,15 +131,13 @@ export class NotificationManagerService {
   private isNotificationATip(notification: LauncherNotification): boolean {
     try {
       let jsonMessage = JSON.parse(notification.message);
-      if ("type" in jsonMessage && "message" in jsonMessage) {
-        if (jsonMessage["type"] == "tip")
-          return true;
+      if ('type' in jsonMessage && 'message' in jsonMessage) {
+        if (jsonMessage['type'] == 'tip') return true;
       }
 
       // Other cases: not a tip
       return false;
-    }
-    catch (e) {
+    } catch (e) {
       // Not a JSON content, so this is not a special notification
       return false;
     }
@@ -137,6 +152,8 @@ export class NotificationManagerService {
     switch (app) {
       case App.CONTACTS:
         return 'launcher.app-contacts';
+      case App.PSPROFILE:
+        return 'launcher.app-psprofile';
       case App.CRCOUNCIL_VOTING:
         return 'launcher.app-cr-council';
       case App.CRCOUNCIL_MANAGER:
@@ -168,6 +185,8 @@ export class NotificationManagerService {
     switch (app) {
       case App.CONTACTS:
         return 'assets/contacts/images/logo.png';
+      case App.PSPROFILE:
+        return 'assets/psprofile/images/logo.png';
       case App.CRCOUNCIL_VOTING:
         return 'assets/crcouncilvoting/images/logo.png';
       case App.CRCOUNCIL_MANAGER:
@@ -192,14 +211,14 @@ export class NotificationManagerService {
         return 'assets/wallet/images/logo.png';
       default:
         if (this.theme.darkMode) {
-          return "assets/launcher/icons/dark_mode/elalogo.svg";
+          return 'assets/launcher/icons/dark_mode/elalogo.svg';
         } else {
-          return "assets/launcher/icons/elalogo.svg";
+          return 'assets/launcher/icons/elalogo.svg';
         }
     }
   }
 
-   /*  setNotificationListener() {
+  /*  setNotificationListener() {
     this.globalNotifications.setNotificationListener((notification) => {
       Logger.log('Launcher', 'new notification:', notification);
 

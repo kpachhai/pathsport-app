@@ -131,7 +131,7 @@ export class IdentityService {
   }
 
   public async signIn(identityEntry: IdentityEntry, goToLauncher = false) {
-    // Security check: ask user to enter the master password for the target did.
+    // Security check: ask user to enter the password for the target did.
     try {
       let options: PasswordManagerPlugin.GetPasswordInfoOptions = {
         promptPasswordIfLocked: true,
@@ -163,7 +163,7 @@ export class IdentityService {
       } else {
         Logger.warn(
           'didsessions',
-          'Failed to authentify using master password. Sign in not permitted.'
+          'Failed to authentify using password. Sign in not permitted.'
         );
       }
     } catch (e) {
@@ -277,7 +277,7 @@ export class IdentityService {
   ): Promise<boolean> {
     try {
       console.log('Waqas: ', identityLocation);
-      // Save the did store password with a master password
+      // Save the did store password with a password
       let passwordInfo: PasswordManagerPlugin.GenericPasswordInfo = {
         type: PasswordManagerPlugin.PasswordType.GENERIC_PASSWORD,
         key: 'didstore-' + didStore.getId(),
@@ -290,7 +290,7 @@ export class IdentityService {
         await this.nativeService.showLoading(
           this.translate.instant('common.please-wait')
         );
-        // Master password was created and did store password could be saved
+        // Main Password was created and did store password could be saved
         // Save the identity entry in the did session plugin
         // IMPORTANT: Don't set the avatar here before signing in. Because the avatar could be stored on hive,
         // And currently hive needs a user to be signed in to generate a APPID credential during its auth.
@@ -337,7 +337,7 @@ export class IdentityService {
         // Go back to the default screen, creating the new DID is cancelled.
         Logger.log(
           'didsessions',
-          'Master password input failed. Aborting identity creation.'
+          'Password input failed. Aborting identity creation.'
         );
       }
     } catch (e) {
@@ -351,7 +351,7 @@ export class IdentityService {
         // Nothing to do, just stop the flow here.
         Logger.log(
           'didsessions',
-          'Master password input cancelled. Stopping identity creation.'
+          'Password input cancelled. Stopping identity creation.'
         );
 
         // Delete the did store
@@ -383,8 +383,8 @@ export class IdentityService {
    *      - Set a virtual did context to the password manager (using the created did string)
    *        (so the password manager can save the did store password in the DID session password sandbox,
    *         without being signed in yet)
-   *      - Save the did store password to the password manager (will ask to create a master password)
-   *      - If master password created, add a did session identity entry with did string, user name
+   *      - Save the did store password to the password manager (will ask to create a password)
+   *      - If password created, add a did session identity entry with did string, user name
    *      - Sign in with the new DID in did session plugin. DID session app is closed and launcher is started.
    */
   async startImportingMnemonic(existingMnemonic?: string) {

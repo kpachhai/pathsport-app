@@ -11,6 +11,7 @@ import { WalletInitService } from '../wallet/services/init.service';
 import { CRProposalVotingInitService } from '../crproposalvoting/services/init.service';
 import { DeveloperToolsInitService } from '../developertools/services/init.service';
 import { GlobalJsonRPCService } from './global.jsonrpc.service';
+import { PSProfileInitService } from '../psprofile/services/init.service';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +28,8 @@ export class GlobalAppBackgroundService {
     // private walletInitService: WalletInitService,
 
     // private crProposalVotingInitService: CRProposalVotingInitService,
-    private developerToolsInitService: DeveloperToolsInitService
+    private developerToolsInitService: DeveloperToolsInitService,
+    private psprofileInitService: PSProfileInitService
   ) {}
 
   /**
@@ -44,6 +46,7 @@ export class GlobalAppBackgroundService {
     // await this.walletInitService.init();
     // await this.crProposalVotingInitService.init();
     await this.developerToolsInitService.init();
+    await this.psprofileInitService.init();
   }
 
   /**

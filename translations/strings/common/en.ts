@@ -1,6 +1,6 @@
 export const en = {
   common: {
-    'elastos-essentials': 'Elastos Essentials',
+    'elastos-essentials': 'PathSports',
 
     // Generic actions
     delete: 'Delete',
@@ -33,6 +33,7 @@ export const en = {
     // Navigation
     settings: 'Settings',
     contacts: 'Contacts',
+    psprofile: 'Profile',
     wallet: 'Wallet',
     identity: 'Identity',
     favorites: 'Favorites',
@@ -77,5 +78,40 @@ export const en = {
     // Sharing
     'share-friend': 'Add my friend in Elastos Essentials',
     'share-add-me-as-friend': 'Add me as a friend',
+
+    // Stats
+    match_date: 'Match Date',
+    opponent_team: 'Opponent Team',
+    team_score: 'Team Score',
+    opponent_score: 'Opponent Team Score',
+    league: 'League',
+
+    assists: 'Assists',
+    // Football
+    fouls_suffered: 'Fouls Suffered',
+    fouls_committed: 'Fouls Committed',
+    total_goals: 'Total Goals',
+    offsides: 'Offsides',
+    red_cards: 'Red Cards',
+    shots: 'Shots',
+    shots_on_target: 'Shots On Target',
+    starts: 'Starts',
+    yellow_cards: 'Yellow Cards',
+
+    // Basketball
+    three_point_field_goal_percentage: '3-Point Field Goal Percentage',
+    three_point_field_goals_made_attempted:
+      '3-Point Field Goals Made-Attempted',
+    blocks: 'Blocks',
+    field_goals_made_attempted: 'Field Goals Made-Attempted',
+    field_goal_percentage: 'Field Goal Percentage',
+    free_throws_made_attempted: 'Free Throws Made-Attempted',
+    free_throw_percentage: 'Free Throw Percentage',
+    minutes: 'Minutes',
+    fouls: 'Fouls',
+    points: 'Points',
+    rebounds: 'Rebounds',
+    steals: 'Steals',
+    turnovers: 'Turnovers',
   },
 };

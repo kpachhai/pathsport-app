@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'settings', loadChildren: './settings/module#SettingsModule' },
   { path: 'contacts', loadChildren: './contacts/module#ContactsModule' },
   { path: 'identity', loadChildren: './identity/module#IdentityModule' },
+  { path: 'psprofile', loadChildren: './psprofile/module#PSProfileModule' },
   // { path: 'wallet', loadChildren: './wallet/module#WalletModule' },
   // { path: 'dposvoting', loadChildren: './dposvoting/module#DPoSVotingModule' },
   // { path: 'dposregistration', loadChildren: './dposregistration/module#DPoSRegistrationModule' },

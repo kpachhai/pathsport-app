@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
-import { GlobalDIDSessionsService, IdentityEntry } from 'src/app/services/global.didsessions.service';
-import { GlobalService, GlobalServiceManager } from 'src/app/services/global.service.manager';
+import {
+  GlobalDIDSessionsService,
+  IdentityEntry,
+} from 'src/app/services/global.didsessions.service';
+import {
+  GlobalService,
+  GlobalServiceManager,
+} from 'src/app/services/global.service.manager';
 import { GlobalNavService } from 'src/app/services/global.nav.service';
 import { AppService } from '../services/app.service';
 import { BackupService } from '../services/backup.service';
@@ -8,7 +14,7 @@ import { IntentService } from '../services/intent.service';
 import { FriendsService } from './friends.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ContactsInitService extends GlobalService {
   constructor(
@@ -40,6 +46,8 @@ export class ContactsInitService extends GlobalService {
   }
 
   public async start() {
+    console.log('Contacts service started');
+
     await this.globalNav.navigateTo('contacts', '/contacts/friends');
     void this.backupService.init();
   }

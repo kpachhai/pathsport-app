@@ -29,6 +29,7 @@ import { Events } from 'src/app/services/events.service';
 import { App } from 'src/app/model/app.enum';
 import { ContactsInitService } from 'src/app/contacts/services/init.service';
 import { CRCouncilVotingInitService } from 'src/app/crcouncilvoting/services/init.service';
+import { PSProfileInitService } from 'src/app/psprofile/services/init.service';
 
 type RunnableApp = {
   id: string;
@@ -85,7 +86,8 @@ export class AppmanagerService {
     private dposVotingInitService: DPoSVotingInitService,
     private walletInitService: WalletInitService,
     private crcouncilVotingInitService: CRCouncilVotingInitService,
-    private contactsInitService: ContactsInitService
+    private contactsInitService: ContactsInitService,
+    private psprofileInitService: PSProfileInitService
   ) {}
 
   public init() {
@@ -186,7 +188,7 @@ export class AppmanagerService {
             ),
             icon: '/assets/launcher/apps/app-icons/contacts.svg',
             hasWidget: false,
-            // startCall: () => this.contactsInitService.start(),
+            startCall: () => this.psprofileInitService.start(),
           },
 
           // {

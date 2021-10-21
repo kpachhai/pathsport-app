@@ -35,6 +35,7 @@ import { WalletInitModule } from './wallet/init.module';
 import { HiveManagerInitModule } from './hivemanager/init.module';
 import { IdentityInitModule } from './identity/init.module';
 import { ContactsInitModule } from './contacts/init.module';
+import { PSProfileInitModule } from './psprofile/init.module';
 import { DIDSessionsInitModule } from './didsessions/init.module';
 import { ScannerInitModule } from './scanner/init.module';
 // import { CRCouncilVotingInitModule } from './crcouncilvoting/init.module';
@@ -201,6 +202,7 @@ export function TranslateLoaderFactory() {
     HiveManagerInitModule,
     IdentityInitModule,
     ContactsInitModule,
+    PSProfileInitModule,
     DIDSessionsInitModule,
     ScannerInitModule,
     // CRCouncilVotingInitModule,

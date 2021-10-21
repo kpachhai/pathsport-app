@@ -53,7 +53,7 @@ export const en = {
 
     name: 'Name',
     location: 'Location',
-    'master-password': 'Master password',
+    'main-password': 'Password',
     'your-sports': 'Select your sports',
 
     // Backup
