@@ -1,4 +1,40 @@
-## How to run
+### Prerequisites
+
+Latest versions of: Git, Node.js, npm, Python, Cordova, Ionic
+
+#### Github
+
+- Upload your SSH public key to your GitHub profile if not already done - https://github.com/settings/keys
+
+#### For Android:
+
+- Java JDK 1.8 or greater
+- Android SDK
+- Android NDK (android-ndk-r16b or higher)
+
+The supported way of doing this nowadays is to use Android Studio.
+
+Set the ANDROID_HOME environment variable to match the Android SDK path.
+
+on Mac and Linux, add the following line to your login script (e.g., ~/.bashrc, ~/.bash_profile, etc...):
+
+```
+export ANDROID_HOME="YOUR-PATH/sdk"
+```
+
+### How to run
+
+- clone the repo
+- `npm i` (node version: v14.17.5 LTS recommended)
+- `ionic cordova platform add android`
+- `cordova requirements android --verbose`
+- `sudo ionic cordova run android --verbose`
+
+Check if your device is connected
+
+- `adb devices`
+
+Run with live reload
 
 - `ionic cordova run android -l`
 
