@@ -1,0 +1,47 @@
+@import 'src/app/psprofile/root.scss';
+
+.container {
+  padding: 40px 0 80px;
+
+  .textarea {
+    /* Auto Layout */
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 20px 15px;
+
+    /* Input/Background */
+
+    background: #292a37;
+    border-radius: 10px;
+
+    /* Inside Auto Layout */
+
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 1;
+    margin: 10px 0px;
+  }
+
+  .btn-row {
+    /* Auto Layout */
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+    // background: linear-gradient(97.64deg, #0acffe 0.23%, #495aff 101.03%);
+    // border-radius: 15px;
+
+    // /* Inside Auto Layout */
+
+    // flex: none;
+    // order: 0;
+    // flex-grow: 1;
+    // margin: 0px 20px;
+  }
+}

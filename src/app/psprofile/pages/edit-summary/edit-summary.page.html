@@ -1,10 +1,30 @@
 <ion-content>
   <app-titlebar></app-titlebar>
-  <ion-grid
-    *ngIf="psprofile"
-    class="container"
-    [class.darkContainer]="theme.darkMode"
-  >
-    <div class="header">Edit your summary here</div>
+  <ion-grid class="container" [class.darkContainer]="theme.darkMode">
+    <ion-row class="ion-align-items-center main-row">
+      <ion-col size="12">
+        <h3>Summary</h3>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center input-row">
+      <!-- <h6>Summary</h6> -->
+      <ion-col size="12">
+        <ion-textarea
+          class="textarea"
+          rows="10"
+          [placeholder]="'psprofile.enter-summary'|translate"
+          [(ngModel)]="summary"
+          name="summary"
+        >
+        </ion-textarea>
+      </ion-col>
+
+      <ion-col size="12" class="btn-row">
+        <ion-button color="primary" (click)="updateSummary()"
+          >{{ 'psprofile.save-changes' | translate }}</ion-button
+        >
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>

@@ -38,6 +38,10 @@ Run with live reload
 
 - `ionic cordova run android -l`
 
+Connect to the API
+
+- Modify `src/environments/environment.ts` file with your configurations.
+
 ## FATAL ERROR: ... JavaScript heap out of memory
 
 NODE_OPTIONS=--max_old_space_size=8192 ionic cordova run android --livereload --external

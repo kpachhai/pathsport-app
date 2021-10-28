@@ -5,8 +5,10 @@ import { IonSlides } from '@ionic/angular';
 
 import { FriendsService } from '../../services/friends.service';
 import { DidService } from '../../services/did.service';
+import { DIDService as IdentityDidService } from '../../../identity/services/did.service';
 import { UxService } from '../../services/ux.service';
 
+import { ProfileService } from '../../../identity/services/profile.service';
 import { Contact } from '../../models/contact.model';
 import { PopupService } from '../../services/popup.service';
 import { AppService } from '../../services/app.service';
@@ -24,6 +26,10 @@ import { GlobalNavService } from 'src/app/services/global.nav.service';
 import { Logger } from 'src/app/logger';
 import { Events } from 'src/app/services/events.service';
 import { defaultContacts } from '../../config/config';
+import { App } from 'src/app/model/app.enum';
+import { environment } from 'src/environments/environment';
+import { GlobalJsonRPCService } from 'src/app/services/global.jsonrpc.service';
+import { Profile } from 'src/app/identity/model/profile.model';
 
 @Component({
   selector: 'app-friends',
@@ -48,9 +54,16 @@ export class FriendsPage implements OnInit {
     slidesPerView: 3.5,
   };
 
+  public profile: Profile;
+  public profileName: string = null;
+  private didchangedSubscription: Subscription = null;
+
+  public psprofile: any;
+
   constructor(
     public friendsService: FriendsService,
     public didService: DidService,
+    public identityDidService: IdentityDidService,
     public translate: TranslateService,
     public theme: GlobalThemeService,
     public popupService: PopupService,
@@ -58,18 +71,52 @@ export class FriendsPage implements OnInit {
     public uxService: UxService,
     private zone: NgZone,
     private events: Events,
-    private globalNav: GlobalNavService
-  ) {}
+    private globalNav: GlobalNavService,
+    private globalJsonRPCService: GlobalJsonRPCService,
+    public profileService: ProfileService
+  ) {
+    // this.getProfile();
+  }
 
-  ngOnInit() {}
+  // ngOnInit() {
+  async ngOnInit() {
+    this.psprofile = this.getPSProfile();
+    console.log('Profile data nginit: ', this.psprofile);
+
+    this.init();
+  }
+
+  init(publishAvatar?: boolean) {
+    let identity = this.identityDidService.getActiveDid();
+    console.log('Identity: ', identity);
+
+    if (identity) {
+      // Happens when importing a new mnemonic over an existing one
+      // this.profile = identity.getBasicProfile();
+      // this.profileName = this.profile.getName();
+      this.profileName = this.getProfileName();
+      console.log('Profile Name: ', this.profileName);
+    }
+  }
 
   ionViewWillEnter() {
-    this.subscription = this.events.subscribe('friends:updateSlider', () => {
-      this.zone.run(() => {
-        Logger.log('contacts', 'friends:updateSlider event');
-        void this.getActiveSlide();
-      });
-    });
+    // this.subscription = this.events.subscribe(
+    //   'psprofile:updateProfileData',
+    //   () => {
+    //     this.zone.run(() => {
+    //       Logger.log('psprofile', 'psprofile:updateProfileData event');
+    //     });
+    //   }
+    // );
+
+    this.didchangedSubscription = this.events.subscribe(
+      'did:didchanged',
+      () => {
+        this.zone.run(() => {
+          this.init();
+        });
+      }
+    );
 
     this.titleBar.setTitle(this.translate.instant('common.psprofile'));
     // this.titleBar.setIcon(TitleBarIconSlot.OUTER_RIGHT, {
@@ -82,11 +129,14 @@ export class FriendsPage implements OnInit {
     };
     this.titleBar.addOnItemClickedListener(this.titleBarIconClickedListener);
 
-    void this.getContacts();
+    // void this.getContacts();
+    // this.profile = this.getProfile();
+    // console.log('Profile data ionviwewillenter: ', this.profile);
   }
 
   ionViewWillLeave() {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
+    this.didchangedSubscription.unsubscribe();
     this.titleBar.removeOnItemClickedListener(this.titleBarIconClickedListener);
   }
 
@@ -144,6 +194,46 @@ export class FriendsPage implements OnInit {
   }*/
 
   goToEditSummary() {
-    void this.globalNav.navigateTo('psprofile', '/edit-summary/');
+    void this.globalNav.navigateTo('psprofile', '/psprofile/edit-summary');
+  }
+
+  async getPSProfile() {
+    console.log('DID: ', this.didService.getUserDID());
+
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${environment.auth_token}`,
+    };
+
+    let rpcApiUrl = environment.base_api_url;
+    rpcApiUrl = rpcApiUrl.endsWith('/') ? rpcApiUrl.slice(0, -1) : rpcApiUrl;
+
+    rpcApiUrl = `${rpcApiUrl}/players/${this.didService.getUserDID()}`;
+
+    try {
+      const result = await this.globalJsonRPCService.httpGet(
+        rpcApiUrl,
+        headers
+      );
+      // this.profile = result;
+      console.log('Get Summary Result: ', result);
+      return result;
+    } catch (why: any) {
+      Logger.log(App.PSPROFILE, 'error get summary:', why);
+    }
+    // if (result && !Util.isEmptyObject(result.producers)) {
+    //     Logger.log(App.PSPROFILE, "key:", result.producers);
+  }
+
+  getProfileName() {
+    if (this.profileName == null) {
+      let identity = this.identityDidService.getActiveDid();
+      if (identity) {
+        // Happens when importing a new mnemonic over an existing one
+        this.profile = this.profileService.getBasicProfile();
+      }
+      this.profileName = this.profile.getName();
+    }
+    return this.profileName;
   }
 }
