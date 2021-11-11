@@ -23,6 +23,10 @@ import { FriendsPage } from './pages/friends/friends.page';
 import { InvitePage } from './pages/invite/invite.page';
 
 import { EditSummaryPage } from './pages/edit-summary/edit-summary.page';
+import { EditPersonalInformationPage } from './pages/edit-personal-information/edit-personal-information.page';
+import { EditSocialProfilesPage } from './pages/edit-social-profiles/edit-social-profiles.page';
+import { EditProfessionalHighlightsPage } from './pages/edit-professional-highlights/edit-professional-highlights.page';
+import { AddStatsPage } from './pages/add-stats/add-stats.page';
 
 @NgModule({
   declarations: [
@@ -37,6 +41,10 @@ import { EditSummaryPage } from './pages/edit-summary/edit-summary.page';
     FriendsPage,
     InvitePage,
     EditSummaryPage,
+    EditPersonalInformationPage,
+    EditSocialProfilesPage,
+    EditProfessionalHighlightsPage,
+    AddStatsPage,
   ],
   imports: [
     CommonModule,

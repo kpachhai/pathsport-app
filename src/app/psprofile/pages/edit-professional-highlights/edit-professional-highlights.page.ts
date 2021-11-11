@@ -40,18 +40,20 @@ type DisplayableAppInfo = {
 };
 
 @Component({
-  selector: 'app-edit-summary',
-  templateUrl: './edit-summary.page.html',
-  styleUrls: ['./edit-summary.page.scss'],
+  selector: 'app-edit-professional-highlights',
+  templateUrl: './edit-professional-highlights.page.html',
+  styleUrls: ['./edit-professional-highlights.page.scss'],
 })
-export class EditSummaryPage implements OnInit {
+export class EditProfessionalHighlightsPage implements OnInit {
   @ViewChild(TitleBarComponent, { static: false }) titleBar: TitleBarComponent;
 
   // public contact: Contact;
   //public contactsApps: DisplayableAppInfo[] = [];
   public fetchingApps = false;
   public detailsActive = true;
-  public summary: string = ''; // Summary being edited
+  public sport: string = ''; // sport being edited
+  public team: string = ''; // team being edited
+  public position: string = ''; // position being edited
 
   private titleBarIconClickedListener: (
     icon: TitleBarIcon | TitleBarMenuItem
@@ -93,13 +95,13 @@ export class EditSummaryPage implements OnInit {
         }
       });
 */
-      Logger.log('psprofile', 'PSprofile edit summary');
+      Logger.log('psprofile', 'PSprofile edit professional highlights');
       //this.buildDisplayableAppsInfo();
     });
   }
 
   ionViewWillEnter() {
-    console.log('Edit summary page ionViewWillEnter');
+    console.log('Edit professional highlights page ionViewWillEnter');
 
     this.titleBar.setTitle(
       this.translate.instant('psprofile.psprofile-profile')
@@ -180,13 +182,13 @@ export class EditSummaryPage implements OnInit {
   //   //     Logger.log(App.PSPROFILE, "key:", result.producers);
   // }
 
-  async updateSummary() {
+  async updatePersonalInformation() {
     console.log('DID: ', this.didService.getUserDID());
-    console.log('Summary: ', this.summary);
-
     const param = {
       did: this.didService.getUserDID(),
-      summary: this.summary,
+      sport: this.sport,
+      team: this.team,
+      position: this.position,
     };
     const headers = {
       'Content-Type': 'application/json',
@@ -205,11 +207,9 @@ export class EditSummaryPage implements OnInit {
         param,
         headers
       );
-      console.log('Update Summary Result: ', result);
+      console.log('Update Professional Highlights Result: ', result);
     } catch (why: any) {
-      Logger.log(App.PSPROFILE, 'error update summary:', why);
+      Logger.log(App.PSPROFILE, 'error update professional highlights:', why);
     }
-    // if (result && !Util.isEmptyObject(result.producers)) {
-    //     Logger.log(App.PSPROFILE, "key:", result.producers);
   }
 }

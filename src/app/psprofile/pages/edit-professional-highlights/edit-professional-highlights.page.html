@@ -1,0 +1,54 @@
+<ion-content>
+  <app-titlebar></app-titlebar>
+  <ion-grid class="container" [class.darkContainer]="theme.darkMode">
+    <ion-row class="ion-align-items-center main-row">
+      <ion-col size="12">
+        <h3>Professional Highlights</h3>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center input-row">
+      <h6>Sport</h6>
+      <ion-col size="12">
+        <ion-input
+          class="input-text"
+          [placeholder]="'psprofile.enter-sport'|translate"
+          [(ngModel)]="sport"
+          name="sport"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center input-row">
+      <h6>Team</h6>
+      <ion-col size="12">
+        <ion-input
+          class="input-text"
+          [placeholder]="'psprofile.enter-team'|translate"
+          [(ngModel)]="team"
+          name="team"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center input-row">
+      <h6>Position</h6>
+      <ion-col size="12">
+        <ion-input
+          class="input-text"
+          [placeholder]="'psprofile.enter-position'|translate"
+          [(ngModel)]="position"
+          name="position"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" class="btn-row">
+        <ion-button color="primary" (click)="updatePersonalInformation()"
+          >{{ 'psprofile.save-changes' | translate }}</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

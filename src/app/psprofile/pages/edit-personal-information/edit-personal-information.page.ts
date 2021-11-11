@@ -40,18 +40,24 @@ type DisplayableAppInfo = {
 };
 
 @Component({
-  selector: 'app-edit-summary',
-  templateUrl: './edit-summary.page.html',
-  styleUrls: ['./edit-summary.page.scss'],
+  selector: 'app-edit-personal-information',
+  templateUrl: './edit-personal-information.page.html',
+  styleUrls: ['./edit-personal-information.page.scss'],
 })
-export class EditSummaryPage implements OnInit {
+export class EditPersonalInformationPage implements OnInit {
   @ViewChild(TitleBarComponent, { static: false }) titleBar: TitleBarComponent;
 
   // public contact: Contact;
   //public contactsApps: DisplayableAppInfo[] = [];
   public fetchingApps = false;
   public detailsActive = true;
-  public summary: string = ''; // Summary being edited
+  public firstName: string = ''; // firstName being edited
+  public lastName: string = ''; // lastName being edited
+  public jerseyName: string = ''; // jerseyName being edited
+  public height: string = ''; // height being edited
+  public weight: string = ''; // weight being edited
+  public dob: string = ''; // dob being edited
+  public location: string = ''; // location being edited
 
   private titleBarIconClickedListener: (
     icon: TitleBarIcon | TitleBarMenuItem
@@ -93,13 +99,13 @@ export class EditSummaryPage implements OnInit {
         }
       });
 */
-      Logger.log('psprofile', 'PSprofile edit summary');
+      Logger.log('psprofile', 'PSprofile edit personal information');
       //this.buildDisplayableAppsInfo();
     });
   }
 
   ionViewWillEnter() {
-    console.log('Edit summary page ionViewWillEnter');
+    console.log('Edit personal information page ionViewWillEnter');
 
     this.titleBar.setTitle(
       this.translate.instant('psprofile.psprofile-profile')
@@ -180,13 +186,36 @@ export class EditSummaryPage implements OnInit {
   //   //     Logger.log(App.PSPROFILE, "key:", result.producers);
   // }
 
-  async updateSummary() {
+  async updatePersonalInformation() {
     console.log('DID: ', this.didService.getUserDID());
-    console.log('Summary: ', this.summary);
+    console.log('Firstname: ', this.firstName);
+    console.log('Lastname: ', this.lastName);
+    console.log('Jerseyname: ', this.jerseyName);
+    console.log('Height: ', this.height);
+    console.log('Weight: ', this.weight);
+    // console.log('Summary: ', this.summary);
+    console.log('DOB: ', this.dob);
+    console.log('Location: ', this.location);
+
+    if (this.dob) {
+      const tempDOB = new Date(this.dob);
+      this.dob =
+        tempDOB.getFullYear() +
+        '-' +
+        (tempDOB.getMonth() + 1) +
+        '-' +
+        tempDOB.getDate();
+    }
 
     const param = {
       did: this.didService.getUserDID(),
-      summary: this.summary,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      name: this.jerseyName,
+      height: this.height,
+      weight: this.weight,
+      birth: { date: this.dob },
+      location: this.location,
     };
     const headers = {
       'Content-Type': 'application/json',
@@ -205,11 +234,9 @@ export class EditSummaryPage implements OnInit {
         param,
         headers
       );
-      console.log('Update Summary Result: ', result);
+      console.log('Update Personal Information Result: ', result);
     } catch (why: any) {
-      Logger.log(App.PSPROFILE, 'error update summary:', why);
+      Logger.log(App.PSPROFILE, 'error update personal information:', why);
     }
-    // if (result && !Util.isEmptyObject(result.producers)) {
-    //     Logger.log(App.PSPROFILE, "key:", result.producers);
   }
 }

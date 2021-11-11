@@ -18,42 +18,46 @@
         <div class="spacing">
           <!-- <h3>firstName</h3> -->
           <h3>{{ profileName }}</h3>
-          <p>Football player</p>
+          <p>{{ sport }} player</p>
         </div>
       </div>
 
       <div class="profile-container">
         <div class="profile-stats-highlights">
           <h4>Games</h4>
-          <h3>134</h3>
+          <h3>{{games}}</h3>
         </div>
         <div class="profile-stats-highlights">
           <h4>Goals</h4>
-          <h3>134</h3>
+          <h3>{{goals}}</h3>
         </div>
         <div class="profile-stats-highlights">
           <h4>Average</h4>
-          <h3>13.4</h3>
+          <h3>{{average}}</h3>
         </div>
       </div>
 
       <div class="profile-container">
         <div class="profile-summary">
           <div>
-            <h6 style="display: inline-flex; width: 90%">Summary</h6>
+            <h6 class="icon-spacer">Summary</h6>
             <img
               src="../../../../assets/psprofile/icons/edit.svg"
               (click)="goToEditSummary()"
             />
           </div>
-          <p>test summary</p>
-          <!-- <p>{{ profile.summary }}</p> -->
+          <!-- <p>test summary</p> -->
+          <p>{{ summary }}</p>
         </div>
       </div>
 
       <div class="profile-container">
         <div class="player-stats">
-          <h6>Stats</h6>
+          <h6 class="icon-spacer">Stats</h6>
+          <img
+            src="../../../../assets/psprofile/icons/add.svg"
+            (click)="goToAddStats()"
+          />
           <div class="stats-table">
             <table>
               <thead>
@@ -65,18 +69,20 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>2021-01-01</td>
-                  <td>PSG</td>
-                  <td>2-2</td>
-                  <td>1</td>
+                <tr *ngFor="let stats of statistics">
+                  <td>{{stats.match.match_date}}</td>
+                  <td>{{stats.match.opponent_team}}</td>
+                  <td>
+                    {{stats.match.team_score}}-{{stats.match.opponent_score}}
+                  </td>
+                  <td>{{stats.football.total_goals}}</td>
                 </tr>
-                <tr>
+                <!-- <tr>
                   <td>2020-01-01</td>
                   <td>REM</td>
                   <td>2-0</td>
                   <td>1</td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
           </div>
@@ -85,36 +91,30 @@
 
       <div class="profile-container">
         <div class="professional-highlights">
-          <h6>Professional Highlights</h6>
+          <h6 class="icon-spacer">Professional Highlights</h6>
+          <img
+            src="../../../../assets/psprofile/icons/edit.svg"
+            (click)="goToEditProfessionalHighlights()"
+          />
           <div class="professional-highlights-inner">
             <div class="column">
               <span class="label">Game</span>
-              <span>Football</span>
+              <span>{{sport}}</span>
             </div>
 
             <div class="column">
               <span class="label">Current Club</span>
-              <span>Paris Saint-Germain</span>
+              <span>{{club}}</span>
             </div>
 
             <div class="column">
               <span class="label">Current Team (Intl)</span>
-              <span>Brazil</span>
-            </div>
-
-            <div class="column">
-              <span class="label">Preferred Foot</span>
-              <span>Left</span>
+              <span>{{team}}</span>
             </div>
 
             <div class="column">
               <span class="label">Position</span>
-              <span>Attack - Left Winger</span>
-            </div>
-
-            <div class="column">
-              <span class="label">Number</span>
-              <span>101</span>
+              <span>{{position}}</span>
             </div>
           </div>
         </div>
@@ -122,11 +122,15 @@
 
       <div class="profile-container">
         <div class="personal-information">
-          <h6>Personal Information</h6>
+          <h6 class="icon-spacer">Personal Information</h6>
+          <img
+            src="../../../../assets/psprofile/icons/edit.svg"
+            (click)="goToEditPersonalInformation()"
+          />
           <div class="personal-information-inner">
             <div class="column">
               <span class="label">Full name</span>
-              <span>Brooklyn Simmons</span>
+              <span>{{profileName}}</span>
             </div>
 
             <div class="column">
@@ -135,19 +139,19 @@
             </div>
             <div class="column">
               <span class="label">Height</span>
-              <span>175cm</span>
+              <span>{{height}}</span>
             </div>
             <div class="column">
               <span class="label">Weight</span>
-              <span>74Kg</span>
+              <span>{{weight}}</span>
             </div>
             <div class="column">
               <span class="label">D.O.B</span>
-              <span>24, Sept 1987</span>
+              <span>{{dob}}</span>
             </div>
             <div class="column">
               <span class="label">Location</span>
-              <span>São Paulo, Brazil</span>
+              <span>{{location}}</span>
             </div>
           </div>
         </div>
@@ -155,7 +159,11 @@
 
       <div class="profile-container">
         <div class="social-profiles">
-          <h6>Social Profiles</h6>
+          <h6 class="icon-spacer">Social Profiles</h6>
+          <img
+            src="../../../../assets/psprofile/icons/edit.svg"
+            (click)="goToEditSocialProfiles()"
+          />
           <div class="personal-information-inner">
             <div class="social-column">
               <img src="../../../../assets/psprofile/icons/instagram.svg" />

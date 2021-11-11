@@ -56,6 +56,23 @@ export class FriendsPage implements OnInit {
 
   public profile: Profile;
   public profileName: string = null;
+  public sport: string = null;
+  public club: string = null;
+  public team: string = null;
+  public position: string = null;
+
+  public height: string = null;
+  public weight: string = null;
+  public dob: string = null;
+  public location: string = null;
+
+  public summary: string = null;
+
+  public statistics: any = null;
+  public games: number = 0;
+  public goals: number = 0;
+  public average: number = 0;
+
   private didchangedSubscription: Subscription = null;
 
   public psprofile: any;
@@ -80,13 +97,33 @@ export class FriendsPage implements OnInit {
 
   // ngOnInit() {
   async ngOnInit() {
-    this.psprofile = this.getPSProfile();
-    console.log('Profile data nginit: ', this.psprofile);
-
     this.init();
   }
 
-  init(publishAvatar?: boolean) {
+  async init(publishAvatar?: boolean) {
+    this.psprofile = await this.getPSProfile();
+    console.log('Profile data nginit: ', this.psprofile);
+
+    if (this.psprofile) {
+      this.sport = this.psprofile.sport;
+      this.team = this.psprofile.team;
+      this.club = this.psprofile.club;
+      this.position = this.psprofile.position;
+
+      this.height = this.psprofile.height;
+      this.weight = this.psprofile.weight;
+      this.dob = this.psprofile.birth.date;
+      this.location = this.psprofile.location;
+
+      this.summary = this.psprofile.summary;
+      this.statistics = this.psprofile.statistics;
+      this.games = this.statistics.length;
+      this.goals = this.statistics
+        .map((s: any) => s.football.total_goals)
+        .reduce((prevVal: number, currVal: number) => prevVal + currVal);
+      this.average = this.goals / this.games;
+    }
+
     let identity = this.identityDidService.getActiveDid();
     console.log('Identity: ', identity);
 
@@ -197,11 +234,37 @@ export class FriendsPage implements OnInit {
     void this.globalNav.navigateTo('psprofile', '/psprofile/edit-summary');
   }
 
+  goToEditPersonalInformation() {
+    void this.globalNav.navigateTo(
+      'psprofile',
+      '/psprofile/edit-personal-information'
+    );
+  }
+
+  goToEditProfessionalHighlights() {
+    void this.globalNav.navigateTo(
+      'psprofile',
+      '/psprofile/edit-professional-highlights'
+    );
+  }
+
+  goToAddStats() {
+    void this.globalNav.navigateTo('psprofile', '/psprofile/add-stats');
+  }
+
+  goToEditSocialProfiles() {
+    void this.globalNav.navigateTo(
+      'psprofile',
+      '/psprofile/edit-social-profiles'
+    );
+  }
+
   async getPSProfile() {
     console.log('DID: ', this.didService.getUserDID());
 
     const headers = {
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
       Authorization: `Bearer ${environment.auth_token}`,
     };
 

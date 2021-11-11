@@ -40,18 +40,22 @@ type DisplayableAppInfo = {
 };
 
 @Component({
-  selector: 'app-edit-summary',
-  templateUrl: './edit-summary.page.html',
-  styleUrls: ['./edit-summary.page.scss'],
+  selector: 'app-edit-social-profiles',
+  templateUrl: './edit-social-profiles.page.html',
+  styleUrls: ['./edit-social-profiles.page.scss'],
 })
-export class EditSummaryPage implements OnInit {
+export class EditSocialProfilesPage implements OnInit {
   @ViewChild(TitleBarComponent, { static: false }) titleBar: TitleBarComponent;
 
   // public contact: Contact;
   //public contactsApps: DisplayableAppInfo[] = [];
   public fetchingApps = false;
   public detailsActive = true;
-  public summary: string = ''; // Summary being edited
+  public instagram: string = ''; // instagram being edited
+  public facebook: string = ''; // facebook being edited
+  public discord: string = ''; // discord being edited
+  public fifa: string = ''; // fifa being edited
+  public nba: string = ''; // nba being edited
 
   private titleBarIconClickedListener: (
     icon: TitleBarIcon | TitleBarMenuItem
@@ -93,13 +97,13 @@ export class EditSummaryPage implements OnInit {
         }
       });
 */
-      Logger.log('psprofile', 'PSprofile edit summary');
+      Logger.log('psprofile', 'PSprofile edit social profiles');
       //this.buildDisplayableAppsInfo();
     });
   }
 
   ionViewWillEnter() {
-    console.log('Edit summary page ionViewWillEnter');
+    console.log('Edit social profiles page ionViewWillEnter');
 
     this.titleBar.setTitle(
       this.translate.instant('psprofile.psprofile-profile')
@@ -180,13 +184,18 @@ export class EditSummaryPage implements OnInit {
   //   //     Logger.log(App.PSPROFILE, "key:", result.producers);
   // }
 
-  async updateSummary() {
+  async updatePersonalInformation() {
     console.log('DID: ', this.didService.getUserDID());
-    console.log('Summary: ', this.summary);
 
     const param = {
       did: this.didService.getUserDID(),
-      summary: this.summary,
+      social: {
+        instagram: this.instagram,
+        facebook: this.facebook,
+        discord: this.discord,
+        fifa: this.fifa,
+        nba: this.nba,
+      },
     };
     const headers = {
       'Content-Type': 'application/json',
@@ -205,11 +214,9 @@ export class EditSummaryPage implements OnInit {
         param,
         headers
       );
-      console.log('Update Summary Result: ', result);
+      console.log('Update Social Profiles Result: ', result);
     } catch (why: any) {
-      Logger.log(App.PSPROFILE, 'error update summary:', why);
+      Logger.log(App.PSPROFILE, 'error update social profiles:', why);
     }
-    // if (result && !Util.isEmptyObject(result.producers)) {
-    //     Logger.log(App.PSPROFILE, "key:", result.producers);
   }
 }

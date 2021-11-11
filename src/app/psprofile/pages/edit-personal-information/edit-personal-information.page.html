@@ -1,0 +1,109 @@
+<ion-content>
+  <app-titlebar></app-titlebar>
+  <ion-grid class="container" [class.darkContainer]="theme.darkMode">
+    <ion-row class="ion-align-items-center main-row">
+      <ion-col size="12">
+        <h3>Personal Information</h3>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center input-row">
+      <h6>First Name</h6>
+      <ion-col size="12">
+        <ion-input
+          class="input-text"
+          [placeholder]="'psprofile.enter-firstName'|translate"
+          [(ngModel)]="firstName"
+          name="firstName"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center input-row">
+      <h6>Last Name</h6>
+      <ion-col size="12">
+        <ion-input
+          class="input-text"
+          [placeholder]="'psprofile.enter-lastName'|translate"
+          [(ngModel)]="lastName"
+          name="lastName"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center input-row">
+      <h6>Jersey Name</h6>
+      <ion-col size="12">
+        <ion-input
+          class="input-text"
+          [placeholder]="'psprofile.enter-jerseyName'|translate"
+          [(ngModel)]="jerseyName"
+          name="jerseyName"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center input-row">
+      <h6>Height (cms)</h6>
+      <ion-col size="12">
+        <ion-input
+          class="input-text"
+          [placeholder]="'psprofile.enter-height'|translate"
+          [(ngModel)]="height"
+          name="height"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center input-row">
+      <h6>Weight (kgs)</h6>
+      <ion-col size="12">
+        <ion-input
+          class="input-text"
+          [placeholder]="'psprofile.enter-weight'|translate"
+          [(ngModel)]="weight"
+          name="weight"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center input-row">
+      <h6>Date of Birth</h6>
+      <ion-col size="12">
+        <ion-datetime
+          class="input-text"
+          displayFormat="MMM DD YYYY"
+          [placeholder]="'psprofile.enter-dob'|translate"
+          [(ngModel)]="dob"
+          name="dob"
+        ></ion-datetime>
+        <!-- <ion-input
+          class="input-text"
+          [placeholder]="'psprofile.enter-dob'|translate"
+          [(ngModel)]="dob"
+          name="dob"
+        ></ion-input> -->
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center input-row">
+      <h6>Location</h6>
+      <ion-col size="12">
+        <ion-input
+          class="input-text"
+          [placeholder]="'psprofile.enter-location'|translate"
+          [(ngModel)]="location"
+          name="location"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" class="btn-row">
+        <ion-button color="primary" (click)="updatePersonalInformation()"
+          >{{ 'psprofile.save-changes' | translate }}</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

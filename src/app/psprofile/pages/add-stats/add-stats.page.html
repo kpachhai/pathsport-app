@@ -1,0 +1,106 @@
+<ion-content>
+  <app-titlebar></app-titlebar>
+  <ion-grid class="container" [class.darkContainer]="theme.darkMode">
+    <ion-row class="ion-align-items-center main-row">
+      <ion-col size="12">
+        <h3>Add Stats</h3>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row class="ion-align-items-center main-row">
+      <ion-col size="12">
+        <h5>Match Details</h5>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row class="ion-align-items-center input-row">
+      <h6>Match Date</h6>
+      <ion-col size="12">
+        <ion-datetime
+          class="input-text"
+          displayFormat="MMM DD YYYY"
+          [placeholder]="'psprofile.enter-match-date'|translate"
+          [(ngModel)]="matchDate"
+          name="matchDate"
+        ></ion-datetime>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center input-row">
+      <h6>Opponent Team</h6>
+      <ion-col size="12">
+        <ion-input
+          class="input-text"
+          [placeholder]="'psprofile.enter-opponent-team'|translate"
+          [(ngModel)]="opponentTeam"
+          name="opponentTeam"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center input-row">
+      <h6>Team Score</h6>
+      <ion-col size="12">
+        <ion-input
+          type="number"
+          class="input-text"
+          [placeholder]="'psprofile.enter-team-score'|translate"
+          [(ngModel)]="teamScore"
+          name="teamScore"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center input-row">
+      <h6>Opponent Score</h6>
+      <ion-col size="12">
+        <ion-input
+          type="number"
+          class="input-text"
+          [placeholder]="'psprofile.enter-opponent-score'|translate"
+          [(ngModel)]="opponentScore"
+          name="opponentScore"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center input-row">
+      <h6>League</h6>
+      <ion-col size="12">
+        <ion-input
+          class="input-text"
+          [placeholder]="'psprofile.enter-league'|translate"
+          [(ngModel)]="league"
+          name="league"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row class="ion-align-items-center main-row">
+      <ion-col size="12">
+        <h5>Personal Stats</h5>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row class="ion-align-items-center input-row">
+      <h6>Goals</h6>
+      <ion-col size="12">
+        <ion-input
+          type="number"
+          class="input-text"
+          [placeholder]="'psprofile.enter-goals'|translate"
+          [(ngModel)]="totalGoals"
+          name="totalGoals"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" class="btn-row">
+        <ion-button color="primary" (click)="addStats()"
+          >{{ 'psprofile.save-changes' | translate }}</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

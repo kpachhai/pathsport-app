@@ -40,18 +40,23 @@ type DisplayableAppInfo = {
 };
 
 @Component({
-  selector: 'app-edit-summary',
-  templateUrl: './edit-summary.page.html',
-  styleUrls: ['./edit-summary.page.scss'],
+  selector: 'app-add-stats',
+  templateUrl: './add-stats.page.html',
+  styleUrls: ['./add-stats.page.scss'],
 })
-export class EditSummaryPage implements OnInit {
+export class AddStatsPage implements OnInit {
   @ViewChild(TitleBarComponent, { static: false }) titleBar: TitleBarComponent;
 
   // public contact: Contact;
   //public contactsApps: DisplayableAppInfo[] = [];
   public fetchingApps = false;
   public detailsActive = true;
-  public summary: string = ''; // Summary being edited
+  public matchDate: string = ''; // match_date being edited
+  public opponentTeam: string = ''; // opponent_team being edited
+  public teamScore: number = 0; // team_score being edited
+  public opponentScore: number = 0; // opponent_score being edited
+  public league: string = ''; // league being edited
+  public totalGoals: number = 0; // total_goals being edited
 
   private titleBarIconClickedListener: (
     icon: TitleBarIcon | TitleBarMenuItem
@@ -93,13 +98,13 @@ export class EditSummaryPage implements OnInit {
         }
       });
 */
-      Logger.log('psprofile', 'PSprofile edit summary');
+      Logger.log('psprofile', 'PSprofile add stats');
       //this.buildDisplayableAppsInfo();
     });
   }
 
   ionViewWillEnter() {
-    console.log('Edit summary page ionViewWillEnter');
+    console.log('Add stats page ionViewWillEnter');
 
     this.titleBar.setTitle(
       this.translate.instant('psprofile.psprofile-profile')
@@ -180,13 +185,35 @@ export class EditSummaryPage implements OnInit {
   //   //     Logger.log(App.PSPROFILE, "key:", result.producers);
   // }
 
-  async updateSummary() {
+  async addStats() {
     console.log('DID: ', this.didService.getUserDID());
-    console.log('Summary: ', this.summary);
+
+    if (this.matchDate) {
+      const tempMatchDate = new Date(this.matchDate);
+      this.matchDate =
+        tempMatchDate.getFullYear() +
+        '-' +
+        (tempMatchDate.getMonth() + 1) +
+        '-' +
+        tempMatchDate.getDate();
+    }
 
     const param = {
       did: this.didService.getUserDID(),
-      summary: this.summary,
+      statistics: [
+        {
+          match: {
+            match_date: this.matchDate,
+            opponent_team: this.opponentTeam,
+            team_score: this.teamScore,
+            opponent_score: this.opponentScore,
+            league: this.league,
+          },
+          football: {
+            total_goals: this.totalGoals,
+          },
+        },
+      ],
     };
     const headers = {
       'Content-Type': 'application/json',
@@ -205,11 +232,9 @@ export class EditSummaryPage implements OnInit {
         param,
         headers
       );
-      console.log('Update Summary Result: ', result);
+      console.log('Add Stats Result: ', result);
     } catch (why: any) {
-      Logger.log(App.PSPROFILE, 'error update summary:', why);
+      Logger.log(App.PSPROFILE, 'error add stats:', why);
     }
-    // if (result && !Util.isEmptyObject(result.producers)) {
-    //     Logger.log(App.PSPROFILE, "key:", result.producers);
   }
 }

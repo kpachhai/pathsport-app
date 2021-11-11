@@ -28,7 +28,6 @@ export class GlobalJsonRPCService {
       httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
         }),
       };
       console.log('httpOptions from if: ', httpOptions);
@@ -92,7 +91,6 @@ export class GlobalJsonRPCService {
       httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
         }),
       };
       console.log('httpOptions from if: ', httpOptions);
@@ -156,7 +154,6 @@ export class GlobalJsonRPCService {
       httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
         }),
       };
       console.log('httpOptions from if: ', httpOptions);
@@ -219,7 +216,6 @@ export class GlobalJsonRPCService {
       httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
         }),
       };
     } else {
