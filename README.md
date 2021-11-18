@@ -22,11 +22,17 @@ on Mac and Linux, add the following line to your login script (e.g., ~/.bashrc, 
 export ANDROID_HOME="YOUR-PATH/sdk"
 ```
 
-### How to run
+### Debug APK Location
+
+- `./platforms/android/app/build/outputs/apk/debug/app-debug.apk`
+
+### How to build and run
 
 - clone the repo
 - `npm i` (node version: v14.17.5 LTS recommended)
+- `npm run translations`
 - `ionic cordova platform add android`
+
 - `cordova requirements android --verbose`
 - `sudo ionic cordova run android --verbose`
 
