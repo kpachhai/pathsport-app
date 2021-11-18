@@ -14,6 +14,7 @@ import { PopupService } from '../../services/popup.service';
 import { AppService } from '../../services/app.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TitleBarComponent } from 'src/app/components/titlebar/titlebar.component';
 import { GlobalThemeService } from 'src/app/services/global.theme.service';
 import {
@@ -30,6 +31,8 @@ import { App } from 'src/app/model/app.enum';
 import { environment } from 'src/environments/environment';
 import { GlobalJsonRPCService } from 'src/app/services/global.jsonrpc.service';
 import { Profile } from 'src/app/identity/model/profile.model';
+import { NavigationExtras } from '@angular/router';
+import { ProposalListingPage } from 'src/app/crproposalvoting/pages/proposal-lists/listing/listing';
 
 @Component({
   selector: 'app-friends',
@@ -56,11 +59,13 @@ export class FriendsPage implements OnInit {
 
   public profile: Profile;
   public profileName: string = null;
+
   public sport: string = null;
   public club: string = null;
   public team: string = null;
   public position: string = null;
 
+  public jerseyName: string = null;
   public height: string = null;
   public weight: string = null;
   public dob: string = null;
@@ -72,6 +77,12 @@ export class FriendsPage implements OnInit {
   public games: number = 0;
   public goals: number = 0;
   public average: number = 0;
+
+  public instagram: string = null;
+  public facebook: string = null;
+  public twitter: string = null;
+  public fifa: string = null;
+  public nba: string = null;
 
   private didchangedSubscription: Subscription = null;
 
@@ -90,7 +101,8 @@ export class FriendsPage implements OnInit {
     private events: Events,
     private globalNav: GlobalNavService,
     private globalJsonRPCService: GlobalJsonRPCService,
-    public profileService: ProfileService
+    public profileService: ProfileService,
+    private route: ActivatedRoute
   ) {
     // this.getProfile();
   }
@@ -98,6 +110,68 @@ export class FriendsPage implements OnInit {
   // ngOnInit() {
   async ngOnInit() {
     this.init();
+
+    this.route.queryParams.subscribe((params) => {
+      // console.log('Personal info pageee: ', params);
+
+      // Update Summary if navigating back from edit page
+      if (params['summary']) {
+        this.summary = params['summary'];
+      }
+
+      // Update Personal Information if navigating back from edit page
+      if (params['fullName']) {
+        this.profileName = params['fullName'];
+      }
+      if (params['jerseyName']) {
+        this.jerseyName = params['jerseyName'];
+      }
+      if (params['height']) {
+        this.height = params['height'];
+      }
+      if (params['weight']) {
+        this.weight = params['weight'];
+      }
+      if (params['dob']) {
+        this.dob = params['dob'];
+      }
+      if (params['location']) {
+        this.location = params['location'];
+      }
+
+      // Update Professional Highlights if navigating back from edit page
+      if (params['sport']) {
+        this.sport = params['sport'];
+      }
+      if (params['club']) {
+        this.club = params['club'];
+      }
+      if (params['team']) {
+        this.team = params['team'];
+      }
+      if (params['position']) {
+        this.position = params['position'];
+      }
+
+      // Update Social Profiles if navigating back from edit page
+      if (params['instagram']) {
+        this.instagram = params['instagram'];
+      }
+      if (params['facebook']) {
+        this.facebook = params['facebook'];
+      }
+      if (params['twitter']) {
+        this.twitter = params['twitter'];
+      }
+      if (params['fifa']) {
+        this.fifa = params['fifa'];
+      }
+      if (params['nba']) {
+        this.nba = params['nba'];
+      }
+
+      // Logger.log('psprofile', 'PSprofile edit professional highlights');
+    });
   }
 
   async init(publishAvatar?: boolean) {
@@ -110,6 +184,7 @@ export class FriendsPage implements OnInit {
       this.club = this.psprofile.club;
       this.position = this.psprofile.position;
 
+      this.jerseyName = this.psprofile.jerseyName;
       this.height = this.psprofile.height;
       this.weight = this.psprofile.weight;
       this.dob = this.psprofile.birth.date;
@@ -122,6 +197,12 @@ export class FriendsPage implements OnInit {
         .map((s: any) => s.football.total_goals)
         .reduce((prevVal: number, currVal: number) => prevVal + currVal);
       this.average = this.goals / this.games;
+
+      this.instagram = this.psprofile.social.instagram;
+      this.facebook = this.psprofile.social.facebook;
+      this.twitter = this.psprofile.social.twitter;
+      this.fifa = this.psprofile.social.fifa;
+      this.nba = this.psprofile.social.nba;
     }
 
     let identity = this.identityDidService.getActiveDid();
@@ -231,20 +312,54 @@ export class FriendsPage implements OnInit {
   }*/
 
   goToEditSummary() {
-    void this.globalNav.navigateTo('psprofile', '/psprofile/edit-summary');
+    let props: NavigationExtras = {
+      queryParams: {
+        summary: this.summary,
+      },
+    };
+
+    console.log('goToEditSummary: ', this.summary);
+
+    void this.globalNav.navigateTo(
+      'psprofile',
+      '/psprofile/edit-summary',
+      props
+    );
   }
 
   goToEditPersonalInformation() {
+    let props: NavigationExtras = {
+      queryParams: {
+        fullName: this.profileName,
+        jerseyName: this.jerseyName,
+        height: this.height,
+        weight: this.weight,
+        dob: this.dob,
+        location: this.location,
+      },
+    };
+
     void this.globalNav.navigateTo(
       'psprofile',
-      '/psprofile/edit-personal-information'
+      '/psprofile/edit-personal-information',
+      props
     );
   }
 
   goToEditProfessionalHighlights() {
+    let props: NavigationExtras = {
+      queryParams: {
+        sport: this.sport,
+        club: this.club,
+        team: this.team,
+        position: this.position,
+      },
+    };
+
     void this.globalNav.navigateTo(
       'psprofile',
-      '/psprofile/edit-professional-highlights'
+      '/psprofile/edit-professional-highlights',
+      props
     );
   }
 
@@ -253,9 +368,20 @@ export class FriendsPage implements OnInit {
   }
 
   goToEditSocialProfiles() {
+    let props: NavigationExtras = {
+      queryParams: {
+        instagram: this.instagram,
+        facebook: this.facebook,
+        twitter: this.twitter,
+        fifa: this.fifa,
+        nba: this.nba,
+      },
+    };
+
     void this.globalNav.navigateTo(
       'psprofile',
-      '/psprofile/edit-social-profiles'
+      '/psprofile/edit-social-profiles',
+      props
     );
   }
 

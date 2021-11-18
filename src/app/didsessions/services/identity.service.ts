@@ -520,13 +520,22 @@ export class IdentityService {
         // create a new profile
         this.navigateWithCompletion(
           '/didsessions/editprofile',
-          async (returnedName) => {
+          async ({ returnedName, returnedLocation }) => {
             this.identityBeingCreated.name = returnedName as string;
-            if (this.identityBeingCreated.name) {
+            this.identityBeingCreated.country = returnedLocation as string;
+            if (
+              this.identityBeingCreated.name ||
+              this.identityBeingCreated.country
+            ) {
               Logger.log(
                 'didsessions',
                 'Adding DID with info name:',
                 this.identityBeingCreated.name
+              );
+              Logger.log(
+                'didsessions',
+                'Adding DID with info location/country:',
+                this.identityBeingCreated.country
               );
               let createdDID = await didStore.addDID(
                 this.identityBeingCreated,
@@ -537,7 +546,8 @@ export class IdentityService {
                 storePassword,
                 createdDID,
                 this.identityBeingCreated.name,
-                true
+                true,
+                this.identityBeingCreated.country
               );
             }
           }

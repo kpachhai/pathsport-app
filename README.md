@@ -30,6 +30,10 @@ export ANDROID_HOME="YOUR-PATH/sdk"
 - `cordova requirements android --verbose`
 - `sudo ionic cordova run android --verbose`
 
+Generating the resources (splash screen and app icons)
+
+- `ionic cordova resources -f`
+
 Check if your device is connected
 
 - `adb devices`

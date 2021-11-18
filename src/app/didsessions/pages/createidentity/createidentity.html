@@ -3,12 +3,12 @@
   <img
     *ngIf="slideIndex === 0 && onboarded === false"
     class="animateLogo"
-    [src]="!theme.darkMode ? 'assets/didsessions/onboard/logo.svg' : 'assets/didsessions/onboard/logo.svg'"
+    [src]="!theme.darkMode ? 'assets/didsessions/onboard/logo.svg' : 'assets/didsessions/onboard/dark_mode/logo.svg'"
   />
   <img
     *ngIf="slideIndex !== 0 || onboarded === true"
     class="logo"
-    [src]="!theme.darkMode ? 'assets/didsessions/onboard/logo.svg' : 'assets/didsessions/onboard/logo.svg'"
+    [src]="!theme.darkMode ? 'assets/didsessions/onboard/logo.svg' : 'assets/didsessions/onboard/dark_mode/logo.svg'"
   />
   <ion-slides
     #slide

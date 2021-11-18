@@ -68,6 +68,24 @@ export class DID {
     }
   }
 
+  async addCountryCredential(
+    country: string,
+    storePassword: string
+  ): Promise<void> {
+    try {
+      await this.addCredential(
+        new DIDURL('#country'),
+        {
+          country: country,
+        },
+        storePassword,
+        ['BasicProfileCredential']
+      );
+    } catch (e) {
+      throw e;
+    }
+  }
+
   /**
    */
   async addCredential(

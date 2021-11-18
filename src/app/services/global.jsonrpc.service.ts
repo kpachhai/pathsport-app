@@ -97,6 +97,7 @@ export class GlobalJsonRPCService {
     } else {
       httpOptions = {
         headers: new HttpHeaders(headers),
+        observe: 'response',
       };
       console.log('httpOptions from else: ', httpOptions);
     }
@@ -114,7 +115,7 @@ export class GlobalJsonRPCService {
       this.http.patch(rpcApiUrl, JSON.stringify(param), httpOptions).subscribe(
         (res: any) => {
           if (res) {
-            // Logger.warn("GlobalJsonRPCService", 'httpPost response:', res);
+            Logger.warn('GlobalJsonRPCService', 'httpPatch response:', res);
             if (res instanceof Array) {
               resolve(res);
             } else {

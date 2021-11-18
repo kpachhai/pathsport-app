@@ -28,7 +28,10 @@ import {
 } from 'src/app/components/titlebar/titlebar.types';
 import { GlobalIntentService } from 'src/app/services/global.intent.service';
 import { Logger } from 'src/app/logger';
-import { GlobalNavService } from 'src/app/services/global.nav.service';
+import {
+  Direction,
+  GlobalNavService,
+} from 'src/app/services/global.nav.service';
 import { partitionArray } from '@angular/compiler/src/util';
 import { App } from 'src/app/model/app.enum';
 
@@ -51,12 +54,11 @@ export class EditPersonalInformationPage implements OnInit {
   //public contactsApps: DisplayableAppInfo[] = [];
   public fetchingApps = false;
   public detailsActive = true;
-  public firstName: string = ''; // firstName being edited
-  public lastName: string = ''; // lastName being edited
+  public fullName: string = ''; // fullName being edited
   public jerseyName: string = ''; // jerseyName being edited
   public height: string = ''; // height being edited
   public weight: string = ''; // weight being edited
-  public dob: string = ''; // dob being edited
+  public dob: any = new Date(); // dob being edited
   public location: string = ''; // location being edited
 
   private titleBarIconClickedListener: (
@@ -81,7 +83,16 @@ export class EditPersonalInformationPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe((paramMap) => {
+    this.route.queryParams.subscribe((params) => {
+      console.log('Personal info pageee: ', params);
+
+      this.fullName = params['fullName'] ? params['fullName'] : '';
+      this.jerseyName = params['jerseyName'] ? params['jerseyName'] : '';
+      this.height = params['height'] ? params['height'] : '';
+      this.weight = params['weight'] ? params['weight'] : '';
+      this.dob = params['dob'] ? params['dob'] : '';
+      this.location = params['location'] ? params['location'] : '';
+
       // if (!paramMap.has('friendId')) {
       // void this.globalNavService.navigateRoot(
       //   'psprofile',
@@ -188,8 +199,7 @@ export class EditPersonalInformationPage implements OnInit {
 
   async updatePersonalInformation() {
     console.log('DID: ', this.didService.getUserDID());
-    console.log('Firstname: ', this.firstName);
-    console.log('Lastname: ', this.lastName);
+    console.log('Fullname: ', this.fullName);
     console.log('Jerseyname: ', this.jerseyName);
     console.log('Height: ', this.height);
     console.log('Weight: ', this.weight);
@@ -197,21 +207,20 @@ export class EditPersonalInformationPage implements OnInit {
     console.log('DOB: ', this.dob);
     console.log('Location: ', this.location);
 
-    if (this.dob) {
-      const tempDOB = new Date(this.dob);
-      this.dob =
-        tempDOB.getFullYear() +
-        '-' +
-        (tempDOB.getMonth() + 1) +
-        '-' +
-        tempDOB.getDate();
-    }
+    // if (this.dob) {
+    //   const tempDOB = new Date(this.dob);
+    //   this.dob =
+    //     tempDOB.getFullYear() +
+    //     '-' +
+    //     (tempDOB.getMonth() + 1) +
+    //     '-' +
+    //     tempDOB.getDate();
+    // }
 
     const param = {
       did: this.didService.getUserDID(),
-      firstName: this.firstName,
-      lastName: this.lastName,
-      name: this.jerseyName,
+      fullName: this.fullName,
+      jerseyName: this.jerseyName,
       height: this.height,
       weight: this.weight,
       birth: { date: this.dob },
@@ -235,6 +244,24 @@ export class EditPersonalInformationPage implements OnInit {
         headers
       );
       console.log('Update Personal Information Result: ', result);
+
+      let props: any = {
+        queryParams: {
+          fullName: this.fullName,
+          jerseyName: this.jerseyName,
+          height: this.height,
+          weight: this.weight,
+          birth: { date: this.dob },
+          location: this.location,
+        },
+        animationDirection: Direction.BACK,
+      };
+
+      void this.globalNavService.navigateRoot(
+        App.PSPROFILE,
+        '/psprofile/friends',
+        props
+      );
     } catch (why: any) {
       Logger.log(App.PSPROFILE, 'error update personal information:', why);
     }

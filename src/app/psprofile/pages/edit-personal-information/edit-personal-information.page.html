@@ -8,25 +8,13 @@
     </ion-row>
 
     <ion-row class="ion-align-items-center input-row">
-      <h6>First Name</h6>
+      <h6>Full Name</h6>
       <ion-col size="12">
         <ion-input
           class="input-text"
-          [placeholder]="'psprofile.enter-firstName'|translate"
-          [(ngModel)]="firstName"
-          name="firstName"
-        ></ion-input>
-      </ion-col>
-    </ion-row>
-
-    <ion-row class="ion-align-items-center input-row">
-      <h6>Last Name</h6>
-      <ion-col size="12">
-        <ion-input
-          class="input-text"
-          [placeholder]="'psprofile.enter-lastName'|translate"
-          [(ngModel)]="lastName"
-          name="lastName"
+          [placeholder]="'psprofile.enter-fullName'|translate"
+          [(ngModel)]="fullName"
+          name="fullName"
         ></ion-input>
       </ion-col>
     </ion-row>
@@ -47,6 +35,7 @@
       <h6>Height (cms)</h6>
       <ion-col size="12">
         <ion-input
+          type="number"
           class="input-text"
           [placeholder]="'psprofile.enter-height'|translate"
           [(ngModel)]="height"
@@ -59,6 +48,7 @@
       <h6>Weight (kgs)</h6>
       <ion-col size="12">
         <ion-input
+          type="number"
           class="input-text"
           [placeholder]="'psprofile.enter-weight'|translate"
           [(ngModel)]="weight"

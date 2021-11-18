@@ -28,9 +28,13 @@ import {
 } from 'src/app/components/titlebar/titlebar.types';
 import { GlobalIntentService } from 'src/app/services/global.intent.service';
 import { Logger } from 'src/app/logger';
-import { GlobalNavService } from 'src/app/services/global.nav.service';
+import {
+  Direction,
+  GlobalNavService,
+} from 'src/app/services/global.nav.service';
 import { partitionArray } from '@angular/compiler/src/util';
 import { App } from 'src/app/model/app.enum';
+import { NavigationExtras } from '@angular/router';
 
 type DisplayableAppInfo = {
   packageId: string;
@@ -52,6 +56,7 @@ export class EditProfessionalHighlightsPage implements OnInit {
   public fetchingApps = false;
   public detailsActive = true;
   public sport: string = ''; // sport being edited
+  public club: string = ''; // club being edited
   public team: string = ''; // team being edited
   public position: string = ''; // position being edited
 
@@ -77,7 +82,15 @@ export class EditProfessionalHighlightsPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe((paramMap) => {
+    this.route.queryParams.subscribe((params) => {
+      // console.log('Personal info pageee: ', params);
+
+      this.sport = params['sport'] ? params['sport'] : '';
+      this.club = params['club'] ? params['club'] : '';
+      this.team = params['team'] ? params['team'] : '';
+      this.position = params['position'] ? params['position'] : '';
+
+      // this.route.paramMap.subscribe((paramMap) => {
       // if (!paramMap.has('friendId')) {
       // void this.globalNavService.navigateRoot(
       //   'psprofile',
@@ -187,6 +200,7 @@ export class EditProfessionalHighlightsPage implements OnInit {
     const param = {
       did: this.didService.getUserDID(),
       sport: this.sport,
+      club: this.club,
       team: this.team,
       position: this.position,
     };
@@ -208,6 +222,22 @@ export class EditProfessionalHighlightsPage implements OnInit {
         headers
       );
       console.log('Update Professional Highlights Result: ', result);
+
+      let props: any = {
+        queryParams: {
+          sport: this.sport,
+          club: this.club,
+          team: this.team,
+          position: this.position,
+        },
+        animationDirection: Direction.BACK,
+      };
+
+      void this.globalNavService.navigateRoot(
+        App.PSPROFILE,
+        '/psprofile/friends',
+        props
+      );
     } catch (why: any) {
       Logger.log(App.PSPROFILE, 'error update professional highlights:', why);
     }

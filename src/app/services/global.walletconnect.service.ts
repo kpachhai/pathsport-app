@@ -218,12 +218,12 @@ export class GlobalWalletConnectService extends GlobalService {
         uri: uri,
         storageId: '' + Math.random(), // Using a different storage ID for every sessions seems to be necessary to deal with cache/multi-sessions issues
         clientMeta: {
-          description: 'Pathsports',
+          description: 'Pathsport',
           url: 'https://www.elastos.org',
           icons: [
             'https://www.elastos.org/assets/img/elastos_logo_white_2x.png',
           ],
-          name: 'Pathsports',
+          name: 'Pathsport',
         },
       },
       /*

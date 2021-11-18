@@ -1,6 +1,6 @@
 export const en = {
   common: {
-    'elastos-essentials': 'PathSports',
+    'elastos-essentials': 'PathSport',
 
     // Generic actions
     delete: 'Delete',

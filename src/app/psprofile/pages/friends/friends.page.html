@@ -42,7 +42,7 @@
           <div>
             <h6 class="icon-spacer">Summary</h6>
             <img
-              src="../../../../assets/psprofile/icons/edit.svg"
+              src="../../../../assets/psprofile/icons/pencil.svg"
               (click)="goToEditSummary()"
             />
           </div>
@@ -55,7 +55,7 @@
         <div class="player-stats">
           <h6 class="icon-spacer">Stats</h6>
           <img
-            src="../../../../assets/psprofile/icons/add.svg"
+            src="../../../../assets/psprofile/icons/plus.svg"
             (click)="goToAddStats()"
           />
           <div class="stats-table">
@@ -93,7 +93,7 @@
         <div class="professional-highlights">
           <h6 class="icon-spacer">Professional Highlights</h6>
           <img
-            src="../../../../assets/psprofile/icons/edit.svg"
+            src="../../../../assets/psprofile/icons/pencil.svg"
             (click)="goToEditProfessionalHighlights()"
           />
           <div class="professional-highlights-inner">
@@ -124,7 +124,7 @@
         <div class="personal-information">
           <h6 class="icon-spacer">Personal Information</h6>
           <img
-            src="../../../../assets/psprofile/icons/edit.svg"
+            src="../../../../assets/psprofile/icons/pencil.svg"
             (click)="goToEditPersonalInformation()"
           />
           <div class="personal-information-inner">
@@ -135,15 +135,15 @@
 
             <div class="column">
               <span class="label">Label Name</span>
-              <span>B. Simmons</span>
+              <span>{{jerseyName}}</span>
             </div>
             <div class="column">
               <span class="label">Height</span>
-              <span>{{height}}</span>
+              <span>{{height}} cms</span>
             </div>
             <div class="column">
               <span class="label">Weight</span>
-              <span>{{weight}}</span>
+              <span>{{weight}} kgs</span>
             </div>
             <div class="column">
               <span class="label">D.O.B</span>
@@ -161,27 +161,33 @@
         <div class="social-profiles">
           <h6 class="icon-spacer">Social Profiles</h6>
           <img
-            src="../../../../assets/psprofile/icons/edit.svg"
+            src="../../../../assets/psprofile/icons/pencil.svg"
             (click)="goToEditSocialProfiles()"
           />
           <div class="personal-information-inner">
             <div class="social-column">
-              <img src="../../../../assets/psprofile/icons/instagram.svg" />
-              <div class="label">
-                <span>Instagram</span>
-              </div>
+              <a href="https://www.instagram.com/{{instagram}}">
+                <img src="../../../../assets/psprofile/icons/instagram.svg" />
+                <div class="label">
+                  <span>Instagram</span>
+                </div>
+              </a>
             </div>
             <div class="social-column">
-              <img src="../../../../assets/psprofile/icons/facebook.svg" />
-              <div class="label">
-                <span>Facebook</span>
-              </div>
+              <a href="https://www.facebook.com/{{facebook}}">
+                <img src="../../../../assets/psprofile/icons/facebook.svg" />
+                <div class="label">
+                  <span>Facebook</span>
+                </div>
+              </a>
             </div>
             <div class="social-column">
-              <img src="../../../../assets/psprofile/icons/discord.svg" />
-              <div class="label">
-                <span>Discord</span>
-              </div>
+              <a href="https://www.twitter.com/{{twitter}}">
+                <img src="../../../../assets/psprofile/icons/twitter.svg" />
+                <div class="label">
+                  <span>Twitter</span>
+                </div>
+              </a>
             </div>
             <div class="social-column">
               <img src="../../../../assets/psprofile/icons/fifa.svg" />

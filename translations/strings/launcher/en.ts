@@ -49,7 +49,7 @@ export const en = {
     'app-scanner': 'Scanner',
     'app-scanner-description': 'Scan anything',
     'app-settings': 'Settings',
-    'app-settings-description': 'Manage Pathsports',
+    'app-settings-description': 'Manage Pathsport',
     'app-dpos-voting': 'DPoS Voting',
     'app-dpos-description': 'DPoS Supernodes',
     'app-cr-council': 'CR Council',

@@ -28,7 +28,10 @@ import {
 } from 'src/app/components/titlebar/titlebar.types';
 import { GlobalIntentService } from 'src/app/services/global.intent.service';
 import { Logger } from 'src/app/logger';
-import { GlobalNavService } from 'src/app/services/global.nav.service';
+import {
+  Direction,
+  GlobalNavService,
+} from 'src/app/services/global.nav.service';
 import { partitionArray } from '@angular/compiler/src/util';
 import { App } from 'src/app/model/app.enum';
 
@@ -53,7 +56,7 @@ export class EditSocialProfilesPage implements OnInit {
   public detailsActive = true;
   public instagram: string = ''; // instagram being edited
   public facebook: string = ''; // facebook being edited
-  public discord: string = ''; // discord being edited
+  public twitter: string = ''; // twitter being edited
   public fifa: string = ''; // fifa being edited
   public nba: string = ''; // nba being edited
 
@@ -79,7 +82,16 @@ export class EditSocialProfilesPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe((paramMap) => {
+    this.route.queryParams.subscribe((params) => {
+      // console.log('Personal info pageee: ', params);
+
+      this.instagram = params['instagram'] ? params['instagram'] : '';
+      this.facebook = params['facebook'] ? params['facebook'] : '';
+      this.twitter = params['twitter'] ? params['twitter'] : '';
+      this.fifa = params['fifa'] ? params['fifa'] : '';
+      this.nba = params['nba'] ? params['nba'] : '';
+
+      // this.route.paramMap.subscribe((paramMap) => {
       // if (!paramMap.has('friendId')) {
       // void this.globalNavService.navigateRoot(
       //   'psprofile',
@@ -192,7 +204,7 @@ export class EditSocialProfilesPage implements OnInit {
       social: {
         instagram: this.instagram,
         facebook: this.facebook,
-        discord: this.discord,
+        twitter: this.twitter,
         fifa: this.fifa,
         nba: this.nba,
       },
@@ -215,6 +227,23 @@ export class EditSocialProfilesPage implements OnInit {
         headers
       );
       console.log('Update Social Profiles Result: ', result);
+
+      let props: any = {
+        queryParams: {
+          instagram: this.instagram,
+          facebook: this.facebook,
+          twitter: this.twitter,
+          fifa: this.fifa,
+          nba: this.nba,
+        },
+        animationDirection: Direction.BACK,
+      };
+
+      void this.globalNavService.navigateRoot(
+        App.PSPROFILE,
+        '/psprofile/friends',
+        props
+      );
     } catch (why: any) {
       Logger.log(App.PSPROFILE, 'error update social profiles:', why);
     }

@@ -97,17 +97,14 @@
       @extend .container-frame;
     }
 
-    .profile-summary {
-      position: relative;
-      width: 100%;
+    // .profile-summary {
+    //   position: relative;
+    //   width: 100%;
 
-      @extend .container-frame;
-    }
+    //   @extend .container-frame;
+    // }
 
     .player-stats {
-      position: relative;
-      width: 100%;
-
       .stats-table {
         table {
           text-align: center;
@@ -121,8 +118,6 @@
           }
         }
       }
-
-      @extend .container-frame;
     }
 
     .column {
@@ -149,13 +144,20 @@
         padding-left: 0.5em;
         margin: auto 0;
       }
+
+      a {
+        display: inline-flex;
+      }
     }
 
+    .profile-summary,
     .professional-highlights,
     .personal-information,
-    .social-profiles {
+    .social-profiles,
+    .player-stats {
       position: relative;
       width: 100%;
+      padding-left: 1em;
       @extend .container-frame;
     }
   }
