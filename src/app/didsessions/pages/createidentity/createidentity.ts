@@ -133,8 +133,13 @@ export class CreateIdentityPage {
     void this.slide.slideNext();
   }
 
-  createNewIdentity() {
+  async createNewIdentity() {
     this.identityService.startCreatingNewDIDWithNewMnemonic();
+
+    // const didDoc = await this.identityService.getCreatedDIDDocument();
+    // const didStr = didDoc.getSubject().getDIDString();
+
+    // console.log('Time to create user, auth token and player: ', didStr);
   }
 
   async importIdentity(existingMnemonic: string = null) {

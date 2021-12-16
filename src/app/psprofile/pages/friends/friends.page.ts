@@ -32,7 +32,7 @@ import { environment } from 'src/environments/environment';
 import { GlobalJsonRPCService } from 'src/app/services/global.jsonrpc.service';
 import { Profile } from 'src/app/identity/model/profile.model';
 import { NavigationExtras } from '@angular/router';
-import { ProposalListingPage } from 'src/app/crproposalvoting/pages/proposal-lists/listing/listing';
+import { GlobalStorageService } from 'src/app/services/global.storage.service';
 
 @Component({
   selector: 'app-friends',
@@ -84,6 +84,10 @@ export class FriendsPage implements OnInit {
   public fifa: string = null;
   public nba: string = null;
 
+  public match: string = null;
+  public football: string = null;
+  public basketball: string = null;
+
   private didchangedSubscription: Subscription = null;
 
   public psprofile: any;
@@ -102,7 +106,8 @@ export class FriendsPage implements OnInit {
     private globalNav: GlobalNavService,
     private globalJsonRPCService: GlobalJsonRPCService,
     public profileService: ProfileService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private storage: GlobalStorageService
   ) {
     // this.getProfile();
   }
@@ -170,6 +175,35 @@ export class FriendsPage implements OnInit {
         this.nba = params['nba'];
       }
 
+      // Update Stats if navigating back from add page
+      if (params['match']) {
+        this.match = params['match'];
+      }
+
+      if (params['football']) {
+        this.football = params['football'];
+      }
+
+      if (params['basketball']) {
+        this.basketball = params['basketball'];
+      }
+
+      // upon navigating from add-stats page, append new stats to statistics json
+      if (this.match && (this.football || this.basketball)) {
+        const newlyAddedMatch = {
+          match: JSON.parse(this.match),
+          football: JSON.parse(this.football),
+        };
+
+        this.statistics.push(newlyAddedMatch);
+
+        this.games = this.statistics.length;
+        this.goals = this.statistics
+          .map((s: any) => s.football.total_goals)
+          .reduce((prevVal: number, currVal: number) => prevVal + currVal);
+        this.average = this.goals / this.games;
+      }
+
       // Logger.log('psprofile', 'PSprofile edit professional highlights');
     });
   }
@@ -187,7 +221,9 @@ export class FriendsPage implements OnInit {
       this.jerseyName = this.psprofile.jerseyName;
       this.height = this.psprofile.height;
       this.weight = this.psprofile.weight;
-      this.dob = this.psprofile.birth.date;
+      if (this.psprofile.birth && this.psprofile.birth.date) {
+        this.dob = this.psprofile.birth.date;
+      }
       this.location = this.psprofile.location;
 
       this.summary = this.psprofile.summary;
@@ -198,11 +234,21 @@ export class FriendsPage implements OnInit {
         .reduce((prevVal: number, currVal: number) => prevVal + currVal);
       this.average = this.goals / this.games;
 
-      this.instagram = this.psprofile.social.instagram;
-      this.facebook = this.psprofile.social.facebook;
-      this.twitter = this.psprofile.social.twitter;
-      this.fifa = this.psprofile.social.fifa;
-      this.nba = this.psprofile.social.nba;
+      if (this.psprofile.social && this.psprofile.social.instagram) {
+        this.instagram = this.psprofile.social.instagram;
+      }
+      if (this.psprofile.social && this.psprofile.social.facebook) {
+        this.facebook = this.psprofile.social.facebook;
+      }
+      if (this.psprofile.social && this.psprofile.social.twitter) {
+        this.twitter = this.psprofile.social.twitter;
+      }
+      if (this.psprofile.social && this.psprofile.social.fifa) {
+        this.fifa = this.psprofile.social.fifa;
+      }
+      if (this.psprofile.social && this.psprofile.social.nba) {
+        this.nba = this.psprofile.social.nba;
+      }
     }
 
     let identity = this.identityDidService.getActiveDid();
@@ -386,18 +432,26 @@ export class FriendsPage implements OnInit {
   }
 
   async getPSProfile() {
-    console.log('DID: ', this.didService.getUserDID());
+    const _did = this.didService.getSignedIdentity();
+    const _authToken = await this.storage.getSetting(
+      _did,
+      'didsession',
+      '_accessToken',
+      ''
+    );
+    console.log('DID: ', _did);
+    console.log('Access Token: ', _authToken);
 
     const headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      Authorization: `Bearer ${environment.auth_token}`,
+      Authorization: `Bearer ${_authToken}`,
     };
 
     let rpcApiUrl = environment.base_api_url;
     rpcApiUrl = rpcApiUrl.endsWith('/') ? rpcApiUrl.slice(0, -1) : rpcApiUrl;
 
-    rpcApiUrl = `${rpcApiUrl}/players/${this.didService.getUserDID()}`;
+    rpcApiUrl = `${rpcApiUrl}/players/${_did}`;
 
     try {
       const result = await this.globalJsonRPCService.httpGet(

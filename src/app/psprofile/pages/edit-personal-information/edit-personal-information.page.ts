@@ -26,14 +26,13 @@ import {
   TitleBarIcon,
   TitleBarMenuItem,
 } from 'src/app/components/titlebar/titlebar.types';
-import { GlobalIntentService } from 'src/app/services/global.intent.service';
 import { Logger } from 'src/app/logger';
 import {
   Direction,
   GlobalNavService,
 } from 'src/app/services/global.nav.service';
-import { partitionArray } from '@angular/compiler/src/util';
 import { App } from 'src/app/model/app.enum';
+import { GlobalStorageService } from 'src/app/services/global.storage.service';
 
 type DisplayableAppInfo = {
   packageId: string;
@@ -79,7 +78,8 @@ export class EditPersonalInformationPage implements OnInit {
     public theme: GlobalThemeService,
     private clipboard: Clipboard,
     private globalNavService: GlobalNavService,
-    private globalJsonRPCService: GlobalJsonRPCService
+    private globalJsonRPCService: GlobalJsonRPCService,
+    private storage: GlobalStorageService
   ) {}
 
   ngOnInit() {
@@ -198,7 +198,15 @@ export class EditPersonalInformationPage implements OnInit {
   // }
 
   async updatePersonalInformation() {
-    console.log('DID: ', this.didService.getUserDID());
+    const _did = this.didService.getSignedIdentity();
+    const _authToken = await this.storage.getSetting(
+      _did,
+      'didsession',
+      '_accessToken',
+      ''
+    );
+    console.log('DID: ', _did);
+    console.log('Access Token: ', _authToken);
     console.log('Fullname: ', this.fullName);
     console.log('Jerseyname: ', this.jerseyName);
     console.log('Height: ', this.height);
@@ -218,7 +226,7 @@ export class EditPersonalInformationPage implements OnInit {
     // }
 
     const param = {
-      did: this.didService.getUserDID(),
+      did: _did,
       fullName: this.fullName,
       jerseyName: this.jerseyName,
       height: this.height,
@@ -229,13 +237,13 @@ export class EditPersonalInformationPage implements OnInit {
     const headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      Authorization: `Bearer ${environment.auth_token}`,
+      Authorization: `Bearer ${_authToken}`,
     };
 
     let rpcApiUrl = environment.base_api_url;
     rpcApiUrl = rpcApiUrl.endsWith('/') ? rpcApiUrl.slice(0, -1) : rpcApiUrl;
 
-    rpcApiUrl = `${rpcApiUrl}/players/${this.didService.getUserDID()}`;
+    rpcApiUrl = `${rpcApiUrl}/players/${_did}`;
 
     try {
       const result = await this.globalJsonRPCService.httpPatch(
@@ -251,7 +259,7 @@ export class EditPersonalInformationPage implements OnInit {
           jerseyName: this.jerseyName,
           height: this.height,
           weight: this.weight,
-          birth: { date: this.dob },
+          dob: this.dob,
           location: this.location,
         },
         animationDirection: Direction.BACK,
