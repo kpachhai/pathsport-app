@@ -302,17 +302,17 @@ export class IdentityService {
         '_accessToken',
         apiAuthToken.accessToken
       );
-      // console.log(
-      //   await this.storage.getSetting(
-      //     createdDID.getDIDString(),
-      //     'didsession',
-      //     '_accessToken',
-      //     ''
-      //   )
-      // );
+
+      const _accessToken = await this.storage.getSetting(
+        createdDID.getDIDString(),
+        'didsession',
+        '_accessToken',
+        ''
+      );
+      console.log(_accessToken);
 
       const apiPlayer = await this.createAPIPlayer(
-        apiAuthToken.accessToken,
+        _accessToken,
         createdDID.getDIDString(),
         identityName
       );
