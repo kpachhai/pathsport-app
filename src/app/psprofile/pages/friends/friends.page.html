@@ -33,7 +33,7 @@
         </div>
         <div class="profile-stats-highlights">
           <h4>Average</h4>
-          <h3>{{average}}</h3>
+          <h3>{{average | number: '1.0-2'}}</h3>
         </div>
       </div>
 
@@ -70,7 +70,7 @@
               </thead>
               <tbody>
                 <tr *ngFor="let stats of statistics">
-                  <td>{{stats.match.match_date}}</td>
+                  <td>{{stats.match.match_date | date:'mediumDate'}}</td>
                   <td>{{stats.match.opponent_team}}</td>
                   <td>
                     {{stats.match.team_score}}-{{stats.match.opponent_score}}
@@ -147,7 +147,7 @@
             </div>
             <div class="column">
               <span class="label">D.O.B</span>
-              <span>{{dob}}</span>
+              <span>{{dob | date:'mediumDate'}}</span>
             </div>
             <div class="column">
               <span class="label">Location</span>

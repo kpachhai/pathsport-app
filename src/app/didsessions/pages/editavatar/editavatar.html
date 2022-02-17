@@ -1,0 +1,94 @@
+<ion-content>
+  <app-titlebar></app-titlebar>
+  <ion-grid class="container" [class.dark-container]="theme.darkMode">
+    <ion-row>
+      <ion-col
+        (click)="selectAvatar('avatar1')"
+        [ngClass]="this.avatar === 'avatar1' ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img src="../../../../assets/didsessions/avatars/avatar1.svg" />
+        </ion-row>
+      </ion-col>
+      <ion-col
+        (click)="selectAvatar('avatar2')"
+        [ngClass]="this.avatar === 'avatar2' ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img src="../../../../assets/didsessions/avatars/avatar2.svg" />
+        </ion-row>
+      </ion-col>
+      <ion-col
+        (click)="selectAvatar('avatar3')"
+        [ngClass]="this.avatar === 'avatar3' ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img src="../../../../assets/didsessions/avatars/avatar3.svg" />
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col
+        (click)="selectAvatar('avatar4')"
+        [ngClass]="this.avatar === 'avatar4' ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img src="../../../../assets/didsessions/avatars/avatar4.svg" />
+        </ion-row>
+      </ion-col>
+      <ion-col
+        (click)="selectAvatar('avatar5')"
+        [ngClass]="this.avatar === 'avatar5' ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img src="../../../../assets/didsessions/avatars/avatar5.svg" />
+        </ion-row>
+      </ion-col>
+      <ion-col
+        (click)="selectAvatar('avatar6')"
+        [ngClass]="this.avatar === 'avatar6' ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img src="../../../../assets/didsessions/avatars/avatar6.svg" />
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col
+        (click)="selectAvatar('avatar7')"
+        [ngClass]="this.avatar === 'avatar7' ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img src="../../../../assets/didsessions/avatars/avatar7.svg" />
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row class="sportsIcon">
+          <img src="../../../../assets/didsessions/sports/tennis.svg" />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Tennis</ion-label>
+        </ion-row>
+
+        <ion-row class="sportsIcon">
+          <img src="../../../../assets/didsessions/sports/table-tennis.svg" />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Table Tennis</ion-label>
+        </ion-row> -->
+
+    <div class="footer">
+      <ion-button (click)="saveAvatar()">
+        {{ 'common.continue' | translate }}
+      </ion-button>
+      <ion-row class="skipLink">
+        <ion-label (click)="navigateToNextScreen()"
+          >Skip & do this later ></ion-label
+        >
+      </ion-row>
+    </div>
+  </ion-grid>
+</ion-content>

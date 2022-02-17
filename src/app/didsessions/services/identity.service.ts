@@ -31,6 +31,9 @@ import { GlobalHiveService } from 'src/app/services/global.hive.service';
 import { GlobalStorageService } from 'src/app/services/global.storage.service';
 import { GlobalNavService } from 'src/app/services/global.nav.service';
 import { GlobalStartupService } from 'src/app/services/global.startup.service';
+import { App } from 'src/app/model/app.enum';
+import { environment } from 'src/environments/environment';
+import { GlobalJsonRPCService } from 'src/app/services/global.jsonrpc.service';
 
 declare let internalManager: InternalPlugin.InternalManager;
 declare let didManager: DIDPlugin.DIDManager;
@@ -80,7 +83,8 @@ export class IdentityService {
     private globalElastosAPIService: GlobalElastosAPIService,
     private globalHiveService: GlobalHiveService,
     private globalStartupService: GlobalStartupService,
-    private didSessions: GlobalDIDSessionsService
+    private didSessions: GlobalDIDSessionsService,
+    private globalJsonRPCService: GlobalJsonRPCService
   ) {
     this.events.subscribe('signIn', (identity) => {
       this.zone.run(() => {
@@ -201,6 +205,15 @@ export class IdentityService {
     );
   }
 
+  // temporary navigation to edit interests
+  public navigateEditInterests() {
+    this.uxService.go('/didsessions/editinterests');
+  }
+
+  public navigateEditAvatar() {
+    this.uxService.go('/didsessions/editavatar');
+  }
+
   public startCreatingNewDIDWithNewMnemonic() {
     this.identityBeingCreated = new NewIdentity();
 
@@ -208,8 +221,8 @@ export class IdentityService {
     this.navigateWithCompletion(
       '/didsessions/editprofile',
       async ({ name, location }) => {
-        this.identityBeingCreated.name = name;
-        this.identityBeingCreated.country = location;
+        this.identityBeingCreated.name = name as string;
+        this.identityBeingCreated.country = location as string;
         //this.uxService.go('/didsessions/backupdid', { state: { create: true } });
         //this.uxService.go('/didsessions/preparedid');
         await this.createNewDIDWithNewMnemonic();
@@ -276,7 +289,44 @@ export class IdentityService {
     identityLocation?: string
   ): Promise<boolean> {
     try {
-      console.log('Waqas: ', identityLocation);
+      console.log(
+        'Time to create user, auth token and player from finalizeIdentityCreation: ',
+        createdDID.getDIDString()
+      );
+
+      const apiUser = await this.createAPIUser(
+        createdDID.getDIDString(),
+        storePassword
+      );
+      console.log('api user created: ', apiUser);
+      const apiAuthToken = await this.createAPIAuthToken(
+        createdDID.getDIDString(),
+        storePassword
+      );
+      console.log('Auth Token generated: ', apiAuthToken);
+
+      await this.storage.setSetting(
+        createdDID.getDIDString(),
+        'didsession',
+        '_accessToken',
+        apiAuthToken.accessToken
+      );
+
+      const _accessToken = await this.storage.getSetting(
+        createdDID.getDIDString(),
+        'didsession',
+        '_accessToken',
+        ''
+      );
+      console.log(_accessToken);
+
+      const apiPlayer = await this.createAPIPlayer(
+        _accessToken,
+        createdDID.getDIDString(),
+        identityName
+      );
+
+      // console.log('Waqas: ', identityLocation);
       // Save the did store password with a password
       let passwordInfo: PasswordManagerPlugin.GenericPasswordInfo = {
         type: PasswordManagerPlugin.PasswordType.GENERIC_PASSWORD,
@@ -313,7 +363,7 @@ export class IdentityService {
         this.navigateWithCompletion('/didsessions/preparedid', async () => {
           Logger.log(
             'didsessions',
-            'DID preparation is complete, now navigating to home screen'
+            'DID preparation is complete, now navigating to interest (previously home) screen'
           );
 
           // IMPORTANT: We UPDATE the new identity with the avatar here after signing in. See comment above.
@@ -330,7 +380,11 @@ export class IdentityService {
           if (isImportOperation)
             await this.didSessions.markActiveIdentityBackedUp();
 
-          void this.didSessions.navigateHome();
+          this.navigateEditInterests();
+
+          // Navigating to interests screen
+          //TODO: move preparedid slides to top as per design for interests selection while publishing is in progress
+          // void this.didSessions.navigateHome();
         });
         return;
       } else {
@@ -520,13 +574,10 @@ export class IdentityService {
         // create a new profile
         this.navigateWithCompletion(
           '/didsessions/editprofile',
-          async ({ returnedName, returnedLocation }) => {
-            this.identityBeingCreated.name = returnedName as string;
-            this.identityBeingCreated.country = returnedLocation as string;
-            if (
-              this.identityBeingCreated.name ||
-              this.identityBeingCreated.country
-            ) {
+          async ({ name, location }) => {
+            this.identityBeingCreated.name = name as string;
+            this.identityBeingCreated.country = location as string;
+            if (this.identityBeingCreated.name) {
               Logger.log(
                 'didsessions',
                 'Adding DID with info name:',
@@ -603,17 +654,21 @@ export class IdentityService {
         );
         this.navigateWithCompletion(
           '/didsessions/editprofile',
-          async (profileName) => {
+          async ({ name, location }) => {
             // Add the name credential in the DID
-            await createdDID.addNameCredential(profileName, storePassword);
+            await createdDID.addNameCredential(name, storePassword);
+
+            // Add the country credential in the DID
+            await createdDID.addCountryCredential(location, storePassword);
 
             // Finalize
             await this.finalizeIdentityCreation(
               didStore,
               storePassword,
               createdDID,
-              profileName,
-              true
+              name,
+              true,
+              location
             );
           }
         );
@@ -942,5 +997,109 @@ export class IdentityService {
     });
 
     await alert.present();
+  }
+
+  async createAPIPlayer(authToken: string, did: string, fullName: string) {
+    console.log('authToken: ', authToken);
+    console.log('DID: ', did);
+    console.log('fullName: ', fullName);
+
+    const param = {
+      did: did,
+      fullName: fullName,
+    };
+    const headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      Authorization: `Bearer ${authToken}`,
+    };
+
+    let rpcApiUrl = environment.base_api_url;
+    rpcApiUrl = rpcApiUrl.endsWith('/') ? rpcApiUrl.slice(0, -1) : rpcApiUrl;
+
+    rpcApiUrl = `${rpcApiUrl}/players`;
+
+    try {
+      const result = await this.globalJsonRPCService.httpPost(
+        rpcApiUrl,
+        param,
+        headers
+      );
+      Logger.log(App.DID_SESSIONS, 'Create API Player Result: ', result);
+      return result;
+    } catch (why: any) {
+      Logger.log(App.DID_SESSIONS, 'error create api player:', why);
+    }
+    // if (result && !Util.isEmptyObject(result.producers)) {
+    //     Logger.log(App.PSPROFILE, "key:", result.producers);
+  }
+
+  async createAPIAuthToken(did: string, password: string) {
+    console.log('DID: ', did);
+    console.log('Password: ', password);
+
+    const param = {
+      did: did,
+      password: password,
+    };
+    const headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      // Authorization: `Bearer ${environment.auth_token}`,
+    };
+
+    let rpcApiUrl = environment.base_api_url;
+    rpcApiUrl = rpcApiUrl.endsWith('/') ? rpcApiUrl.slice(0, -1) : rpcApiUrl;
+
+    rpcApiUrl = `${rpcApiUrl}/auth`;
+
+    try {
+      const result = await this.globalJsonRPCService.httpPost(
+        rpcApiUrl,
+        param,
+        headers
+      );
+      Logger.log(App.DID_SESSIONS, 'Create API Auth Token Result: ', result);
+      return result;
+    } catch (why: any) {
+      Logger.log(App.DID_SESSIONS, 'error create api auth token:', why);
+    }
+    // if (result && !Util.isEmptyObject(result.producers)) {
+    //     Logger.log(App.PSPROFILE, "key:", result.producers);
+  }
+
+  async createAPIUser(did: string, password: string) {
+    console.log('DID: ', did);
+    console.log('Password: ', password);
+
+    const param = {
+      did: did,
+      password: password,
+      permissionLevel: 2,
+    };
+    const headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      // Authorization: `Bearer ${environment.auth_token}`,
+    };
+
+    let rpcApiUrl = environment.base_api_url;
+    rpcApiUrl = rpcApiUrl.endsWith('/') ? rpcApiUrl.slice(0, -1) : rpcApiUrl;
+
+    rpcApiUrl = `${rpcApiUrl}/users`;
+
+    try {
+      const result = await this.globalJsonRPCService.httpPost(
+        rpcApiUrl,
+        param,
+        headers
+      );
+      Logger.log(App.DID_SESSIONS, 'Create API User Result: ', result);
+      return result;
+    } catch (why: any) {
+      Logger.log(App.DID_SESSIONS, 'error create api user:', why);
+    }
+    // if (result && !Util.isEmptyObject(result.producers)) {
+    //     Logger.log(App.PSPROFILE, "key:", result.producers);
   }
 }

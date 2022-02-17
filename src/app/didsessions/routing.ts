@@ -8,6 +8,8 @@ import { LanguagePage } from './pages/language/language.page';
 import { ChooseImportedDIDPage } from './pages/chooseimporteddid/chooseimporteddid.page';
 import { ScanPage } from './pages/scan/scan.page';
 import { PrepareDIDPage } from './pages/preparedid/preparedid';
+import { EditInterestsPage } from './pages/editinterests/editinterests';
+import { EditAvatarPage } from './pages/editavatar/editavatar';
 
 const routes: Routes = [
   { path: 'language', component: LanguagePage },
@@ -17,13 +19,13 @@ const routes: Routes = [
   { path: 'editprofile', component: EditProfilePage },
   { path: 'chooseimporteddid', component: ChooseImportedDIDPage },
   { path: 'preparedid', component: PrepareDIDPage },
-  { path: 'scan', component: ScanPage }
+  { path: 'scan', component: ScanPage },
+  { path: 'editinterests', component: EditInterestsPage },
+  { path: 'editavatar', component: EditAvatarPage },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routes)
-  ],
-  exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class DIDSessionsRoutingModule {}

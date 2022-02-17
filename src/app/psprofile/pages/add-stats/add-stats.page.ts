@@ -26,11 +26,13 @@ import {
   TitleBarIcon,
   TitleBarMenuItem,
 } from 'src/app/components/titlebar/titlebar.types';
-import { GlobalIntentService } from 'src/app/services/global.intent.service';
 import { Logger } from 'src/app/logger';
-import { GlobalNavService } from 'src/app/services/global.nav.service';
-import { partitionArray } from '@angular/compiler/src/util';
+import {
+  Direction,
+  GlobalNavService,
+} from 'src/app/services/global.nav.service';
 import { App } from 'src/app/model/app.enum';
+import { GlobalStorageService } from 'src/app/services/global.storage.service';
 
 type DisplayableAppInfo = {
   packageId: string;
@@ -76,7 +78,8 @@ export class AddStatsPage implements OnInit {
     public theme: GlobalThemeService,
     private clipboard: Clipboard,
     private globalNavService: GlobalNavService,
-    private globalJsonRPCService: GlobalJsonRPCService
+    private globalJsonRPCService: GlobalJsonRPCService,
+    private storage: GlobalStorageService
   ) {}
 
   ngOnInit() {
@@ -186,7 +189,15 @@ export class AddStatsPage implements OnInit {
   // }
 
   async addStats() {
-    console.log('DID: ', this.didService.getUserDID());
+    const _did = this.didService.getSignedIdentity();
+    const _authToken = await this.storage.getSetting(
+      _did,
+      'didsession',
+      '_accessToken',
+      ''
+    );
+    console.log('DID: ', _did);
+    console.log('Access Token: ', _authToken);
 
     if (this.matchDate) {
       const tempMatchDate = new Date(this.matchDate);
@@ -199,32 +210,28 @@ export class AddStatsPage implements OnInit {
     }
 
     const param = {
-      did: this.didService.getUserDID(),
-      statistics: [
-        {
-          match: {
-            match_date: this.matchDate,
-            opponent_team: this.opponentTeam,
-            team_score: this.teamScore,
-            opponent_score: this.opponentScore,
-            league: this.league,
-          },
-          football: {
-            total_goals: this.totalGoals,
-          },
-        },
-      ],
+      did: _did,
+      match: {
+        match_date: this.matchDate,
+        opponent_team: this.opponentTeam,
+        team_score: this.teamScore,
+        opponent_score: this.opponentScore,
+        league: this.league,
+      },
+      football: {
+        total_goals: this.totalGoals,
+      },
     };
     const headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      Authorization: `Bearer ${environment.auth_token}`,
+      Authorization: `Bearer ${_authToken}`,
     };
 
     let rpcApiUrl = environment.base_api_url;
     rpcApiUrl = rpcApiUrl.endsWith('/') ? rpcApiUrl.slice(0, -1) : rpcApiUrl;
 
-    rpcApiUrl = `${rpcApiUrl}/players/${this.didService.getUserDID()}`;
+    rpcApiUrl = `${rpcApiUrl}/players/${_did}/stats`;
 
     try {
       const result = await this.globalJsonRPCService.httpPatch(
@@ -233,6 +240,28 @@ export class AddStatsPage implements OnInit {
         headers
       );
       console.log('Add Stats Result: ', result);
+
+      let props: any = {
+        queryParams: {
+          match: JSON.stringify({
+            match_date: this.matchDate,
+            opponent_team: this.opponentTeam,
+            team_score: this.teamScore,
+            opponent_score: this.opponentScore,
+            league: this.league,
+          }),
+          football: JSON.stringify({
+            total_goals: this.totalGoals,
+          }),
+        },
+        animationDirection: Direction.BACK,
+      };
+
+      void this.globalNavService.navigateRoot(
+        App.PSPROFILE,
+        '/psprofile/friends',
+        props
+      );
     } catch (why: any) {
       Logger.log(App.PSPROFILE, 'error add stats:', why);
     }

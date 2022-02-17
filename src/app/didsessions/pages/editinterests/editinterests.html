@@ -1,0 +1,162 @@
+<ion-content>
+  <app-titlebar></app-titlebar>
+  <ion-grid class="container" [class.dark-container]="theme.darkMode">
+    <ion-row>
+      <!-- <ion-col
+        (click)="selectInterests('real_madrid')"
+        [ngClass]="checkActive('real_madrid') === true ? 'sportsType sportsTypeActive' : 'sportsType'"
+      > -->
+      <ion-col
+        (click)="selectInterests('real_madrid')"
+        [ngClass]="this.interests['real_madrid'] ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img
+            src="../../../../assets/didsessions/interests/football/real_madrid.svg"
+          />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Real Madrid</ion-label>
+        </ion-row>
+      </ion-col>
+      <ion-col
+        (click)="selectInterests('barcelona')"
+        [ngClass]="this.interests['barcelona'] ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img
+            src="../../../../assets/didsessions/interests/football/barcelona.svg"
+          />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Barcelona</ion-label>
+        </ion-row>
+      </ion-col>
+
+      <ion-col
+        (click)="selectInterests('manchester_united')"
+        [ngClass]="this.interests['manchester_united'] ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img
+            src="../../../../assets/didsessions/interests/football/manchester_united.svg"
+          />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Manchester United</ion-label>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col
+        (click)="selectInterests('juventus')"
+        [ngClass]="this.interests['juventus'] ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img
+            src="../../../../assets/didsessions/interests/football/juventus.svg"
+          />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Juventus</ion-label>
+        </ion-row>
+      </ion-col>
+      <ion-col
+        (click)="selectInterests('chelsea')"
+        [ngClass]="this.interests['chelsea'] ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img
+            src="../../../../assets/didsessions/interests/football/chelsea.svg"
+          />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Chelsea</ion-label>
+        </ion-row>
+      </ion-col>
+
+      <ion-col
+        (click)="selectInterests('ronaldo')"
+        [ngClass]="this.interests['ronaldo'] ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img
+            src="../../../../assets/didsessions/interests/football/ronaldo.svg"
+          />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Ronaldo</ion-label>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col
+        (click)="selectInterests('messi')"
+        [ngClass]="this.interests['messi'] ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img
+            src="../../../../assets/didsessions/interests/football/messi.svg"
+          />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Messi</ion-label>
+        </ion-row>
+      </ion-col>
+      <ion-col
+        (click)="selectInterests('neymar')"
+        [ngClass]="this.interests['neymar'] ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img
+            src="../../../../assets/didsessions/interests/football/neymar.svg"
+          />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Neymar</ion-label>
+        </ion-row>
+      </ion-col>
+
+      <ion-col
+        (click)="selectInterests('dybala')"
+        [ngClass]="this.interests['dybala'] ? 'sportsType sportsTypeActive' : 'sportsType'"
+      >
+        <ion-row class="sportsIcon">
+          <img
+            src="../../../../assets/didsessions/interests/football/dybala.svg"
+          />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Dybala</ion-label>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row class="sportsIcon">
+          <img src="../../../../assets/didsessions/sports/tennis.svg" />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Tennis</ion-label>
+        </ion-row>
+
+        <ion-row class="sportsIcon">
+          <img src="../../../../assets/didsessions/sports/table-tennis.svg" />
+        </ion-row>
+        <ion-row class="sportsLabel">
+          <ion-label>Table Tennis</ion-label>
+        </ion-row> -->
+
+    <div class="footer">
+      <ion-button (click)="saveInterests()">
+        {{ 'common.continue' | translate }}
+      </ion-button>
+      <ion-row class="skipLink">
+        <ion-label (click)="navigateToNextScreen()"
+          >Skip & do this later ></ion-label
+        >
+      </ion-row>
+    </div>
+  </ion-grid>
+</ion-content>

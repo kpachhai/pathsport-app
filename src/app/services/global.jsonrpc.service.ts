@@ -34,6 +34,7 @@ export class GlobalJsonRPCService {
     } else {
       httpOptions = {
         headers: new HttpHeaders(headers),
+        observe: 'response',
       };
       console.log('httpOptions from else: ', httpOptions);
     }
@@ -51,7 +52,7 @@ export class GlobalJsonRPCService {
       this.http.post(rpcApiUrl, JSON.stringify(param), httpOptions).subscribe(
         (res: any) => {
           if (res) {
-            // Logger.warn("GlobalJsonRPCService", 'httpPost response:', res);
+            Logger.warn('GlobalJsonRPCService', 'httpPost response:', res);
             if (res instanceof Array) {
               resolve(res);
             } else {
@@ -59,7 +60,7 @@ export class GlobalJsonRPCService {
                 Logger.error('GlobalJsonRPCService', 'httpPost error:', res);
                 reject(res.error);
               } else {
-                resolve(res.result || '');
+                resolve(res.body || '');
               }
             }
           } else {
@@ -123,7 +124,7 @@ export class GlobalJsonRPCService {
                 Logger.error('GlobalJsonRPCService', 'httpPatch error:', res);
                 reject(res.error);
               } else {
-                resolve(res.result || '');
+                resolve(res.body || '');
               }
             }
           } else {
@@ -186,7 +187,7 @@ export class GlobalJsonRPCService {
                 Logger.error('GlobalJsonRPCService', 'httpPut error:', res);
                 reject(res.error);
               } else {
-                resolve(res.result || '');
+                resolve(res.body || '');
               }
             }
           } else {

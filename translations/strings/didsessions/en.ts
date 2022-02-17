@@ -10,6 +10,10 @@ export const en = {
     'select-identity': 'Select identity',
     'your-private-qr-code': 'Your Private QR Code',
     'your-private-key': 'Your Private Key',
+    'choose-interests': 'Choose Interests',
+    'edit-interests': 'Edit Interests',
+    'choose-avatar': 'Choose Avatar',
+    'edit-avatar': 'Edit Avatar',
 
     // Placeholder
     'enter-name-here': 'Enter Name Here',

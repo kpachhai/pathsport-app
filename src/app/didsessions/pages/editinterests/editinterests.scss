@@ -1,0 +1,90 @@
+@import 'src/app/didsessions/root.scss';
+
+.container {
+  padding: 20px;
+
+  ion-row {
+    margin: 0 0 10px 2.5px;
+
+    ion-label {
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+    }
+  }
+
+  ion-input {
+    --padding-start: 12px;
+    --padding-top: 13px;
+    --padding-bottom: 13px;
+    height: 47.5px;
+    width: 100%;
+    background: #ffffff;
+    box-shadow: 0 3px 15px 0 #ededf0;
+    color: black;
+    border-radius: 8px;
+    font-size: 13px;
+    text-align: left;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+}
+
+.dark-container {
+  ion-input {
+    background: #212021;
+    box-shadow: none;
+    color: #e5f0f4;
+  }
+}
+
+.interestsContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sportsType {
+  width: 7.5em !important;
+  background: #292a37;
+  border-radius: 10px;
+  height: 8em;
+  // font-size: 0.75em;
+  margin-right: 10px;
+
+  img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.sportsTypeActive {
+  background: #eff0ff;
+  color: #292a37;
+}
+
+.sportsIcon {
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px !important;
+}
+
+.sportsLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ion-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    text-align: center;
+  }
+}
+
+.skipLink {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  justify-content: center;
+}
