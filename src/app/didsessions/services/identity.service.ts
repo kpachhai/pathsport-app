@@ -205,6 +205,15 @@ export class IdentityService {
     );
   }
 
+  // temporary navigation to edit interests
+  public navigateEditInterests() {
+    this.uxService.go('/didsessions/editinterests');
+  }
+
+  public navigateEditAvatar() {
+    this.uxService.go('/didsessions/editavatar');
+  }
+
   public startCreatingNewDIDWithNewMnemonic() {
     this.identityBeingCreated = new NewIdentity();
 
@@ -354,7 +363,7 @@ export class IdentityService {
         this.navigateWithCompletion('/didsessions/preparedid', async () => {
           Logger.log(
             'didsessions',
-            'DID preparation is complete, now navigating to home screen'
+            'DID preparation is complete, now navigating to interest (previously home) screen'
           );
 
           // IMPORTANT: We UPDATE the new identity with the avatar here after signing in. See comment above.
@@ -371,7 +380,11 @@ export class IdentityService {
           if (isImportOperation)
             await this.didSessions.markActiveIdentityBackedUp();
 
-          void this.didSessions.navigateHome();
+          this.navigateEditInterests();
+
+          // Navigating to interests screen
+          //TODO: move preparedid slides to top as per design for interests selection while publishing is in progress
+          // void this.didSessions.navigateHome();
         });
         return;
       } else {

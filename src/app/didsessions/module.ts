@@ -21,6 +21,8 @@ import { ChooseImportedDIDPage } from './pages/chooseimporteddid/chooseimportedd
 import { ScanPage } from './pages/scan/scan.page';
 import { SharedComponentsModule } from '../components/sharedcomponents.module';
 import { PrepareDIDPage } from './pages/preparedid/preparedid';
+import { EditInterestsPage } from './pages/editinterests/editinterests';
+import { EditAvatarPage } from './pages/editavatar/editavatar';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { PrepareDIDPage } from './pages/preparedid/preparedid';
     PrepareDIDPage,
     ScanPage,
     OptionsComponent,
-    WarningComponent
+    WarningComponent,
+    EditInterestsPage,
+    EditAvatarPage,
   ],
   imports: [
     IonicModule,
@@ -54,14 +58,11 @@ import { PrepareDIDPage } from './pages/preparedid/preparedid';
     PrepareDIDPage,
     ScanPage,
     OptionsComponent,
-    WarningComponent
+    WarningComponent,
+    EditInterestsPage,
+    EditAvatarPage,
   ],
-  providers: [
-    QRScanner,
-    Platform,
-    PopupProvider,
-    WebView
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  providers: [QRScanner, Platform, PopupProvider, WebView],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class DIDSessionsModule {}

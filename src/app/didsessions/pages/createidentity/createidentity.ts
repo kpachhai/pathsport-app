@@ -133,6 +133,14 @@ export class CreateIdentityPage {
     void this.slide.slideNext();
   }
 
+  // async navigateEditInterests() {
+  //   this.identityService.navigateEditInterests();
+  // }
+
+  // async navigateEditAvatar() {
+  //   this.identityService.navigateEditAvatar();
+  // }
+
   async createNewIdentity() {
     this.identityService.startCreatingNewDIDWithNewMnemonic();
 

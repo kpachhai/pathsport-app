@@ -1,0 +1,73 @@
+@import 'src/app/didsessions/root.scss';
+
+.container {
+  padding: 20px;
+
+  ion-row {
+    margin: 0 0 10px 2.5px;
+
+    ion-label {
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+    }
+  }
+
+  ion-input {
+    --padding-start: 12px;
+    --padding-top: 13px;
+    --padding-bottom: 13px;
+    height: 47.5px;
+    width: 100%;
+    background: #ffffff;
+    box-shadow: 0 3px 15px 0 #ededf0;
+    color: black;
+    border-radius: 8px;
+    font-size: 13px;
+    text-align: left;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+}
+
+.dark-container {
+  ion-input {
+    background: #212021;
+    box-shadow: none;
+    color: #e5f0f4;
+  }
+}
+
+.interestsContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sportsType {
+  margin-right: 10px;
+}
+
+.sportsTypeActive {
+  background-image: url('../../../../assets/didsessions/avatars/checkmark.svg');
+  background-position: top right;
+  background-repeat: no-repeat;
+  padding: 2px;
+}
+
+.sportsIcon {
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px !important;
+
+  img {
+    border-radius: 50%;
+  }
+}
+
+.skipLink {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  justify-content: center;
+}
