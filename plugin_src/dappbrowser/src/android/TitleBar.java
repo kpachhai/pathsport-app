@@ -22,7 +22,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.elastos.essentials.app.R;
+import pathsport.app.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

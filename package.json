@@ -1,8 +1,8 @@
 {
-  "name": "elastos-essentials",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "name": "pathsport",
+  "version": "0.0.2",
+  "author": "Tuum Tech",
+  "homepage": "https://www.tuum.tech/",
   "scripts": {
     "ng": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng",
     "translations": "ts-node --project translations/tsconfig.json translations/generate_translations.ts",
@@ -128,7 +128,7 @@
     "https": false,
     "os": false
   },
-  "description": "An Ionic project",
+  "description": "Sports Decentralized Digital Identity",
   "cordova": {
     "plugins": {
       "cordova-plugin-add-swift-support": {},

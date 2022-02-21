@@ -11,7 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import org.elastos.essentials.app.R;
+import pathsport.app.R;
 
 public class TitleBarIconView extends FrameLayout {
     ImageButton ivMainIcon;

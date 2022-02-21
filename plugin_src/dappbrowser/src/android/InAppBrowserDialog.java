@@ -23,7 +23,7 @@ import android.content.Context;
 import android.webkit.WebView;
 import android.widget.EditText;
 
-import org.elastos.essentials.app.R;
+import pathsport.app.R;
 
 /**
  * Created by Oliver on 22/11/2013.
