@@ -21,7 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.apache.cordova.inappbrowser.InAppBrowserDialog;
-import org.elastos.essentials.app.R;
+import pathsport.app.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -13,7 +13,7 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.widget.EditText;
 
-import org.elastos.essentials.app.R;
+import pathsport.app.R;
 
 @SuppressLint("AppCompatCustomView")
 public class UrlEditText extends EditText {

@@ -49,7 +49,7 @@ import org.apache.cordova.CordovaWebViewImpl;
 import org.apache.cordova.LOG;
 import org.apache.cordova.PluginEntry;
 import org.apache.cordova.engine.SystemWebView;
-import org.elastos.essentials.app.R;
+import pathsport.app.R;
 import org.json.JSONException;
 
 import java.util.ArrayList;
