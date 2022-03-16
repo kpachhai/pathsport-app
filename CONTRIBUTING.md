@@ -3,7 +3,7 @@
 ## Getting started <!-- omit in toc -->
 
 Before you begin:
-- This site is powered by React.js.
+- This app is powered by Ionic Angular and supporting technologies.
 - Have you read the [code of conduct](CODE_OF_CONDUCT.md)?
 - Check out the [existing issues](https://github.com/tuum-tech/getDIDs.com) to see if an issue exists already for the change you want to make.
 
