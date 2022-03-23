@@ -393,3 +393,9 @@ body {
     letter-spacing: 0.1px;
   }
 }
+
+@media screen and (max-height: 367px) {
+  .footer {
+    display: none;
+  }
+}

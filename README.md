@@ -46,7 +46,7 @@ Check if your device is connected
 
 Run with live reload
 
-- `ionic cordova run android -l`
+- `ionic cordova run android -l` OR `ionic cordova run android`
 
 Connect to the API
 
