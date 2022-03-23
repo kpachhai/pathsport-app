@@ -119,6 +119,10 @@ export class FriendsPage implements OnInit {
     this.route.queryParams.subscribe((params) => {
       // console.log('Personal info pageee: ', params);
 
+      this.match = '';
+      this.football = '';
+      this.basketball = '';
+
       // Update Summary if navigating back from edit page
       if (params['summary']) {
         this.summary = params['summary'];
