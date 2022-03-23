@@ -113,7 +113,7 @@ export const en = {
       'publish-title': 'Publishing your identity to the public ledger',
       'publish-intro': 'This is mandatory but takes a few seconds',
       'sign-in-title': 'Signing in...',
-      'sign-in-intro': 'Entering Elastos Essentials',
+      'sign-in-intro': 'Entering Pathsport',
       'hive-title': 'Making storage for your apps',
       'hive-intro':
         'A storage space is being created on a random Elastos Hive storage provider. You can move your data somewhere else later.',
@@ -122,7 +122,7 @@ export const en = {
         'A default wallet is created with the same paper key as your DID. You can choose to use it or to delete it.',
       'done-title': 'You are all set!',
       'done-intro':
-        'Your identity is now fully ready. You can start using Elastos Essentials.',
+        'Your identity is now fully ready. You can start using Pathsport.',
     },
   },
 };

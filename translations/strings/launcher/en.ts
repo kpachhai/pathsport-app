@@ -76,24 +76,24 @@ export const en = {
     'tip-audience-developers': 'Tips for Developers',
 
     /*********** Tips ************/
-    'tip-title-welcome': 'Welcome to Elastos Essentials',
+    'tip-title-welcome': 'Welcome to Pathsport',
     'tip-message-welcome':
-      "Thank you for running this app! Elastos Essentials can manage your <b>digital identity</b>, your <b>personal storage</b>, your contacts, and your crypto-currency <b>wallets</b>. You can use part, or all of this.<br/><br/>Elastos Essentials is also your <b>super wallet toolbox</b> while running other apps, similar to MetaMask (if you've heard of it), but for more than only cryptos.",
+      "Thank you for running this app! Pathsport can manage your <b>digital identity</b>, your <b>personal storage</b>, your contacts, and your crypto-currency <b>wallets</b>. You can use part, or all of this.<br/><br/>Pathsport is also your <b>super wallet toolbox</b> while running other apps, similar to MetaMask (if you've heard of it), but for more than only cryptos.",
     'tip-title-what-is-did': 'What is a DID?',
     'tip-message-what-is-did':
       'A DID is a <b>decentralized identity</b>. This identity is <b>owned by you</b> and by no one else. This is why you have to save those strange mnemonic words and keep them safe.<br/><br/>DIDs allow you to <b>verify things that are claimed</b> by you and by others (for example, a diploma). They also allow you <b>being in control of your application data</b>, therefore increasing your privacy.',
     'tip-title-what-is-hive': 'What is Hive (storage)?',
     'tip-message-what-is-hive':
       'Hive is your <b>personal storage space</b>. Not to store documents or holiday pictures, but to save all kinds of <b>data managed by the applications you use every day</b>.<br/><br/>Application data is <b>stored where you decide</b>, and not by the application developers any more. As a consequence, you get <b>more privacy and control</b> over your data.',
-    'tip-title-toolbox': 'Elastos Essentials is a toolbox',
+    'tip-title-toolbox': 'Pathsport is a toolbox',
     'tip-message-toolbox':
       '<b>What can Essentials do for me when used by other apps?</b> With Essentials, you can <b>sign in</b> to third party apps or websites with your DID, you can <b>share and modify some of your personal data</b>, run crypto transactions, make payments, and many other decentralized operations, without relying on third parties to do so.',
     'tip-title-not-only-for-crypto-players': 'Not just about cryptos',
     'tip-message-not-only-for-crypto-players':
-      'While Elastos Essentials uses blockchains to manage decentralized identities - and blockchains need crypto currencies to run - we try our best to <b>bring most of the features without requesting you to hold crypto currencies</b>, as we know it can be complex (and worrying) to acquire crypto-currencies.',
+      'While Pathsport uses blockchains to manage decentralized identities - and blockchains need crypto currencies to run - we try our best to <b>bring most of the features without requesting you to hold crypto currencies</b>, as we know it can be complex (and worrying) to acquire crypto-currencies.',
     'tip-title-bring-friends': 'Inviting friends',
     'tip-message-bring-friends':
-      'So you like the Elastos Essentials concept? You like to own your identity, having privacy over your data, using an internet with more trust and less hiding?<br/><br/>You would like your friends to join, but you feel using Elastos Essentials powered apps is <b>not as easy</b> as using traditional applications?<br/><br/>YOU ARE RIGHT! But like every <b>new innovation</b>, it takes a bit of time to adapt. After a while, most people <b>will understand the power of this new internet</b> and will join without efforts.',
+      'So you like the Pathsport concept? You like to own your identity, having privacy over your data, using an internet with more trust and less hiding?<br/><br/>You would like your friends to join, but you feel using Pathsport powered apps is <b>not as easy</b> as using traditional applications?<br/><br/>YOU ARE RIGHT! But like every <b>new innovation</b>, it takes a bit of time to adapt. After a while, most people <b>will understand the power of this new internet</b> and will join without efforts.',
 
     /********* Developer Tips *********/
     'tip-title-dev-getting-support': 'Where to get dev support?',
