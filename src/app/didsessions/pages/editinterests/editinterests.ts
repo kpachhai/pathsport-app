@@ -188,7 +188,7 @@ export class EditInterestsPage {
     console.log('Save interests: ', dbInterests);
     console.log('saving interests...');
 
-    const _did = 'did:elastos:ipsGDumwoBti6iwPF8rWHqFg2ishQ9yHdH'; //this.didService.getSignedIdentity();
+    const _did = this.didService.getSignedIdentity();
     const _authToken = await this.storage.getSetting(
       _did,
       'didsession',
